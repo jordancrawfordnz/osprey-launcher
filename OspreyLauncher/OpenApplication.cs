@@ -15,8 +15,9 @@ namespace OspreyLauncher
         public OpenApplication(LaunchableApplication application, Process process) : base(application)
         {
             this.process = process;
-            watcher = ProcessCloseWatcher.GetWatcher(this, process);
+            watcher = ProcessCloseWatcher.GetWatcher(application, process);
             watcher.addWatcher(this);
+            watcher.addWatcher(LauncherController.GetInstance());
             
             Thread watcherThread = new Thread(new ThreadStart(watcher.waitForExit));
             watcherThread.Start(); // Start the thread
@@ -55,7 +56,7 @@ namespace OspreyLauncher
             onClose();
         }
 
-        public void notifyProcessClosure(ApplicationInstance instanceClosed)
+        public void notifyProcessClosure(LaunchableApplication instanceClosed)
         {
             onClose();
         }

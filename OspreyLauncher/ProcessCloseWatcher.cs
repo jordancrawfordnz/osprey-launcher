@@ -11,12 +11,11 @@ namespace OspreyLauncher
     {
         Process toWatch;
         List<ProcessClosureNotifiable> toNotify;
-        ApplicationInstance instance;
+        LaunchableApplication application;
 
         static Dictionary<int,ProcessCloseWatcher> watchers = new Dictionary<int,ProcessCloseWatcher>();
 
-
-        public static ProcessCloseWatcher GetWatcher(ApplicationInstance instance, Process toWatch)
+        public static ProcessCloseWatcher GetWatcher(LaunchableApplication instance, Process toWatch)
         {
            ProcessCloseWatcher toReturn;
             if (!watchers.TryGetValue(toWatch.Id,out toReturn))
@@ -27,10 +26,10 @@ namespace OspreyLauncher
             return toReturn;
         }
 
-        private ProcessCloseWatcher(ApplicationInstance instance, Process toWatch)
+        private ProcessCloseWatcher(LaunchableApplication instance, Process toWatch)
         {
             this.toWatch = toWatch;
-            this.instance = instance;
+            this.application = instance;
             toNotify = new List<ProcessClosureNotifiable>();
         }
 
@@ -45,7 +44,7 @@ namespace OspreyLauncher
             toWatch.WaitForExit();
             foreach (ProcessClosureNotifiable notify in toNotify)
             {
-                notify.notifyProcessClosure(instance);
+                notify.notifyProcessClosure(application);
             }
         }
 

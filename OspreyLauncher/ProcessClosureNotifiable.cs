@@ -7,6 +7,6 @@ namespace OspreyLauncher
 {
     public interface ProcessClosureNotifiable
     {
-        void notifyProcessClosure(ApplicationInstance instanceClosed);
+        void notifyProcessClosure(LaunchableApplication instanceClosed);
     }
 }

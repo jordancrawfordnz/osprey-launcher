@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace OspreyLauncher
 {
-    public class LauncherController
+    public class LauncherController : ProcessClosureNotifiable
     {
         static LauncherController instance = null;
         LauncherWindow launcherWindow;
@@ -37,8 +37,6 @@ namespace OspreyLauncher
 
         public void handleHotkey()
         {
-            launcherWindow.Show();
-            launcherWindow.BringToFront();
             Close(currentApplication);
         }
 
@@ -60,9 +58,12 @@ namespace OspreyLauncher
         public void Close(LaunchableApplication application)
         {
             if (application == null) return;
-            if (currentApplication == application)
-                currentApplication = null;
             application.Close();
+            if (currentApplication == application)
+            {
+                currentApplication = null;
+                launcherWindow.makePresent();
+            }
         }
 
         public void CloseLauncher()
@@ -72,6 +73,11 @@ namespace OspreyLauncher
             {
                 currentApplication.ForceClose();
             }
+        }
+
+        public void notifyProcessClosure(LaunchableApplication applicationClosed)
+        {
+            Close(applicationClosed);
         }
     }
 }
