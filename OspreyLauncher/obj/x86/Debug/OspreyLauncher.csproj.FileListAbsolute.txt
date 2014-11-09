@@ -1,7 +1,0 @@
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\obj\x86\Debug\OspreyLauncher.Properties.Resources.resources
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\obj\x86\Debug\OspreyLauncher.csproj.GenerateResource.Cache
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\bin\Debug\OspreyLauncher.exe
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\bin\Debug\OspreyLauncher.pdb
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\obj\x86\Debug\OspreyLauncher.exe
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\obj\x86\Debug\OspreyLauncher.pdb
-\\vmware-host\shared folders\documents\visual studio 2010\Projects\OspreyLauncher\OspreyLauncher\obj\x86\Debug\OspreyLauncher.LauncherWindow.resources
