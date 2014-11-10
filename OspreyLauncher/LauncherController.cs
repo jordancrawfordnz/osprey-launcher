@@ -49,7 +49,10 @@ namespace OspreyLauncher
         public List<Selectable> getSelectableItems()
         {
             List<Selectable> toReturn = new List<Selectable>();
-            toReturn.InsertRange(0, getApplications());
+            foreach (Selectable currentSelectable in getApplications())
+            {
+                toReturn.Add(currentSelectable);
+            }
             toReturn.Add(ExitSelectable.GetInstance());
             return toReturn;
         }

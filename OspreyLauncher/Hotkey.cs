@@ -12,7 +12,7 @@ namespace OspreyLauncher
         {
             // Taken from: http://www.codeproject.com/Articles/19004/A-Simple-C-Global-Low-Level-Keyboard-Hook
             globalKeyboardHook gkh = new globalKeyboardHook();
-            gkh.HookedKeys.Add(Keys.A);
+            gkh.HookedKeys.Add(Keys.D9);
             gkh.KeyUp += new KeyEventHandler(HandleHotkey);
         }
 
