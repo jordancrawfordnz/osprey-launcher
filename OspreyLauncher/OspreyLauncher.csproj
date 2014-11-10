@@ -56,9 +56,12 @@
   <ItemGroup>
     <Compile Include="ApplicationInstance.cs" />
     <Compile Include="ClosedApplication.cs" />
+    <Compile Include="HiddenApplication.cs" />
+    <Compile Include="DesktopLaunchable.cs" />
     <Compile Include="ExitSelectable.cs" />
     <Compile Include="globalKeyboardHook.cs" />
     <Compile Include="Hotkey.cs" />
+    <Compile Include="Launchable.cs" />
     <Compile Include="LauncherController.cs" />
     <Compile Include="LauncherWindow.cs">
       <SubType>Form</SubType>

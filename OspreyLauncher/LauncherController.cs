@@ -11,7 +11,8 @@ namespace OspreyLauncher
     {
         static LauncherController instance = null;
         LauncherWindow launcherWindow;
-        LaunchableApplication currentApplication = null;
+        Launchable currentLaunchable = null;
+        List<Launchable> launchables = new List<Launchable>();
 
         public static LauncherController GetInstance()
         {
@@ -24,23 +25,25 @@ namespace OspreyLauncher
         {
             launcherWindow = LauncherWindow.GetInstance();
             Hotkey.SetupKeyHook();
-            setupApplications();
+            setupLaunchables();
         }
 
 
-        void setupApplications()
+        void setupLaunchables()
         {
-            applications.Add(new LaunchableApplication("MediaPortal",
-    "C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", true));
-            applications.Add(new LaunchableApplication("XBMC",
-    "C:\\Program Files (x86)\\XBMC\\XBMC.exe", true));
+            launchables.Add(new LaunchableApplication("MediaPortal",
+    "C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe"));
+            launchables.Add(new LaunchableApplication("XBMC",
+    "C:\\Program Files (x86)\\XBMC\\XBMC.exe",true, true));
+            launchables.Add(DesktopLaunchable.GetInstance());
+
 
         }
-        List<LaunchableApplication> applications = new List<LaunchableApplication>();
+
 
         public void handleHotkey()
         {
-            Close(currentApplication);
+            Close(currentLaunchable);
         }
 
         public List<Selectable> getSelectableItems()
@@ -52,28 +55,28 @@ namespace OspreyLauncher
         }
 
 
-        public List<LaunchableApplication> getApplications()
+        public List<Launchable> getApplications()
         {
-            return applications;
+            return launchables;
         }
 
-        public void Launch(LaunchableApplication application)
+        public void Launch(Launchable application)
         {
             if (application == null) return;
             launcherWindow.Hide();
-            if (currentApplication != null && currentApplication != application)
-                currentApplication.Close();
+            if (currentLaunchable != null && currentLaunchable != application)
+                currentLaunchable.Close();
             application.Launch();
-            currentApplication = application;
+            currentLaunchable = application;
         }
 
-        public void Close(LaunchableApplication application)
+        public void Close(Launchable application)
         {
             if (application == null) return;
             application.Close();
-            if (currentApplication == application)
+            if (currentLaunchable == application)
             {
-                currentApplication = null;
+                currentLaunchable = null;
                 launcherWindow.makePresent();
                 WindowManagement.BringWindowToTop(Process.GetCurrentProcess());
             }
@@ -82,7 +85,7 @@ namespace OspreyLauncher
         public void CloseAll()
         {
             // Shutdown all applications.
-            foreach(LaunchableApplication currentApplication in applications)
+            foreach(Launchable currentApplication in launchables)
             {
                 currentApplication.ForceClose();
             }

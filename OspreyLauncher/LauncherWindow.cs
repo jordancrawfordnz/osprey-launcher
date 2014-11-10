@@ -68,6 +68,8 @@ namespace OspreyLauncher
                     return icon2;
                 case 3:
                     return icon3;
+                case 4:
+                    return icon4;
                 default:
                     return null;
             }

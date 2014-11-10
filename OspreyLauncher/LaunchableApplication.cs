@@ -6,18 +6,19 @@ using System.Diagnostics;
 
 namespace OspreyLauncher
 {
-    public class LaunchableApplication : Selectable
+    public class LaunchableApplication : Launchable
     {
         string name, path;
-        bool suspendable;
+        bool suspendable, keepOpen;
         ApplicationInstance instance;
         
-        public LaunchableApplication(string name, string path, bool suspendable = true)
+        public LaunchableApplication(string name, string path, bool suspendable = true, bool keepOpen = false)
         {
             this.name = name;
             this.path = path;
             this.suspendable = suspendable;
             this.instance = new ClosedApplication(this);
+            this.keepOpen = keepOpen;
         }
 
         public string getPath()
@@ -28,6 +29,11 @@ namespace OspreyLauncher
         public bool isSuspendable()
         {
             return suspendable;
+        }
+
+        public bool shouldKeepOpen()
+        {
+            return keepOpen;
         }
 
         public string getName()

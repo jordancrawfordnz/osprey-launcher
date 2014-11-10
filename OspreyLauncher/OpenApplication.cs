@@ -37,16 +37,29 @@ namespace OspreyLauncher
             application.changeInstance(new SuspendedApplication(application, process));
         }
 
+        void onHide()
+        {
+            application.changeInstance(new HiddenApplication(application, process));
+        }
+
         public override void Close()
         {
-            if (application.isSuspendable())
+            if (application.shouldKeepOpen())
             {
                 WindowManagement.HideMainWindow(process);
-                Suspend.DoSuspend(process); // resume process
-                onSuspend();
+                onHide();
             }
             else
-                ForceClose();
+            {
+                if (application.isSuspendable())
+                {
+                    WindowManagement.HideMainWindow(process);
+                    Suspend.DoSuspend(process); // resume process
+                    onSuspend();
+                }
+                else
+                    ForceClose();
+            }
         }
 
         public override void ForceClose()
