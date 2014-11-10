@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace OspreyLauncher
 {
@@ -74,6 +75,7 @@ namespace OspreyLauncher
             {
                 currentApplication = null;
                 launcherWindow.makePresent();
+                WindowManagement.BringWindowToTop(Process.GetCurrentProcess());
             }
         }
 

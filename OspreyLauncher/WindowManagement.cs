@@ -18,8 +18,9 @@ namespace OspreyLauncher
         [DllImport("user32.dll", SetLastError = true)]
         static extern bool BringWindowToTop(IntPtr hWnd);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern bool BringWindowToTop(HandleRef hWnd);
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
 
 
         // With help from:
@@ -46,7 +47,7 @@ namespace OspreyLauncher
         {
             if (toBringToTop.MainWindowHandle != IntPtr.Zero)
             {
-                BringWindowToTop(toBringToTop.MainWindowHandle);
+                SetForegroundWindow(toBringToTop.MainWindowHandle);
             }
         }
     }
