@@ -12,7 +12,6 @@ namespace OspreyLauncher
 {
     public partial class LauncherWindow : Form
     {
-        LaunchableApplication application;
         int selectedIcon = 1;
 
         static LauncherWindow instance = null;
@@ -25,9 +24,12 @@ namespace OspreyLauncher
 
         private LauncherWindow()
         {
-            this.TopMost = true;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            if (!Program.DebugMode)
+            {
+                this.TopMost = true;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+            }
             InitializeComponent();
         }
 
@@ -81,6 +83,10 @@ namespace OspreyLauncher
             toNormal.BorderColor = Color.White;
         }
 
+        private void select()
+        {
+            LauncherController.GetInstance().getSelectableItems()[selectedIcon-1].Select();
+        }
 
         private void updateSelectedIcon(int newSelected)
         {
@@ -92,24 +98,25 @@ namespace OspreyLauncher
             selectedIcon = newSelected;
         }
 
-        private void LauncherWindow_KeyUp(object sender, KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            MessageBox.Show("KEYPRESS");
-            if (e.KeyCode == Keys.Left)
+            if (keyData == Keys.Left)
             {
                 if (getIcon(selectedIcon - 1) != null) updateSelectedIcon(selectedIcon - 1);
-                e.Handled = true;
+                return true;
             }
-            else if (e.KeyCode == Keys.Right)
+            else if (keyData == Keys.Right)
             {
                 if (getIcon(selectedIcon + 1) != null) updateSelectedIcon(selectedIcon + 1);
-                e.Handled = true;
+                return true;
             }
-            else if (e.KeyCode == Keys.Enter)
+            else if (keyData == Keys.Enter)
             {
-                e.Handled = true;
+                select();
+                return true;
             }
-            else e.Handled = false;
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         public void makePresent()

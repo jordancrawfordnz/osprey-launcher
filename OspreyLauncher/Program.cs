@@ -16,8 +16,22 @@ namespace OspreyLauncher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LauncherController controller = LauncherController.GetInstance(); // ensure the controller gets constructed
-            Application.Run(LauncherWindow.GetInstance());
-            controller.CloseLauncher();
+            try
+            {
+                Application.Run(LauncherWindow.GetInstance());
+            }
+            catch (Exception ex)
+            {
+                if (Program.DebugMode) throw;
+                else
+                {
+                    MessageBox.Show("The error is:\n" + ex.Message, "Something bad happened!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            controller.CloseAll();
         }
+
+        public static bool DebugMode = false;
     }
 }

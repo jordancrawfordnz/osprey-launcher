@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace OspreyLauncher
 {
-    public class LaunchableApplication
+    public class LaunchableApplication : Selectable
     {
         string name, path;
         bool suspendable;
@@ -58,6 +58,11 @@ namespace OspreyLauncher
         public void Close()
         {
             instance.Close();
+        }
+
+        public void Select()
+        {
+            LauncherController.GetInstance().Launch(this);
         }
     }
 }

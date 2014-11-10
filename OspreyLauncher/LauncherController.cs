@@ -31,6 +31,8 @@ namespace OspreyLauncher
         {
             applications.Add(new LaunchableApplication("MediaPortal",
     "C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", true));
+            applications.Add(new LaunchableApplication("XBMC",
+    "C:\\Program Files (x86)\\XBMC\\XBMC.exe", true));
 
         }
         List<LaunchableApplication> applications = new List<LaunchableApplication>();
@@ -39,6 +41,15 @@ namespace OspreyLauncher
         {
             Close(currentApplication);
         }
+
+        public List<Selectable> getSelectableItems()
+        {
+            List<Selectable> toReturn = new List<Selectable>();
+            toReturn.InsertRange(0, getApplications());
+            toReturn.Add(ExitSelectable.GetInstance());
+            return toReturn;
+        }
+
 
         public List<LaunchableApplication> getApplications()
         {
@@ -66,7 +77,7 @@ namespace OspreyLauncher
             }
         }
 
-        public void CloseLauncher()
+        public void CloseAll()
         {
             // Shutdown all applications.
             foreach(LaunchableApplication currentApplication in applications)
