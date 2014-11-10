@@ -14,7 +14,7 @@ namespace OspreyLauncher
         private static ProcessStartInfo getStartInfo()
         {
             ProcessStartInfo processInfo = new ProcessStartInfo();
-            processInfo.FileName = "C:\\pstools\\pssuspend.exe";
+            processInfo.FileName = "pssuspend.exe";
             processInfo.WindowStyle = ProcessWindowStyle.Hidden;
             return processInfo;
         }
