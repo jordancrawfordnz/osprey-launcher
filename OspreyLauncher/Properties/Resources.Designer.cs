@@ -59,5 +59,15 @@ namespace OspreyLauncher.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _14408052591_6afa684f34_k {
+            get {
+                object obj = ResourceManager.GetObject("14408052591_6afa684f34_k", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

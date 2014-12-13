@@ -15,7 +15,7 @@ namespace OspreyLauncher
         }
 
         Process process;
-
+        
         public override void Launch()
         {
             WindowManagement.ShowMainWindow(process);

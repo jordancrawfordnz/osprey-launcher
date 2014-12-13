@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.icon4 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
             this.icon3 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
             this.icon2 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
             this.icon1 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
@@ -36,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.icon4 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
             this.SuspendLayout();
             // 
             // shapeContainer1
@@ -49,9 +49,23 @@
             this.icon3,
             this.icon2,
             this.icon1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1309, 579);
+            this.shapeContainer1.Size = new System.Drawing.Size(1309, 675);
             this.shapeContainer1.TabIndex = 11;
             this.shapeContainer1.TabStop = false;
+            // 
+            // icon4
+            // 
+            this.icon4.BackColor = System.Drawing.Color.White;
+            this.icon4.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
+            this.icon4.BorderColor = System.Drawing.Color.White;
+            this.icon4.BorderWidth = 5;
+            this.icon4.FillColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.icon4.FillGradientColor = System.Drawing.Color.DimGray;
+            this.icon4.FillGradientStyle = Microsoft.VisualBasic.PowerPacks.FillGradientStyle.Central;
+            this.icon4.Location = new System.Drawing.Point(1000, 56);
+            this.icon4.Name = "icon4";
+            this.icon4.SelectionColor = System.Drawing.Color.Transparent;
+            this.icon4.Size = new System.Drawing.Size(250, 250);
             // 
             // icon3
             // 
@@ -129,30 +143,18 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Other Sources";
             // 
-            // icon4
-            // 
-            this.icon4.BackColor = System.Drawing.Color.White;
-            this.icon4.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
-            this.icon4.BorderColor = System.Drawing.Color.White;
-            this.icon4.BorderWidth = 5;
-            this.icon4.FillColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.icon4.FillGradientColor = System.Drawing.Color.DimGray;
-            this.icon4.FillGradientStyle = Microsoft.VisualBasic.PowerPacks.FillGradientStyle.Central;
-            this.icon4.Location = new System.Drawing.Point(1000, 56);
-            this.icon4.Name = "icon4";
-            this.icon4.SelectionColor = System.Drawing.Color.Transparent;
-            this.icon4.Size = new System.Drawing.Size(250, 250);
-            // 
             // LauncherWindow
             // 
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1309, 579);
+            this.BackColor = System.Drawing.Color.DimGray;
+            this.ClientSize = new System.Drawing.Size(1309, 675);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.shapeContainer1);
+            this.Cursor = System.Windows.Forms.Cursors.No;
             this.Name = "LauncherWindow";
             this.Text = "LauncherWindow";
             this.ResumeLayout(false);

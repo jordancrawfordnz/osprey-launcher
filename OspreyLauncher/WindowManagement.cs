@@ -22,6 +22,13 @@ namespace OspreyLauncher
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool EnableWindow(IntPtr hWnd, bool bEnable);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SetFocus(IntPtr hWnd);
+
 
         // With help from:
         // http://msdn.microsoft.com/en-us/library/aa288468%28v=vs.71%29.aspx#pinvoke_callingdllexport
@@ -32,14 +39,16 @@ namespace OspreyLauncher
             if (toHide.MainWindowHandle != IntPtr.Zero)
             {
                 ShowWindow(toHide.MainWindowHandle, 0);
+                EnableWindow(toHide.MainWindowHandle, false);
             }
         }
 
-        public static void ShowMainWindow(Process toHide)
+        public static void ShowMainWindow(Process toShow)
         {
-            if (toHide.MainWindowHandle != IntPtr.Zero)
+            if (toShow.MainWindowHandle != IntPtr.Zero)
             {
-                ShowWindow(toHide.MainWindowHandle, 1);
+                ShowWindow(toShow.MainWindowHandle, 1);
+                EnableWindow(toShow.MainWindowHandle, true);
             }
         }
 
@@ -48,6 +57,7 @@ namespace OspreyLauncher
             if (toBringToTop.MainWindowHandle != IntPtr.Zero)
             {
                 SetForegroundWindow(toBringToTop.MainWindowHandle);
+                SetFocus(toBringToTop.MainWindowHandle);
             }
         }
     }
