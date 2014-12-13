@@ -121,6 +121,19 @@ namespace OspreyLauncher
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        public void displayMessage(string message)
+        {
+            // this could be run from another thread!
+            // http://stackoverflow.com/questions/13698704/execute-a-method-in-main-thread-from-event-handler
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { displayMessage(message); }); // invokes this method in the UI thread
+                return;
+            }
+            // if in the main (UI) thread
+            MessageBox.Show(message);
+        }
+
         public void makePresent()
         {
             // this could be run from another thread!
