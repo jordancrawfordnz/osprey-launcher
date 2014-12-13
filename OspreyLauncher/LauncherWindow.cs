@@ -13,11 +13,10 @@ namespace OspreyLauncher
     public partial class LauncherWindow : Form
     {
         int selectedIcon = 1;
-
         static LauncherWindow instance = null;
         public static LauncherWindow GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
                 instance = new LauncherWindow();
             return instance;
         }
@@ -87,14 +86,14 @@ namespace OspreyLauncher
 
         private void select()
         {
-            LauncherController.GetInstance().getSelectableItems()[selectedIcon-1].Select();
+            LauncherController.GetInstance().getSelectableItems()[selectedIcon - 1].Select();
         }
 
         private void updateSelectedIcon(int newSelected)
         {
             if (newSelected == selectedIcon) return;
             if (getIcon(newSelected) == null) throw new Exception("Invalid icon.");
-            
+
             appearSelected(getIcon(newSelected));
             appearNormal(getIcon(selectedIcon));
             selectedIcon = newSelected;
@@ -146,6 +145,7 @@ namespace OspreyLauncher
             // if in the main (UI) thread
             this.Show();
             this.BringToFront();
+            this.Focus();
         }
     }
 }
