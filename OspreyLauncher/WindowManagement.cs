@@ -29,29 +29,45 @@ namespace OspreyLauncher
         [DllImport("user32.dll")]
         static extern IntPtr SetFocus(IntPtr hWnd);
 
+        // From: http://stackoverflow.com/questions/18364504/c-sharp-switching-windows-in-net
+        // and: http://www.pinvoke.net/default.aspx/user32/SwitchToThisWindow.html
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern void SwitchToThisWindow(IntPtr hWnd, bool fAltTab);
+
 
         // With help from:
         // http://msdn.microsoft.com/en-us/library/aa288468%28v=vs.71%29.aspx#pinvoke_callingdllexport
         // http://stackoverflow.com/questions/2647820/toggle-process-startinfo-windowstyle-processwindowstyle-hidden-at-runtime
 
-        static Process currentProcess;
+        static Process currentProcess = Process.GetCurrentProcess();
 
         public static void SwitchProcess(Process toSwitchTo)
         {
-            // potentially not working
+            if (currentProcess == toSwitchTo)
+                return;
+            
+            // hide current process
+            // TODO
+
             currentProcess = toSwitchTo;
-            LauncherWindow.GetInstance().hideWindow();
-            ShowMainWindow(toSwitchTo);
-            BringWindowToTop(toSwitchTo);
+            // do switch
+            SwitchWindow(toSwitchTo);
+
         }
 
         public static void SwitchToLauncher()
         {
-            HideMainWindow(currentProcess);
-            LauncherWindow.GetInstance().showWindow();
-            //SwitchProcess(Process.GetCurrentProcess());
+            SwitchProcess(Process.GetCurrentProcess());
         }
-        
+
+        private static void SwitchWindow(Process toSwitchTo)
+        {
+            if (toSwitchTo.MainWindowHandle != IntPtr.Zero)
+            {
+                SwitchToThisWindow(toSwitchTo.MainWindowHandle,true);
+            }   
+        }
+
         private static void HideMainWindow(Process toHide)
         {
             if (toHide.MainWindowHandle != IntPtr.Zero)

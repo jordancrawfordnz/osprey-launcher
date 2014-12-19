@@ -32,6 +32,6 @@ namespace OspreyLauncher
             controller.CloseAll();
         }
 
-        public static bool DebugMode = true;
+        public static bool DebugMode = false;
     }
 }
