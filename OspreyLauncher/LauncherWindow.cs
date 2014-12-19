@@ -25,7 +25,7 @@ namespace OspreyLauncher
         {
             if (!Program.DebugMode)
             {
-                this.TopMost = true;
+                //this.TopMost = true; Removing this seems to fix hotkey failing on my computer and the alt-tab not working like most other applications.
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
             }
@@ -45,16 +45,6 @@ namespace OspreyLauncher
         private void button4_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private OvalShape getIcon(int selectedIndex)
@@ -133,19 +123,31 @@ namespace OspreyLauncher
             MessageBox.Show(message);
         }
 
-        public void makePresent()
+        public void showWindow()
         {
             // this could be run from another thread!
             // http://stackoverflow.com/questions/13698704/execute-a-method-in-main-thread-from-event-handler
             if (InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate { makePresent(); }); // invokes this method in the UI thread
+                Invoke((MethodInvoker)delegate { showWindow(); }); // invokes this method in the UI thread
                 return;
             }
             // if in the main (UI) thread
             this.Show();
-            this.BringToFront();
-            this.Focus();
         }
+
+        public void hideWindow()
+        {
+            // this could be run from another thread!
+            // http://stackoverflow.com/questions/13698704/execute-a-method-in-main-thread-from-event-handler
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { hideWindow(); }); // invokes this method in the UI thread
+                return;
+            }
+            // if in the main (UI) thread
+            this.Hide();
+        }
+
     }
 }

@@ -34,16 +34,34 @@ namespace OspreyLauncher
         // http://msdn.microsoft.com/en-us/library/aa288468%28v=vs.71%29.aspx#pinvoke_callingdllexport
         // http://stackoverflow.com/questions/2647820/toggle-process-startinfo-windowstyle-processwindowstyle-hidden-at-runtime
 
-        public static void HideMainWindow(Process toHide)
+        static Process currentProcess;
+
+        public static void SwitchProcess(Process toSwitchTo)
+        {
+            // potentially not working
+            currentProcess = toSwitchTo;
+            LauncherWindow.GetInstance().hideWindow();
+            ShowMainWindow(toSwitchTo);
+            BringWindowToTop(toSwitchTo);
+        }
+
+        public static void SwitchToLauncher()
+        {
+            HideMainWindow(currentProcess);
+            LauncherWindow.GetInstance().showWindow();
+            //SwitchProcess(Process.GetCurrentProcess());
+        }
+        
+        private static void HideMainWindow(Process toHide)
         {
             if (toHide.MainWindowHandle != IntPtr.Zero)
             {
                 ShowWindow(toHide.MainWindowHandle, 0);
-                EnableWindow(toHide.MainWindowHandle, false);
+             //   EnableWindow(toHide.MainWindowHandle, false); potentially causing issue
             }
         }
 
-        public static void ShowMainWindow(Process toShow)
+        private static void ShowMainWindow(Process toShow)
         {
             if (toShow.MainWindowHandle != IntPtr.Zero)
             {
@@ -52,7 +70,7 @@ namespace OspreyLauncher
             }
         }
 
-        public static void BringWindowToTop(Process toBringToTop)
+        private static void BringWindowToTop(Process toBringToTop)
         {
             if (toBringToTop.MainWindowHandle != IntPtr.Zero)
             {

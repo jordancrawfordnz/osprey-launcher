@@ -46,15 +46,15 @@ namespace OspreyLauncher
         {
             if (application.shouldKeepOpen())
             {
-                WindowManagement.HideMainWindow(process);
+                WindowManagement.SwitchToLauncher();
                 onHide();
             }
             else
             {
                 if (application.isSuspendable())
                 {
-                    WindowManagement.HideMainWindow(process);
-                    Suspend.DoSuspend(process); // resume process
+                    WindowManagement.SwitchToLauncher();
+                    Suspend.DoSuspend(process); // suspend process
                     onSuspend();
                 }
                 else

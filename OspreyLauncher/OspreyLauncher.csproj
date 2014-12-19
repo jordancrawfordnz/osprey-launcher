@@ -84,7 +84,6 @@
   <ItemGroup>
     <Compile Include="ApplicationInstance.cs" />
     <Compile Include="ClosedApplication.cs" />
-    <Compile Include="DelayFocusGrab.cs" />
     <Compile Include="HiddenApplication.cs" />
     <Compile Include="DesktopLaunchable.cs" />
     <Compile Include="ExitSelectable.cs" />

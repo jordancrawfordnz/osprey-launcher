@@ -31,15 +31,16 @@ namespace OspreyLauncher
 
         void setupLaunchables()
         {
-            launchables.Add(new LaunchableApplication("MediaPortal",
-    "C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe"));
-            launchables.Add(new LaunchableApplication("XBMC",
-    "C:\\Program Files (x86)\\XBMC\\XBMC.exe",true, true));
-            launchables.Add(DesktopLaunchable.GetInstance());
+            // Kitchen PC uses 32-bit versions of everythings
+            // Currently testing: Hiding only
 
-
+           //launchables.Add(new LaunchableApplication("MediaPortal", "C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", false, true));
+           launchables.Add(new LaunchableApplication("MediaPortal","C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe",false, true));
+           launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files (x86)\\XBMC\\XBMC.exe",false,true));
+       //    launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files\\XBMC\\XBMC.exe", false, true));
+         
+            launchables.Add(DesktopLaunchable.GetInstance()); // the launchable to return to the desktop
         }
-
 
         public void handleHotkey()
         {
@@ -66,7 +67,6 @@ namespace OspreyLauncher
         public void Launch(Launchable application)
         {
             if (application == null) return;
-            launcherWindow.Hide();
             if (currentLaunchable != null && currentLaunchable != application)
                 currentLaunchable.Close();
             application.Launch();
@@ -77,11 +77,16 @@ namespace OspreyLauncher
         {
             if (application == null) return;
             application.Close();
+            HandleClose(application);
+        }
+
+        private void HandleClose(Launchable application)
+        {
+            if (application == null) return;
             if (currentLaunchable == application)
             {
                 currentLaunchable = null;
-                launcherWindow.makePresent();
-                WindowManagement.BringWindowToTop(Process.GetCurrentProcess());
+                WindowManagement.SwitchToLauncher();
             }
         }
 
@@ -96,7 +101,7 @@ namespace OspreyLauncher
 
         public void notifyProcessClosure(LaunchableApplication applicationClosed)
         {
-            Close(applicationClosed);
+            HandleClose(applicationClosed);
         }
     }
 }
