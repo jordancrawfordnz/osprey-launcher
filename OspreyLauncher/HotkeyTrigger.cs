@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using System.Windows.Forms; // for Keys
 
 namespace OspreyLauncher
 {
-    public class Hotkey
+    public class HotkeyTrigger
     {
-        public static void SetupKeyHook()
+        public event LaunchHandler Launch;
+        public delegate void LaunchHandler();
+
+        public HotkeyTrigger()
         {
             // Taken from: http://www.codeproject.com/Articles/19004/A-Simple-C-Global-Low-Level-Keyboard-Hook
             globalKeyboardHook gkh = new globalKeyboardHook();
             gkh.HookedKeys.Add(Keys.D9);
-            gkh.KeyUp += new KeyEventHandler(HandleHotkey);
+            gkh.KeyUp += new KeyEventHandler(HandleHotkey);    
         }
 
-        static void HandleHotkey(object sender, KeyEventArgs e)
+        void HandleHotkey(object sender, KeyEventArgs e)
         {
-            LauncherController.GetInstance().handleHotkey();
+            if (Launch != null)
+                Launch(); 
             e.Handled = true;
         }
     }

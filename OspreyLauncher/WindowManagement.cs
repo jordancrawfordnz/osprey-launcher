@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
+using System.Threading;
 
 namespace OspreyLauncher
 {
@@ -45,14 +46,12 @@ namespace OspreyLauncher
         {
             if (currentProcess == toSwitchTo)
                 return;
-            
+
+            currentProcess = toSwitchTo;
             // hide current process
             // TODO
 
-            currentProcess = toSwitchTo;
-            // do switch
             SwitchWindow(toSwitchTo);
-
         }
 
         public static void SwitchToLauncher()
@@ -65,7 +64,7 @@ namespace OspreyLauncher
             if (toSwitchTo.MainWindowHandle != IntPtr.Zero)
             {
                 SwitchToThisWindow(toSwitchTo.MainWindowHandle,true);
-            }   
+            }
         }
 
         private static void HideMainWindow(Process toHide)

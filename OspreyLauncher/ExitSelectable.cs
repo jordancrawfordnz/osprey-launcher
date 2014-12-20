@@ -13,11 +13,12 @@ namespace OspreyLauncher
 
         public void Select()
         {
-            LauncherWindow.GetInstance().Close();
+            LauncherController.GetInstance().CloseLauncher();
         }
 
 
         private static ExitSelectable instance = null;
+    
         public static ExitSelectable GetInstance()
         {
             if (instance == null)

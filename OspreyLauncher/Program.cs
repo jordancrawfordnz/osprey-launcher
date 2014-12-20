@@ -23,13 +23,9 @@ namespace OspreyLauncher
             catch (Exception ex)
             {
                 if (Program.DebugMode) throw;
-                else
-                {
-                    MessageBox.Show("The error is:\n" + ex.Message, "Something bad happened!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                else MessageBox.Show("The error is:\n" + ex.Message, "Something bad happened!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            controller.CloseAll();
+            controller.CloseLauncher();
         }
 
         public static bool DebugMode = false;
