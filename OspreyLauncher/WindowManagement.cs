@@ -42,7 +42,14 @@ namespace OspreyLauncher
 
         static Process currentProcess = Process.GetCurrentProcess();
 
-        public static void SwitchProcess(Process toSwitchTo)
+        public static void SwitchToApplication(Process toSwitchTo)
+        {
+            LauncherWindow.GetInstance().prepareFadeOut();
+            SwitchProcess(toSwitchTo);
+            LauncherWindow.GetInstance().fadeOut();
+        }
+
+        private static void SwitchProcess(Process toSwitchTo)
         {
             if (currentProcess == toSwitchTo)
                 return;
@@ -52,11 +59,14 @@ namespace OspreyLauncher
             // TODO
 
             SwitchWindow(toSwitchTo);
+
         }
 
         public static void SwitchToLauncher()
         {
+            LauncherWindow.GetInstance().prepareFadeIn();
             SwitchProcess(Process.GetCurrentProcess());
+            LauncherWindow.GetInstance().fadeIn();
         }
 
         private static void SwitchWindow(Process toSwitchTo)

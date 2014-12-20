@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.PowerPacks;
+using System.Threading;
 
 namespace OspreyLauncher
 {
@@ -25,26 +26,10 @@ namespace OspreyLauncher
         {
             if (!Program.DebugMode)
             {
-                //this.TopMost = true; Removing this seems to fix hotkey failing on my computer and the alt-tab not working like most other applications.
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
             }
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LauncherController.GetInstance().Launch(LauncherController.GetInstance().getApplications()[0]);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private OvalShape getIcon(int selectedIndex)
@@ -147,6 +132,68 @@ namespace OspreyLauncher
             }
             // if in the main (UI) thread
             this.Hide();
+        }
+
+        private void LauncherWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        public void fadeOut()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { fadeOut(); }); // invokes this method in the UI thread
+                return;
+            }
+
+            while (this.Opacity > 0)
+            {
+                this.Opacity -= 0.1;
+                Thread.Sleep(10);
+
+            }
+
+        }
+
+        public void fadeIn()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { fadeIn(); }); // invokes this method in the UI thread
+                return;
+            }
+
+            while (this.Opacity < 1)
+            {
+                this.Opacity += 0.1;
+                Thread.Sleep(10);
+
+            }
+
+        }
+
+        public void prepareFadeIn()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { prepareFadeIn(); }); // invokes this method in the UI thread
+                return;
+            }
+
+            this.Opacity = 0;
+        }
+
+        public void prepareFadeOut()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { prepareFadeOut(); }); // invokes this method in the UI thread
+                return;
+            }
+
+            this.Opacity = 1;
         }
 
     }

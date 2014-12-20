@@ -34,10 +34,10 @@ namespace OspreyLauncher
             // Kitchen PC uses 32-bit versions of everythings
             // Currently testing: Hiding only
 
-           launchables.Add(new LaunchableApplication("MediaPortal", "C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", false, true));
+           launchables.Add(new LaunchableApplication("MediaPortal", "C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", true, false));
           // launchables.Add(new LaunchableApplication("MediaPortal","C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe",false, true));
           // launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files (x86)\\XBMC\\XBMC.exe",false,true));
-           launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files\\XBMC\\XBMC.exe", false, true));
+           launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files\\XBMC\\XBMC.exe", true, false));
          
             launchables.Add(DesktopLaunchable.GetInstance()); // the launchable to return to the desktop
         }
@@ -86,7 +86,6 @@ namespace OspreyLauncher
             if (currentLaunchable == application)
             {
                 currentLaunchable = null;
-                WindowManagement.SwitchToLauncher();
             }
         }
 
@@ -108,6 +107,7 @@ namespace OspreyLauncher
         public void notifyProcessClosure(LaunchableApplication applicationClosed)
         {
             HandleClose(applicationClosed);
+            WindowManagement.SwitchToLauncher();
         }
     }
 }

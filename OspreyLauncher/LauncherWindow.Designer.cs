@@ -33,7 +33,6 @@
             this.icon3 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
             this.icon2 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
             this.icon1 = new Microsoft.VisualBasic.PowerPacks.OvalShape();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,7 +48,7 @@
             this.icon3,
             this.icon2,
             this.icon1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1284, 675);
+            this.shapeContainer1.Size = new System.Drawing.Size(1276, 675);
             this.shapeContainer1.TabIndex = 11;
             this.shapeContainer1.TabStop = false;
             // 
@@ -149,14 +148,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
-            this.ClientSize = new System.Drawing.Size(1284, 675);
+            this.ClientSize = new System.Drawing.Size(1276, 675);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.shapeContainer1);
             this.Cursor = System.Windows.Forms.Cursors.No;
+            this.DoubleBuffered = true;
             this.Name = "LauncherWindow";
             this.Text = "LauncherWindow";
+            this.Load += new System.EventHandler(this.LauncherWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,7 +169,6 @@
         private Microsoft.VisualBasic.PowerPacks.OvalShape icon3;
         private Microsoft.VisualBasic.PowerPacks.OvalShape icon2;
         private Microsoft.VisualBasic.PowerPacks.OvalShape icon1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

@@ -15,7 +15,7 @@ namespace OspreyLauncher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LauncherController controller = LauncherController.GetInstance(); // ensure the controller gets constructed
+            LauncherController controller = LauncherController.GetInstance();
             try
             {
                 Application.Run(LauncherWindow.GetInstance());

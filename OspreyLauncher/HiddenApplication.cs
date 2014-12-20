@@ -18,7 +18,7 @@ namespace OspreyLauncher
         
         public override void Launch()
         {
-            WindowManagement.SwitchProcess(process);
+            WindowManagement.SwitchToApplication(process);
             application.changeInstance(new OpenApplication(application, process));
         }
 
