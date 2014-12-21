@@ -8,12 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.PowerPacks;
 using System.Threading;
+using CefSharp.WinForms;
+using CefSharp;
 
 namespace OspreyLauncher
 {
     public partial class LauncherWindow : Form
     {
-        int selectedIcon = 1;
+        private readonly ChromiumWebBrowser browser;
+
         static LauncherWindow instance = null;
         public static LauncherWindow GetInstance()
         {
@@ -29,66 +32,59 @@ namespace OspreyLauncher
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
             }
+
             InitializeComponent();
-        }
 
-        private OvalShape getIcon(int selectedIndex)
-        {
-            switch (selectedIndex)
+            browser = new ChromiumWebBrowser("http://192.168.1.106:8888/OspreyLauncher/")
             {
-                case 1:
-                    return icon1;
-                case 2:
-                    return icon2;
-                case 3:
-                    return icon3;
-                case 4:
-                    return icon4;
-                default:
-                    return null;
+                Dock = DockStyle.Fill,
+            };
+            browser.BackColor = Color.Black;
+            browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
+            Cursor.Hide();
+            this.Controls.Add(browser);
+            this.Focus();
+        }
+
+        public void PrepareForClose()
+        {
+            // this could be run from another thread!
+            // http://stackoverflow.com/questions/13698704/execute-a-method-in-main-thread-from-event-handler
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate { PrepareForClose(); }); // invokes this method in the UI thread
+                return;
             }
-        }
-
-        private void appearSelected(OvalShape toSelect)
-        {
-            toSelect.BorderColor = Color.DeepSkyBlue;
-        }
-
-        private void appearNormal(OvalShape toNormal)
-        {
-            toNormal.BorderColor = Color.White;
-        }
-
-        private void select()
-        {
-            LauncherController.GetInstance().getSelectableItems()[selectedIcon - 1].Select();
-        }
-
-        private void updateSelectedIcon(int newSelected)
-        {
-            if (newSelected == selectedIcon) return;
-            if (getIcon(newSelected) == null) throw new Exception("Invalid icon.");
-
-            appearSelected(getIcon(newSelected));
-            appearNormal(getIcon(selectedIcon));
-            selectedIcon = newSelected;
+            fadeOut();
+            this.Close();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            // Send keys through to JS
             if (keyData == Keys.Left)
             {
-                if (getIcon(selectedIcon - 1) != null) updateSelectedIcon(selectedIcon - 1);
+                browser.ExecuteScriptAsync("moveLeft()");
                 return true;
             }
             else if (keyData == Keys.Right)
             {
-                if (getIcon(selectedIcon + 1) != null) updateSelectedIcon(selectedIcon + 1);
+                browser.ExecuteScriptAsync("moveRight()");
+                return true;
+            }
+            else if (keyData == Keys.Up)
+            {
+                browser.ExecuteScriptAsync("moveUp()");
+                return true;
+            }
+            else if (keyData == Keys.Down)
+            {
+                browser.ExecuteScriptAsync("moveDown()");
                 return true;
             }
             else if (keyData == Keys.Enter)
             {
-                select();
+                browser.ExecuteScriptAsync("selectKey()");
                 return true;
             }
             // Call the base class
@@ -134,12 +130,6 @@ namespace OspreyLauncher
             this.Hide();
         }
 
-        private void LauncherWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
         public void fadeOut()
         {
             if (InvokeRequired)
@@ -147,14 +137,11 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate { fadeOut(); }); // invokes this method in the UI thread
                 return;
             }
-
             while (this.Opacity > 0)
             {
                 this.Opacity -= 0.1;
                 Thread.Sleep(10);
-
             }
-
         }
 
         public void fadeIn()
@@ -164,14 +151,11 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate { fadeIn(); }); // invokes this method in the UI thread
                 return;
             }
-
             while (this.Opacity < 1)
             {
                 this.Opacity += 0.1;
                 Thread.Sleep(10);
-
             }
-
         }
 
         public void prepareFadeIn()
@@ -181,7 +165,6 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate { prepareFadeIn(); }); // invokes this method in the UI thread
                 return;
             }
-
             this.Opacity = 0;
         }
 
@@ -192,7 +175,6 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate { prepareFadeOut(); }); // invokes this method in the UI thread
                 return;
             }
-
             this.Opacity = 1;
         }
 

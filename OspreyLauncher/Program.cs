@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CefSharp;
+using System.Diagnostics;
 
 namespace OspreyLauncher
 {
@@ -13,6 +15,7 @@ namespace OspreyLauncher
         [STAThread]
         static void Main()
         {
+            Cef.Initialize(new CefSettings());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LauncherController controller = LauncherController.GetInstance();
@@ -25,7 +28,8 @@ namespace OspreyLauncher
                 if (Program.DebugMode) throw;
                 else MessageBox.Show("The error is:\n" + ex.Message, "Something bad happened!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            controller.CloseLauncher();
+            Cef.Shutdown();
+            Process.GetCurrentProcess().Kill();
         }
 
         public static bool DebugMode = false;
