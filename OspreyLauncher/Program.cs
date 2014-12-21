@@ -28,7 +28,6 @@ namespace OspreyLauncher
                 if (Program.DebugMode) throw;
                 else MessageBox.Show("The error is:\n" + ex.Message, "Something bad happened!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Cef.Shutdown();
             Process.GetCurrentProcess().Kill();
         }
 

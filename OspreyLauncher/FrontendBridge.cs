@@ -10,8 +10,7 @@ namespace OspreyLauncher
         static FrontendBridge instance = null;
 
         private FrontendBridge()
-        {
-        }
+        {}
 
         public static FrontendBridge GetInstance()
         {
@@ -24,8 +23,6 @@ namespace OspreyLauncher
 
         public void SelectItem(string toSelect)
         {
-            LauncherWindow.GetInstance().displayMessage("HELLO!");
-            // Do something really cool here.
             LauncherController.GetInstance().getSelectableItems()[0].Select();
         }
 

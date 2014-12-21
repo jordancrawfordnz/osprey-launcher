@@ -7,6 +7,7 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /*
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -18,7 +19,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
 
         #region Windows Form Designer generated code
 
@@ -38,7 +39,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Name = "LauncherWindow";
-            this.Text = "LauncherWindow";
+            this.Text = "Osprey Launcher";
             this.ResumeLayout(false);
 
         }
