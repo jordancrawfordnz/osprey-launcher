@@ -12,7 +12,6 @@ angular.module('ospreyLauncherApp')
     $scope.applications = [
       {'name': 'Movies'},
       {'name': 'TV'},
-      {'name': 'Stream'},
-      {'name': 'test'},
+      {'name': 'Stream'}
     ];
   });
