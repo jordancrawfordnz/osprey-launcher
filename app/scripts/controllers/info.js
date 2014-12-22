@@ -8,7 +8,7 @@
  * Controller of the ospreyLauncherApp
  */
 angular.module('ospreyLauncherApp')
-  .controller('AboutCtrl', function ($scope) {
+  .controller('InfoCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
