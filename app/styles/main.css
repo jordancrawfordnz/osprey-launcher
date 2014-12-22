@@ -27,6 +27,13 @@ body {
   font-size: 20px;
 }
 
+.application-selector-table
+{
+  color: white;
+  text-align: center;
+  font-size: 30px;
+}
+
 .header-column-left{ width: 40%; text-align: right;}
 .header-column-right{  width: 40%; text-align: left;}
 .header-column-center{ width: 20%; text-align: center; }
