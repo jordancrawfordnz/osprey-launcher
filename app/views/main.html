@@ -1,7 +1,8 @@
 <div class="row application-selector-table">
 		<div class="col-md-3" ng-repeat="application in applications">
 			<div class="application">
-				{{application.name}}
+				<img ng-src="{{application.img}}"/><br>
+				{{application.title}}
 			</div>
 		</div>
 		<div class="col-md-3">

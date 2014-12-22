@@ -10,8 +10,8 @@
 angular.module('ospreyLauncherApp')
   .controller('MainCtrl', function ($scope) {
     $scope.applications = [
-      {'name': 'Movies'},
-      {'name': 'TV'},
-      {'name': 'Stream'}
+      {'title': 'Movies','name' : 'plex', 'img' : 'images/plex.png'},
+      {'title': 'TV', 'name' : 'mediaportal', 'img' : 'images/mediaportal.png'},
+      {'title': 'Stream', 'name' : 'kodi', 'img' : 'images/kodi.png'}
     ];
   });
