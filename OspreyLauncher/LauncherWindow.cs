@@ -35,21 +35,32 @@ namespace OspreyLauncher
 
             InitializeComponent();
 
-            browser = new ChromiumWebBrowser("http://192.168.1.106:9000/")
-            {
-                Dock = DockStyle.Fill,
-            };
+            browser = new ChromiumWebBrowser("http://192.168.1.106:9000/");
+            browser.Dock = DockStyle.Fill;
+
             browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
             Cursor.Hide();
             browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
+            browser.GotFocus += new EventHandler(browser_GotFocus);
             this.Controls.Add(browser);
+        }
+
+        // stop the browser from getting focus
+        void browser_GotFocus(object sender, EventArgs e)
+        {
+            this.Focus();
         }
 
         void browser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
             if (InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate { this.Focus(); }); // invokes this method in the UI thread
+                Invoke((MethodInvoker)delegate
+                {
+                    loadingLabel.Hide();
+                    this.Focus(); 
+                    
+                }); // invokes this method in the UI thread
                 return;
             } 
         }

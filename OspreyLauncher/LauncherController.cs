@@ -11,8 +11,12 @@ namespace OspreyLauncher
     {
         static LauncherController instance = null;
         LauncherWindow launcherWindow;
-        Launchable currentLaunchable = null;
-        List<Launchable> launchables = new List<Launchable>();
+
+        private LauncherController()
+        {
+            launcherWindow = LauncherWindow.GetInstance();
+            LaunchListener.EnableListeners();
+        }
 
         public static LauncherController GetInstance()
         {
@@ -20,50 +24,43 @@ namespace OspreyLauncher
                 instance = new LauncherController();
             return instance;
         }
+    
+        // === Manage launchables / selectables ===
+        Launchable currentLaunchable = null;
 
-        private LauncherController()
+        Dictionary<string, Selectable> selectables = new Dictionary<string, Selectable>();
+
+        public void AddSelectable(string key, Selectable selectableToAdd)
         {
-            launcherWindow = LauncherWindow.GetInstance();
-            LaunchListener.EnableListeners();
-            setupLaunchables();
+            if (selectables.ContainsKey(key)) return; // ignore it if its already in therea
+            selectables.Add(key, selectableToAdd);
         }
 
-
-        void setupLaunchables()
+        public Selectable GetSelectable(string keyToGet)
         {
-            // Kitchen PC uses 32-bit versions of everythings
-            // Currently testing: Hiding only
-
-          // launchables.Add(new LaunchableApplication("MediaPortal", "C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", true, false));
-           launchables.Add(new LaunchableApplication("MediaPortal","C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe",false, true));
-           launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files (x86)\\XBMC\\XBMC.exe",false,true));
-          // launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files\\XBMC\\XBMC.exe", true, false));
-         
-            launchables.Add(DesktopLaunchable.GetInstance()); // the launchable to return to the desktop
+            if (selectables.ContainsKey(keyToGet))
+                return selectables[keyToGet];
+            return null;
         }
 
-        public void handleLaunch()
+        public List<Launchable> GetLaunchables()
         {
-            Close(currentLaunchable);
-        }
-
-        public List<Selectable> getSelectableItems()
-        {
-            List<Selectable> toReturn = new List<Selectable>();
-            foreach (Selectable currentSelectable in getApplications())
+            List<Launchable> toReturn = new List<Launchable>();
+            foreach (Selectable currentSelectable in GetSelectables())
             {
-                toReturn.Add(currentSelectable);
+                if(currentSelectable is Launchable)
+                    toReturn.Add((Launchable)currentSelectable);
             }
-            toReturn.Add(ExitSelectable.GetInstance());
             return toReturn;
         }
 
-
-        public List<Launchable> getApplications()
+        public List<Selectable> GetSelectables()
         {
-            return launchables;
+            return selectables.Values.ToList<Selectable>();
         }
 
+        // === Launchables ===
+                
         public void Launch(Launchable application)
         {
             if (application == null) return;
@@ -89,6 +86,13 @@ namespace OspreyLauncher
             }
         }
 
+        // === General lifecycle things ===
+
+        public void HandleLaunch() // when a launch listener fires
+        {
+            Close(currentLaunchable);
+        }
+
         public void CloseLauncher()
         {
             CloseAll(); // close any running apps
@@ -98,9 +102,9 @@ namespace OspreyLauncher
         public void CloseAll()
         {
             // Shutdown all applications.
-            foreach(Launchable currentApplication in launchables)
+            foreach(Launchable currentLaunchable in GetLaunchables())
             {
-                currentApplication.ForceClose();
+                currentLaunchable.ForceClose();
             }
         }
 

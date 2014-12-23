@@ -27,7 +27,7 @@ namespace OspreyLauncher
         
         private void HandleLaunch()
         {
-            LauncherController.GetInstance().handleLaunch();
+            LauncherController.GetInstance().HandleLaunch();
         }
     }
 }

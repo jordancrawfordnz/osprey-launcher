@@ -23,73 +23,64 @@ namespace OspreyLauncher
 
         public void SelectItem(string toSelect)
         {
-            LauncherController.GetInstance().getSelectableItems()[0].Select();
+            Selectable selectable = LauncherController.GetInstance().GetSelectable(toSelect);
+            if (selectable != null)
+                selectable.Select();
         }
 
-        public void Exit()
+        public void AddApplication(string name, string path, bool suspendable = true, bool keepOpen = false)
         {
-            LauncherController.GetInstance().CloseLauncher();
+            LauncherController.GetInstance().AddSelectable(name,new LaunchableApplication(name, path, suspendable, keepOpen));
         }
 
+        public void AddDesktopLaunchable(string name)
+        {
+            LauncherController.GetInstance().AddSelectable(name, DesktopLaunchable.GetInstance());
+        }
+
+        public void AddExitLaunchable(string name)
+        {
+            LauncherController.GetInstance().AddSelectable(name, ExitSelectable.GetInstance());
+        }
+
+        /*
+         * 
+         *        void setupLaunchables()
+        {
+            // Kitchen PC uses 32-bit versions of everythings
+            // Currently testing: Hiding only
+
+          // launchables.Add(new LaunchableApplication("MediaPortal", "C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe", true, false));
+           launchables.Add(new LaunchableApplication("MediaPortal","C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe",false, true));
+           launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files (x86)\\XBMC\\XBMC.exe",false,true));
+          // launchables.Add(new LaunchableApplication("XBMC", "C:\\Program Files\\XBMC\\XBMC.exe", true, false));
+         
+            launchables.Add(DesktopLaunchable.GetInstance()); // the launchable to return to the desktop
+        }
+         * 
+         * */
+
+
+
+        /*
+                public List<Selectable> getSelectableItems()
+                {
+                    List<Selectable> toReturn = new List<Selectable>();
+                    foreach (Selectable currentSelectable in getLaunchables())
+                    {
+                        toReturn.Add(currentSelectable);
+                    }
+                    toReturn.Add(ExitSelectable.GetInstance());
+                    return toReturn;
+                }
+               */
+
+        /*
+        public List<Launchable> getLaunchables()
+        {
+            return selectables;
+        }
+        */
+              
     }
 }
-        /*
-         *  private void updateSelectedIcon(int newSelected)
-        {
-            if (newSelected == selectedIcon) return;
-            if (getIcon(newSelected) == null) throw new Exception("Invalid icon.");
-
-            appearSelected(getIcon(newSelected));
-            appearNormal(getIcon(selectedIcon));
-            selectedIcon = newSelected;
-        }
-         * 
-         * 
-         * private OvalShape getIcon(int selectedIndex)
-        {
-            return null;
-        }
-
-        private void appearSelected(OvalShape toSelect)
-        {
-            toSelect.BorderColor = Color.DeepSkyBlue;
-        }
-
-        private void appearNormal(OvalShape toNormal)
-        {
-            toNormal.BorderColor = Color.White;
-        }
-         * 
-         * 
-        int selectedIcon = 1;
-         * 
-         * 
-         * 
-         *         private void select()
-        {
-            LauncherController.GetInstance().getSelectableItems()[selectedIcon - 1].Select();
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Left)
-            {
-                if (getIcon(selectedIcon - 1) != null) updateSelectedIcon(selectedIcon - 1);
-                return true;
-            }
-            else if (keyData == Keys.Right)
-            {
-                if (getIcon(selectedIcon + 1) != null) updateSelectedIcon(selectedIcon + 1);
-                return true;
-            }
-            else if (keyData == Keys.Enter)
-            {
-                select();
-                return true;
-            }
-            // Call the base class
-            return base.ProcessCmdKey(ref msg, keyData);
-         * 
-         * 
-        }*/
-
