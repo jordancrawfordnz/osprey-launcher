@@ -38,8 +38,8 @@ body {
 {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  color: black;
-  background-color: #F5F5F5;
+  color: white;
+  background-color: #00325C;
   text-align: center;
   font-size: 55px;
   display: block;
@@ -48,12 +48,14 @@ body {
   margin-right: auto;
   padding-bottom: 20px;
   width: 300px;
-  box-shadow:         0px 0px 50px 0px rgba(50, 50, 50, 1)
+  box-shadow:         0px 0px 50px 0px rgba(50, 50, 50, 1);
+  transition: all 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
 }
 
-.application:hover
+.application.selected
 {
-  background-color: #00B5D9;
+  background-color: white;
+  color: black;
 }
 .header-column-left{ width: 40%; text-align: right;}
 .header-column-right{  width: 40%; text-align: left;}

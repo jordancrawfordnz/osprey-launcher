@@ -1,6 +1,42 @@
+<script>
+	// JavaScript related to selection of content.
+
+	//<input type="button" value="open something" onClick="backend.selectItem('something');"/>
+	//<input type="button" value="close launcher" onClick="backend.exit();"/>
+
+	// how to get access to angular objects?
+	var notifyOfMovement = null;
+	function registerMovementNotifyee(toNotify)
+	{
+		notifyOfMovement = toNotify;
+	}
+
+	function moveLeft()
+	{
+		if(notifyOfMovement != null) notifyOfMovement.moveLeft();
+	}
+	function moveRight()
+	{
+	  if(notifyOfMovement != null) notifyOfMovement.moveRight();
+	}
+	function moveUp()
+	{
+	  if(notifyOfMovement != null) notifyOfMovement.moveUp();
+	}
+	function moveDown()
+	{
+	  if(notifyOfMovement != null) notifyOfMovement.moveDown();
+	}
+	function selectKey()
+	{
+	  if(notifyOfMovement != null) notifyOfMovement.selectKey();
+	}
+
+</script>
+
 <div class="row application-selector-table">
 		<div class="col-md-3" ng-repeat="application in applications">
-			<div class="application">
+			<div class="application" ng-class="{selected: application.selected}">
 				<img ng-src="{{application.img}}"/><br>
 				{{application.title}}
 			</div>
