@@ -49,6 +49,7 @@ namespace OspreyLauncher
         void browser_GotFocus(object sender, EventArgs e)
         {
             this.Focus();
+            // I don't think this is actually doing the trick!
         }
 
         void browser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
