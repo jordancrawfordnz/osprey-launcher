@@ -1,5 +1,50 @@
 'use strict';
 
+// JavaScript related to selection of content.
+
+var notifyOfMovement = null;
+function registerMovementNotifyee(toNotify)
+{
+	notifyOfMovement = toNotify;
+}
+
+function moveLeft()
+{
+	if(notifyOfMovement !== null)
+	{
+		notifyOfMovement.moveLeft();
+	}
+}
+function moveRight()
+{
+  if(notifyOfMovement !== null)
+  {
+  	notifyOfMovement.moveRight();
+  }
+}
+function moveUp()
+{
+  if(notifyOfMovement !== null)
+  {
+  	notifyOfMovement.moveUp();
+  }
+}
+function moveDown()
+{
+  if(notifyOfMovement !== null)
+  {
+  	notifyOfMovement.moveDown();
+  }
+}
+function selectKey()
+{
+  if(notifyOfMovement !== null)
+  {
+  	notifyOfMovement.selectKey();
+  }
+}
+
+
 /**
  * @ngdoc function
  * @name ospreyLauncherApp.controller:MainCtrl
@@ -47,7 +92,13 @@ angular.module('ospreyLauncherApp')
 		backend.selectItem($scope.current.name);
 	};
 
+	// alert(window.screen.availHeight);
+	// alert(window.screen.availWidth);
+
+
 	// == Construct ==
+
+	var x86system = false;
 
   	registerMovementNotifyee($scope); // allow key events to come through.
 
@@ -55,21 +106,18 @@ angular.module('ospreyLauncherApp')
   	var plex = {'title': 'Movies',
   				'name' : 'plex',
   				'img' : 'images/plex.png',
-  				'path' : 'C:\\Program Files (x86)\\Plex Home Theater\\Plex Home Theater.exe',
   				'suspendable' : true,
   				'keepOpen' : false,
   				'selected' : false};
   	var mediaportal = {'title':'TV',
   						'name' : 'mediaportal',
   						'img' : 'images/mediaportal.png',
-  						'path' : 'C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe',
-		  				'suspendable' : true,
+  						'suspendable' : true,
 		  				'keepOpen' : false,
   						'selected' : false};
   	var kodi = {'title': 'Stream',
   				'name' : 'kodi',
   				'img' : 'images/kodi.png',
-  				'path' : 'C:\\Program Files (x86)\\XBMC\\XBMC.exe',
   				'suspendable' : true,
   				'keepOpen' : false,
   				'selected' : false};
@@ -79,22 +127,52 @@ angular.module('ospreyLauncherApp')
   	var exit = {'title': 'Exit',
   				'name' : 'exit',
   				'selected' : false};
+
+  	if(x86system)
+  	{
+  		plex.path = 'C:\\Program Files\\Plex Home Theater\\Plex Home Theater.exe';
+  		mediaportal.path = 'C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
+  		kodi.path = 'C:\\Program Files\\XBMC\\XBMC.exe';
+  	}
+  	else
+  	{
+  		plex.path = 'C:\\Program Files (x86)\\Plex Home Theater\\Plex Home Theater.exe';
+  		mediaportal.path = 'C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
+  		kodi.path = 'C:\\Program Files (x86)\\XBMC\\XBMC.exe';
+  	}
   	
   	// setup the selectables with the backend
   	backend.addApplication(plex.name, plex.path, plex.suspendable, plex.keepOpen);
   	backend.addApplication(mediaportal.name, mediaportal.path, mediaportal.suspendable, mediaportal.keepOpen);
   	backend.addApplication(kodi.name, kodi.path, kodi.suspendable, kodi.keepOpen);
 
+  	backend.addDesktopLaunchable(desktop.name);
+  	backend.addExitLaunchable(exit.name);
+
   	// define relative applications
+
+  	plex.left = desktop;
   	plex.right = mediaportal;
 
   	mediaportal.left = plex;
   	mediaportal.right = kodi;
 
   	kodi.left = mediaportal;
+  	kodi.right = desktop;
+
+  	desktop.left = kodi;
+  	desktop.right = plex;
+  	desktop.up = exit;
+  	desktop.down = exit;
+
+  	exit.left = kodi;
+  	exit.right = plex;
+  	exit.up = desktop;
+  	exit.down = desktop;
 
   	// define display order
 	$scope.applications = [plex,mediaportal,kodi];
+	$scope.extras = [desktop,exit];
   	$scope.current = null;
 
   	// define the default option
