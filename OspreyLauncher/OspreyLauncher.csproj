@@ -110,6 +110,7 @@
     <Compile Include="ProcessClosureNotifiable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Taskbar.cs" />
     <Compile Include="UDPTrigger.cs" />
     <Compile Include="WindowManagement.cs" />
     <EmbeddedResource Include="LauncherWindow.resx">

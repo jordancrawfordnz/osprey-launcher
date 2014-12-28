@@ -14,6 +14,13 @@ namespace OspreyLauncher
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 1;
+
+
+        [DllImport("user32.dll")]
+        private static extern int FindWindow(string className, string windowText);
+        
         // BringWindowToTop signature from: http://www.pinvoke.net/default.aspx/user32.BringWindowToTop
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -29,6 +36,8 @@ namespace OspreyLauncher
 
         [DllImport("user32.dll")]
         static extern IntPtr SetFocus(IntPtr hWnd);
+
+
 
         // From: http://stackoverflow.com/questions/18364504/c-sharp-switching-windows-in-net
         // and: http://www.pinvoke.net/default.aspx/user32/SwitchToThisWindow.html
@@ -49,6 +58,14 @@ namespace OspreyLauncher
             LauncherWindow.GetInstance().fadeOut();
         }
 
+        public static void SwitchToLauncher()
+        {
+            LauncherWindow.GetInstance().prepareFadeIn();
+            SwitchProcess(Process.GetCurrentProcess());
+            Taskbar.Hide();
+            LauncherWindow.GetInstance().fadeIn();
+        }
+
         private static void SwitchProcess(Process toSwitchTo)
         {
             if (currentProcess == toSwitchTo)
@@ -62,12 +79,6 @@ namespace OspreyLauncher
 
         }
 
-        public static void SwitchToLauncher()
-        {
-            LauncherWindow.GetInstance().prepareFadeIn();
-            SwitchProcess(Process.GetCurrentProcess());
-            LauncherWindow.GetInstance().fadeIn();
-        }
 
         private static void SwitchWindow(Process toSwitchTo)
         {

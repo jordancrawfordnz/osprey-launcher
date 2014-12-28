@@ -109,6 +109,7 @@ namespace OspreyLauncher
         public void CloseLauncher()
         {
             CloseAll(); // close any running apps
+            Taskbar.Show();
             LauncherWindow.GetInstance().PrepareForClose();
         }
 
