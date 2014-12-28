@@ -94,11 +94,13 @@ angular.module('ospreyLauncherApp')
 
   $scope.setupInBackend = function(toSetup)
   {
-    backend.addApplication(toSetup.name, toSetup.path, toSetup.suspendable, toSetup.keepOpen, toSetup.restrictions);
+    backend.addApplication(toSetup.name, toSetup.path, toSetup.suspendable, toSetup.keepOpen);
   };
 
-	// alert(window.screen.availHeight);
-	// alert(window.screen.availWidth);
+  $scope.addRestriction = function(restrictionAppliesTo, restricted)
+  {
+    backend.addRestriction(restrictionAppliesTo.name,restricted.name);
+  }
 
 
 	// == Construct ==
@@ -114,7 +116,7 @@ angular.module('ospreyLauncherApp')
   				'suspendable' : true,
   				'keepOpen' : false,
   				'selected' : false,
-          'restrictions' : ['kodi']};
+          'restriction' : 'kodi'};
   	var mediaportal = {'title':'TV',
   						'name' : 'mediaportal',
   						'img' : 'images/mediaportal.png',
@@ -127,7 +129,7 @@ angular.module('ospreyLauncherApp')
   				'suspendable' : true,
   				'keepOpen' : false,
   				'selected' : false,
-          'restrictions' : ['plex']};
+          'restriction' : 'plex'};
   	var desktop = {'title': 'Desktop',
   					'name' : 'desktop',
   					'selected' : false};
@@ -152,9 +154,13 @@ angular.module('ospreyLauncherApp')
     $scope.setupInBackend(plex);
     $scope.setupInBackend(mediaportal);
     $scope.setupInBackend(kodi);
-    
+
   	backend.addDesktopLaunchable(desktop.name);
   	backend.addExitLaunchable(exit.name);
+
+    // setup restrictions
+    $scope.addRestriction(plex,kodi);
+    $scope.addRestriction(kodi,plex);
 
   	// define relative applications
 
