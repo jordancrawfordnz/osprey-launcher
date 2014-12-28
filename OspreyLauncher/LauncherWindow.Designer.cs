@@ -46,10 +46,10 @@
             // LauncherWindow
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1340, 813);
             this.Controls.Add(this.loadingLabel);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "LauncherWindow";

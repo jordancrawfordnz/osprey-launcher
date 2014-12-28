@@ -32,12 +32,11 @@ namespace OspreyLauncher
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
             }
-
             InitializeComponent();
 
             browser = new ChromiumWebBrowser("http://192.168.1.106:9000/");
             browser.Dock = DockStyle.Fill;
-
+           
             browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
             Cursor.Hide();
             browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
