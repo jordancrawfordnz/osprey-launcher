@@ -3,6 +3,7 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   color: white;
+  overflow: hidden;
 }
 
 
@@ -97,8 +98,11 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
   border-bottom: 1px solid #e5e5e5;
+  color: black;
+  font-size: 20px;
+  overflow: hidden;
+  opacity: .8;
 }
 .jumbotron .btn {
   font-size: 21px;
@@ -130,4 +134,18 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.info-col
+{
+  overflow: hidden;
+}
+.info-col.pull-left
+{
+  width: 33%;
+}
+
+.info-col.pull-right
+{
+  width: 66%;
 }

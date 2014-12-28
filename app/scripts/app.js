@@ -26,7 +26,56 @@ angular
         templateUrl: 'views/info.html',
         controller: 'InfoCtrl'
       })
+      .when('/loading', {
+        templateUrl: 'views/loading.html',
+        controller: 'LoadingCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   });
+
+
+// JavaScript related to selection of content.
+
+var notifyOfMovement = null;
+function registerMovementNotifyee(toNotify)
+{
+  notifyOfMovement = toNotify;
+}
+
+function moveLeft()
+{
+  if(notifyOfMovement !== null)
+  {
+    notifyOfMovement.moveLeft();
+  }
+}
+function moveRight()
+{
+  if(notifyOfMovement !== null)
+  {
+    notifyOfMovement.moveRight();
+  }
+}
+function moveUp()
+{
+  if(notifyOfMovement !== null)
+  {
+    notifyOfMovement.moveUp();
+  }
+}
+function moveDown()
+{
+  if(notifyOfMovement !== null)
+  {
+    notifyOfMovement.moveDown();
+  }
+}
+function selectKey()
+{
+  if(notifyOfMovement !== null)
+  {
+    notifyOfMovement.selectKey();
+  }
+}

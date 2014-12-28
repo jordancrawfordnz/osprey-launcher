@@ -1,50 +1,5 @@
 'use strict';
 
-// JavaScript related to selection of content.
-
-var notifyOfMovement = null;
-function registerMovementNotifyee(toNotify)
-{
-	notifyOfMovement = toNotify;
-}
-
-function moveLeft()
-{
-	if(notifyOfMovement !== null)
-	{
-		notifyOfMovement.moveLeft();
-	}
-}
-function moveRight()
-{
-  if(notifyOfMovement !== null)
-  {
-  	notifyOfMovement.moveRight();
-  }
-}
-function moveUp()
-{
-  if(notifyOfMovement !== null)
-  {
-  	notifyOfMovement.moveUp();
-  }
-}
-function moveDown()
-{
-  if(notifyOfMovement !== null)
-  {
-  	notifyOfMovement.moveDown();
-  }
-}
-function selectKey()
-{
-  if(notifyOfMovement !== null)
-  {
-  	notifyOfMovement.selectKey();
-  }
-}
-
-
 /**
  * @ngdoc function
  * @name ospreyLauncherApp.controller:MainCtrl
@@ -53,7 +8,8 @@ function selectKey()
  * Controller of the ospreyLauncherApp
  */
 angular.module('ospreyLauncherApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', ['$scope','$location',function($scope, $location) {
+
   	// == Setup functions ==
 
   	$scope.makeCurrent = function(toMakeCurrent)
@@ -63,79 +19,88 @@ angular.module('ospreyLauncherApp')
   			return;
   		}
   		if($scope.current !== null)
-		{
-			$scope.current.selected = false;
-		}
-		toMakeCurrent.selected = true;
-		$scope.current = toMakeCurrent;
-		$scope.$apply(); // update the changes on the interface
+  		{
+  			$scope.current.selected = false;
+  		}
+  		toMakeCurrent.selected = true;
+  		$scope.current = toMakeCurrent;
+  		$scope.$apply(); // update the changes on the interface
+    };
+
+    $scope.moveLeft = function()
+  	{
+  		$scope.makeCurrent($scope.current.left);
+  	};
+  	
+    $scope.moveRight = function()
+  	{
+  		$scope.makeCurrent($scope.current.right);
+  	};
+  	
+    $scope.moveUp = function()
+  	{
+  		$scope.makeCurrent($scope.current.up);
+  	};
+  	
+    $scope.moveDown = function()
+  	{
+  		$scope.makeCurrent($scope.current.down);
   	};
 
-  	$scope.moveLeft = function()
-	{
-		$scope.makeCurrent($scope.current.left);
-	};
-	$scope.moveRight = function()
-	{
-		$scope.makeCurrent($scope.current.right);
-	};
-	$scope.moveUp = function()
-	{
-		$scope.makeCurrent($scope.current.up);
-	};
-	$scope.moveDown = function()
-	{
-		$scope.makeCurrent($scope.current.down);
-	};
-	$scope.selectKey = function()
-	{
-		backend.selectItem($scope.current.name);
-	};
+  	$scope.selectKey = function()
+  	{
+  		if($scope.current.link)
+      {
+        $scope.$apply(function() { $location.path('/' + $scope.current.name); });
+      }
+      else
+      {
+        // display loading screen
+        backend.selectItem($scope.current.name);
+      }
+  	};
 
-  $scope.setupInBackend = function(toSetup)
-  {
-    backend.addApplication(toSetup.name, toSetup.path, toSetup.suspendable, toSetup.keepOpen);
-  };
+    $scope.setupInBackend = function(toSetup)
+    {
+      backend.addApplication(toSetup.name, toSetup.path, toSetup.suspendable, toSetup.keepOpen);
+    };
 
-  $scope.addRestriction = function(restrictionAppliesTo, restricted)
-  {
-    backend.addRestriction(restrictionAppliesTo.name,restricted.name);
-  }
+    $scope.addRestriction = function(restrictionAppliesTo, restricted)
+    {
+      backend.addRestriction(restrictionAppliesTo.name,restricted.name);
+    };
 
+  	// == Construct ==
 
-	// == Construct ==
-
-	var x86system = false;
+  	var x86system = true;
 
   	registerMovementNotifyee($scope); // allow key events to come through.
 
   	// define applications
   	var plex = {'title': 'Movies',
-  				'name' : 'plex',
-  				'img' : 'images/plex.png',
-  				'suspendable' : true,
-  				'keepOpen' : false,
-  				'selected' : false,
-          'restriction' : 'kodi'};
+        				'name' : 'plex',
+        				'img' : 'images/plex.png',
+        				'suspendable' : true,
+        				'keepOpen' : false,
+                'restriction' : 'kodi'};
   	var mediaportal = {'title':'TV',
-  						'name' : 'mediaportal',
-  						'img' : 'images/mediaportal.png',
-  						'suspendable' : true,
-		  				'keepOpen' : false,
-  						'selected' : false};
+  						         'name' : 'mediaportal',
+  						         'img' : 'images/mediaportal.png',
+  						         'suspendable' : true,
+		  				         'keepOpen' : false};
   	var kodi = {'title': 'Stream',
-  				'name' : 'kodi',
-  				'img' : 'images/kodi.png',
-  				'suspendable' : true,
-  				'keepOpen' : false,
-  				'selected' : false,
-          'restriction' : 'plex'};
+        				'name' : 'kodi',
+        				'img' : 'images/kodi.png',
+        				'suspendable' : true,
+        				'keepOpen' : false,
+                'restriction' : 'plex'};
   	var desktop = {'title': 'Desktop',
-  					'name' : 'desktop',
-  					'selected' : false};
+        					 'name' : 'desktop'};
+    var info = {'title': 'Information',
+                'name' : 'info',
+                'link' : true};
   	var exit = {'title': 'Exit',
-  				'name' : 'exit',
-  				'selected' : false};
+        				'name' : 'exit'};
 
   	if(x86system)
   	{
@@ -163,32 +128,36 @@ angular.module('ospreyLauncherApp')
     $scope.addRestriction(kodi,plex);
 
   	// define relative applications
+    plex.left = desktop;
+    plex.right = mediaportal;
 
-  	plex.left = desktop;
-  	plex.right = mediaportal;
+    mediaportal.left = plex;
+    mediaportal.right = kodi;
 
-  	mediaportal.left = plex;
-  	mediaportal.right = kodi;
+    kodi.left = mediaportal;
+    kodi.right = desktop;
 
-  	kodi.left = mediaportal;
-  	kodi.right = desktop;
+    desktop.left = kodi;
+    desktop.right = plex;
+    desktop.up = exit;
+    desktop.down = info;
 
-  	desktop.left = kodi;
-  	desktop.right = plex;
-  	desktop.up = exit;
-  	desktop.down = exit;
+    info.left = kodi;
+    info.right = plex;
+    info.up = desktop;
+    info.down = exit;
 
-  	exit.left = kodi;
-  	exit.right = plex;
-  	exit.up = desktop;
-  	exit.down = desktop;
+    exit.left = kodi;
+    exit.right = plex;
+    exit.up = info;
+    exit.down = desktop;
 
   	// define display order
-	$scope.applications = [plex,mediaportal,kodi];
-	$scope.extras = [desktop,exit];
-  	$scope.current = null;
+	  $scope.applications = [plex,mediaportal,kodi];
+	  $scope.extras = [desktop,info,exit];
+    $scope.current = null;
 
   	// define the default option
   	$scope.makeCurrent(plex);
     
-  });
+  }]);

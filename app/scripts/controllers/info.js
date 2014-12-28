@@ -1,17 +1,34 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name ospreyLauncherApp.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the ospreyLauncherApp
- */
 angular.module('ospreyLauncherApp')
-  .controller('InfoCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('InfoCtrl', ['$scope','$location',function($scope, $location) {
+
+    $scope.goBack = function()
+    {
+    	$scope.$apply(function() { $location.path('/'); });
+    };
+
+   	$scope.moveLeft = function()
+	{
+	};
+	
+	$scope.moveRight = function()
+	{
+	};
+	
+	$scope.moveUp = function()
+	{
+	};
+	
+	$scope.moveDown = function()
+	{
+	};
+
+	$scope.selectKey = function()
+	{
+		$scope.goBack();
+	};
+
+    registerMovementNotifyee($scope); // allow key events to come through.
+
+  }]);
