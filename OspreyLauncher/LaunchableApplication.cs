@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Threading;
 
 namespace OspreyLauncher
 {
@@ -11,6 +12,7 @@ namespace OspreyLauncher
         string name, path;
         bool suspendable, keepOpen;
         ApplicationInstance instance;
+        List<Launchable> restricted;
         
         public LaunchableApplication(string name, string path, bool suspendable = true, bool keepOpen = false)
         {
@@ -19,6 +21,7 @@ namespace OspreyLauncher
             this.suspendable = suspendable;
             this.instance = new ClosedApplication(this);
             this.keepOpen = keepOpen;
+            restricted = new List<Launchable>();
         }
 
         public string getPath()
@@ -69,6 +72,16 @@ namespace OspreyLauncher
         public void Select()
         {
             LauncherController.GetInstance().Launch(this);
+        }
+
+        public List<Launchable> GetRestrictedLaunchables()
+        {
+            return restricted;
+        }
+
+        public void AddRestrictedLaunchable(Launchable toAdd)
+        {
+            restricted.Add(toAdd);
         }
     }
 }

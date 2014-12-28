@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Threading;
 
 namespace OspreyLauncher
 {
@@ -30,7 +31,8 @@ namespace OspreyLauncher
         public override void ForceClose()
         {
             process.Kill();
-            process.Close();
+            Thread.Sleep(2000);
+            application.changeInstance(new ClosedApplication(application));
         }
     }
 }

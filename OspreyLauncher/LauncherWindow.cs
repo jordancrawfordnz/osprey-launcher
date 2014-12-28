@@ -27,12 +27,12 @@ namespace OspreyLauncher
 
         private LauncherWindow()
         {
-            if (!Program.DebugMode)
+         /*   if (!Program.DebugMode)
             {
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
             }
-            InitializeComponent();
+           */ InitializeComponent();
 
             browser = new ChromiumWebBrowser("http://192.168.1.106:9000/");
             browser.Dock = DockStyle.Fill;

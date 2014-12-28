@@ -35,5 +35,15 @@ namespace OspreyLauncher
         {
             LauncherController.GetInstance().Launch(this);
         }
+
+        public List<Launchable> GetRestrictedLaunchables()
+        {
+            return new List<Launchable>();
+        }
+
+        public void AddRestrictedLaunchable(Launchable toAdd)
+        {
+            return; // we don't keep track of restricted launchables!
+        }
     }
 }

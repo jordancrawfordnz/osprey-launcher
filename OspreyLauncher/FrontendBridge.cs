@@ -33,6 +33,22 @@ namespace OspreyLauncher
             LauncherController.GetInstance().AddSelectable(name,new LaunchableApplication(name, path, suspendable, keepOpen));
         }
 
+        public void AddRestriction(string appliesTo, string restricted)
+        {
+            // find the launchable the restriction applies to.
+            Launchable launchableAppliesTo = LauncherController.GetInstance().GetLaunchable(appliesTo);
+            if (launchableAppliesTo != null)
+            {
+                // find the restricted one.
+                Launchable launchableRestricted = LauncherController.GetInstance().GetLaunchable(restricted);
+                if (launchableRestricted != null)
+                {
+                    // add it.
+                    launchableAppliesTo.AddRestrictedLaunchable(launchableRestricted);
+                }
+            }
+        }
+
         public void AddDesktopLaunchable(string name)
         {
             LauncherController.GetInstance().AddSelectable(name, DesktopLaunchable.GetInstance());

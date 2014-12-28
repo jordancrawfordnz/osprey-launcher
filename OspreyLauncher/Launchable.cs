@@ -10,5 +10,7 @@ namespace OspreyLauncher
         void Close();
         void ForceClose();
         void Launch();
+        List<Launchable> GetRestrictedLaunchables();
+        void AddRestrictedLaunchable(Launchable newRestricted);
     }
 }

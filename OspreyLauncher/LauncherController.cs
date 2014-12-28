@@ -43,6 +43,14 @@ namespace OspreyLauncher
             return null;
         }
 
+        public Launchable GetLaunchable(string keyToGet)
+        {
+            Selectable selectableResult = GetSelectable(keyToGet);
+            if (selectableResult != null && selectableResult is Launchable)
+                return (Launchable)selectableResult;
+            return null;
+        }
+
         public List<Launchable> GetLaunchables()
         {
             List<Launchable> toReturn = new List<Launchable>();
@@ -66,6 +74,10 @@ namespace OspreyLauncher
             if (application == null) return;
             if (currentLaunchable != null && currentLaunchable != application)
                 currentLaunchable.Close();
+            foreach (Launchable currentRestricted in application.GetRestrictedLaunchables())
+            {
+                currentRestricted.ForceClose();
+            }
             application.Launch();
             currentLaunchable = application;
         }
@@ -83,6 +95,7 @@ namespace OspreyLauncher
             if (currentLaunchable == application)
             {
                 currentLaunchable = null;
+                WindowManagement.SwitchToLauncher();
             }
         }
 
@@ -111,7 +124,6 @@ namespace OspreyLauncher
         public void notifyProcessClosure(LaunchableApplication applicationClosed)
         {
             HandleClose(applicationClosed);
-            WindowManagement.SwitchToLauncher();
         }
     }
 }
