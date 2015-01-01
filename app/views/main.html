@@ -1,25 +1,13 @@
 <div class="row application-selector-table">
-		<div ng-repeat="application in applications" class="col-md-3">
+		<div ng-repeat="application in getApplications()" class="col-md-3">
 				<div class="application main" ng-class="{selected: application.selected}">
 					<img ng-src="{{application.img}}"/><br>
 					{{application.title}}
 				</div>
-
 		</div>
 		<div class="col-md-3">
-				<div ng-repeat="extra in extras" class="application extra" ng-class="{selected: extra.selected}">
+				<div ng-repeat="extra in getExtras()" class="application extra" ng-class="{selected: extra.selected}">
 					{{extra.title}}
 				</div>
 		</div>
-		<!-- 
-		<div class="application" ng-class="{selected: application.selected}">
-				<img ng-src="{{application.img}}"/><br>
-				{{application.title}}
-		</div>
- -->
 </div>
-
-<!-- 
-			<div ng-if="isArray">
-				Array!
-			</div> -->

@@ -1,34 +1,28 @@
 'use strict';
 
 angular.module('ospreyLauncherApp')
-  .controller('InfoCtrl', ['$scope','$location',function($scope, $location) {
+  .controller('InfoCtrl', ['$scope','$location','$rootScope',function($scope, $location,$rootScope) {
 
     $scope.goBack = function()
     {
     	$scope.$apply(function() { $location.path('/'); });
     };
 
-   	$scope.moveLeft = function()
-	{
-	};
+   	$rootScope.moveLeft = function()
+	{};
 	
-	$scope.moveRight = function()
-	{
-	};
+	$rootScope.moveRight = function()
+	{};
 	
-	$scope.moveUp = function()
-	{
-	};
+	$rootScope.moveUp = function()
+	{};
 	
-	$scope.moveDown = function()
-	{
-	};
+	$rootScope.moveDown = function()
+	{};
 
-	$scope.selectKey = function()
+	$rootScope.selectKey = function()
 	{
 		$scope.goBack();
 	};
-
-    registerMovementNotifyee($scope); // allow key events to come through.
 
   }]);
