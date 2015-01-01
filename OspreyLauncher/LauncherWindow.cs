@@ -84,27 +84,27 @@ namespace OspreyLauncher
             // Send keys through to JS
             if (keyData == Keys.Left)
             {
-                browser.ExecuteScriptAsync("moveLeft()");
+                browser.ExecuteScriptAsync("frontend.moveLeft()");
                 return true;
             }
             else if (keyData == Keys.Right)
             {
-                browser.ExecuteScriptAsync("moveRight()");
+                browser.ExecuteScriptAsync("frontend.moveRight()");
                 return true;
             }
             else if (keyData == Keys.Up)
             {
-                browser.ExecuteScriptAsync("moveUp()");
+                browser.ExecuteScriptAsync("frontend.moveUp()");
                 return true;
             }
             else if (keyData == Keys.Down)
             {
-                browser.ExecuteScriptAsync("moveDown()");
+                browser.ExecuteScriptAsync("frontend.moveDown()");
                 return true;
             }
             else if (keyData == Keys.Enter)
             {
-                browser.ExecuteScriptAsync("selectKey()");
+                browser.ExecuteScriptAsync("frontend.selectKey()");
                 return true;
             }
             // Call the base class
