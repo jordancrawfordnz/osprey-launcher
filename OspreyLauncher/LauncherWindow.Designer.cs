@@ -33,14 +33,15 @@
             // 
             // loadingLabel
             // 
-            this.loadingLabel.AutoSize = true;
+            this.loadingLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadingLabel.ForeColor = System.Drawing.Color.Black;
-            this.loadingLabel.Location = new System.Drawing.Point(700, 500);
+            this.loadingLabel.Location = new System.Drawing.Point(0, 0);
             this.loadingLabel.Name = "loadingLabel";
-            this.loadingLabel.Size = new System.Drawing.Size(465, 108);
+            this.loadingLabel.Size = new System.Drawing.Size(461, 121);
             this.loadingLabel.TabIndex = 0;
             this.loadingLabel.Text = "Loading...";
+            this.loadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LauncherWindow
             // 
@@ -48,13 +49,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1340, 813);
+            this.ClientSize = new System.Drawing.Size(461, 121);
             this.Controls.Add(this.loadingLabel);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "LauncherWindow";
             this.Text = "Osprey Launcher";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
