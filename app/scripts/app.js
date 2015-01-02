@@ -117,6 +117,18 @@ angular
       kodi.path = 'C:\\Program Files (x86)\\XBMC\\XBMC.exe';
     }
 
+    // setup the selectables with the backend
+    $rootScope.setupInBackend(plex);
+    $rootScope.setupInBackend(mediaportal);
+    $rootScope.setupInBackend(kodi);
+
+    $rootScope.backend.addDesktopLaunchable(desktop.name);
+    $rootScope.backend.addExitLaunchable(exit.name);
+
+    // setup restrictions
+    $rootScope.addRestriction(plex,kodi);
+    $rootScope.addRestriction(kodi,plex);
+
     // define relative applications
     plex.left = desktop;
     plex.right = mediaportal;
