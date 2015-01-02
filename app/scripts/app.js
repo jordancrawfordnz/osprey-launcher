@@ -34,7 +34,7 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function($rootScope) {
+  .run(function($rootScope,$location) {
     frontend = $rootScope;
     $rootScope.backend = backend;
 
@@ -63,35 +63,46 @@ angular
       $rootScope.currentSelectable = toMakeCurrent;
     };
 
+    $rootScope.reset = function()
+    {
+      $rootScope.$apply(function() { $location.path('/'); });
+    }
+
     // == Setup data ==
 
     var x86system = false;
 
     // define applications
     var plex = {'title': 'Movies',
-                'name' : 'plex',
+                'name' : 'Plex',
                 'img' : 'images/plex.png',
                 'suspendable' : true,
                 'keepOpen' : false,
-                'restriction' : 'kodi'};
+                'type' : 'launchable',
+                'restriction' : 'Kodi'};
     var mediaportal = {'title':'TV',
-                       'name' : 'mediaportal',
+                       'name' : 'MediaPortal',
                        'img' : 'images/mediaportal.png',
                        'suspendable' : true,
-                       'keepOpen' : false};
+                       'keepOpen' : false,
+                       'type' : 'launchable'};
     var kodi = {'title': 'Stream',
-                'name' : 'kodi',
+                'name' : 'Kodi',
                 'img' : 'images/kodi.png',
                 'suspendable' : true,
                 'keepOpen' : false,
-                'restriction' : 'plex'};
+                'restriction' : 'Plex',
+                'type' : 'launchable'};
     var desktop = {'title': 'Desktop',
-                   'name' : 'desktop'};
+                   'name' : 'Desktop',
+                   'type' : 'selectable'};
     var info = {'title': 'Information',
-                'name' : 'info',
-                'link' : true};
+                'name' : 'Info',
+                'url'  : 'info',
+                'type' : 'link'};
     var exit = {'title': 'Exit',
-                'name' : 'exit'};
+                'name' : 'exit',
+                'type' : 'selectable'};
 
     if(x86system)
     {

@@ -38,14 +38,24 @@ angular.module('ospreyLauncherApp')
 
   	$rootScope.selectKey = function()
   	{
-  		if($rootScope.currentSelectable.link)
+      switch($rootScope.currentSelectable.type)
       {
-        $rootScope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.name); });
-      }
-      else
-      {
-        // display loading screen
-        $rootScope.backend.selectItem($rootScope.currentSelectable.name);
+        case 'launchable':
+        {
+          $scope.$apply(function() { $location.path('/loading'); }); // display loading screen
+          $rootScope.backend.selectItem($rootScope.currentSelectable.name);
+          break;
+        }
+        case 'selectable':
+        {
+          $rootScope.backend.selectItem($rootScope.currentSelectable.name);
+          break;
+        }
+        case 'link':
+        {
+          $scope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
+          break;
+        }
       }
   	};
 

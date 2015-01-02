@@ -39,8 +39,8 @@ body {
 {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  color: white;
-  background-color: #00325C;
+  color: black;
+  background-color: #eee;
   text-align: center;
   display: block;
   border-radius: 20px;
@@ -65,8 +65,8 @@ body {
 
 .application.selected
 {
-  background-color: white;
-  color: black;
+  background-color: #333333;
+  color: white;
 }
 .header-column-left{ width: 40%; text-align: right;}
 .header-column-right{  width: 40%; text-align: left;}
