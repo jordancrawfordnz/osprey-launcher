@@ -37,7 +37,6 @@ namespace OspreyLauncher
             ProcessStartInfo processInfo = getPsSuspendStartInfo();
             processInfo.Arguments = "-r " + toResume.Id.ToString();
             Process.Start(processInfo);
-            Thread.Sleep(1000);
         }
     }
 }
