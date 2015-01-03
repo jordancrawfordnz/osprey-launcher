@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc function
  * @name ospreyLauncherApp.controller:MainCtrl

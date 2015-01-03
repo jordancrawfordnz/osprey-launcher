@@ -20,6 +20,6 @@ angular.module('ospreyLauncherApp')
 	$scope.getApplication = function()
 	{
 		return $rootScope.currentSelectable;
-	}
+	};
 
   }]);

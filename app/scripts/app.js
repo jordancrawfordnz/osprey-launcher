@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc overview
  * @name ospreyLauncherApp
@@ -8,6 +7,30 @@
  *
  * Main module of the application.
  */
+
+var frontend;
+var mockBackend = {};
+mockBackend.addApplication = function(name,path,suspendable,keepopen)
+{
+  return;
+};
+
+mockBackend.addDesktopLaunchable = function(name)
+{
+  return;
+};
+
+mockBackend.addExitLaunchable = function(name)
+{
+  return;
+};
+
+mockBackend.addRestriction = function(first,second)
+{
+  return;
+};
+
+
 angular
   .module('ospreyLauncherApp', [
     'ngAnimate',
@@ -36,7 +59,17 @@ angular
   })
   .run(function($rootScope,$location) {
     frontend = $rootScope;
-    $rootScope.backend = backend;
+
+    var useMockBackend = false;
+
+    if(useMockBackend)
+    {
+      $rootScope.backend = mockBackend;
+    }
+    else
+    {
+      $rootScope.backend = backend;
+    }
 
     $rootScope.setupInBackend = function(toSetup)
     {
@@ -66,7 +99,7 @@ angular
     $rootScope.reset = function()
     {
       $rootScope.$apply(function() { $location.path('/'); });
-    }
+    };
 
     // == Setup data ==
 
@@ -114,7 +147,7 @@ angular
     {
       plex.path = 'C:\\Program Files (x86)\\Plex Home Theater\\Plex Home Theater.exe';
       mediaportal.path = 'C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
-      kodi.path = 'C:\\Program Files (x86)\\XBMC\\XBMC.exe';
+      kodi.path = 'C:\\Program Files (x86)\\Kodi\\Kodi.exe';
     }
 
     // setup the selectables with the backend
@@ -160,5 +193,3 @@ angular
     
     $rootScope.makeCurrent(plex);
   });
-
-var frontend;
