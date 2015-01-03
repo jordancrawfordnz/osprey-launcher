@@ -19,7 +19,7 @@ namespace OspreyLauncher
 
         public override void Launch()
         {
-            Suspend.DoResume(process);    // resume process
+            ToolLauncher.DoResume(process);    // resume process
             WindowManagement.SwitchToApplication(process);
             application.changeInstance(new OpenApplication(application, process));
         }

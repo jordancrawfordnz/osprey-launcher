@@ -103,7 +103,7 @@
     </Compile>
     <Compile Include="OpenApplication.cs" />
     <Compile Include="Selectable.cs" />
-    <Compile Include="Suspend.cs" />
+    <Compile Include="ToolLauncher.cs" />
     <Compile Include="SuspendedApplication.cs" />
     <Compile Include="ProcessCloseWatcher.cs" />
     <Compile Include="LaunchableApplication.cs" />

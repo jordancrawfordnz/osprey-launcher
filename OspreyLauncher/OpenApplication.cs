@@ -54,7 +54,7 @@ namespace OspreyLauncher
                 if (application.isSuspendable())
                 {
                     WindowManagement.SwitchToLauncher();
-                    Suspend.DoSuspend(process); // suspend process
+                    ToolLauncher.DoSuspend(process); // suspend process
                     onSuspend();
                 }
                 else
