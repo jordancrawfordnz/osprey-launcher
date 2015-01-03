@@ -16,6 +16,11 @@ namespace OspreyLauncher
         private const int SW_HIDE = 0;
         private const int SW_SHOW = 1;
 
+        // From: http://stackoverflow.com/questions/18364504/c-sharp-switching-windows-in-net
+        // and: http://www.pinvoke.net/default.aspx/user32/SwitchToThisWindow.html
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern void SwitchToThisWindow(IntPtr hWnd, bool fAltTab);
+
         static Process currentProcess = Process.GetCurrentProcess();
 
         public static void SwitchToApplication(Process toSwitchTo)
@@ -50,11 +55,11 @@ namespace OspreyLauncher
         {
             if (currentProcess == toSwitchTo)
                 return;
-            try
+
+            if (toSwitchTo.MainWindowHandle != IntPtr.Zero)
             {
-                Interaction.AppActivate(toSwitchTo.Id);
+                SwitchToThisWindow(toSwitchTo.MainWindowHandle,true);
             }
-            finally{}
             currentProcess = toSwitchTo;
         }
     }
