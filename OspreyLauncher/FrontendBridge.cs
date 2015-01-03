@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace OspreyLauncher
 {
@@ -25,7 +26,7 @@ namespace OspreyLauncher
         {
             Selectable selectable = LauncherController.GetInstance().GetSelectable(toSelect);
             if (selectable != null)
-                selectable.Select();
+                new Thread(new ThreadStart(selectable.Select)).Start(); // select the item in a new thread so the view is not frozen.
         }
 
         public void AddApplication(string name, string path, bool suspendable = true, bool keepOpen = false)
@@ -57,6 +58,36 @@ namespace OspreyLauncher
         public void AddExitLaunchable(string name)
         {
             LauncherController.GetInstance().AddSelectable(name, ExitSelectable.GetInstance());
-        }              
+        }
+
+        public void Reset()
+        {
+            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.reset()");
+        }
+
+        public void MoveLeft()
+        {
+            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveLeft()");
+        }
+
+        public void MoveRight()
+        {
+            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveRight()");
+        }
+
+        public void MoveUp()
+        {
+            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveUp()");
+        }
+
+        public void MoveDown()
+        {
+            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveDown()");
+        }
+
+        public void SelectKey()
+        {
+            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.selectKey()");
+        }
     }
 }

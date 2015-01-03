@@ -52,6 +52,11 @@ namespace OspreyLauncher
             // I don't think this is actually doing the trick!
         }
 
+        public ChromiumWebBrowser getBrowser()
+        {
+            return browser;
+        }
+
         void browser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
             if (InvokeRequired)
@@ -84,27 +89,27 @@ namespace OspreyLauncher
             // Send keys through to JS
             if (keyData == Keys.Left)
             {
-                browser.ExecuteScriptAsync("frontend.moveLeft()");
+                FrontendBridge.GetInstance().MoveLeft();
                 return true;
             }
             else if (keyData == Keys.Right)
             {
-                browser.ExecuteScriptAsync("frontend.moveRight()");
+                FrontendBridge.GetInstance().MoveRight();
                 return true;
             }
             else if (keyData == Keys.Up)
             {
-                browser.ExecuteScriptAsync("frontend.moveUp()");
+                FrontendBridge.GetInstance().MoveUp();
                 return true;
             }
             else if (keyData == Keys.Down)
             {
-                browser.ExecuteScriptAsync("frontend.moveDown()");
+                FrontendBridge.GetInstance().MoveDown();
                 return true;
             }
             else if (keyData == Keys.Enter)
             {
-                browser.ExecuteScriptAsync("frontend.selectKey()");
+                FrontendBridge.GetInstance().SelectKey();
                 return true;
             }
             // Call the base class
@@ -150,6 +155,12 @@ namespace OspreyLauncher
             this.Hide();
         }
 
+        public void prepareToBeShown()
+        {
+            FrontendBridge.GetInstance().Reset();
+        }
+
+        // == Currently Unused Fade Methods ===
         public void fadeOut()
         {
             if (InvokeRequired)
