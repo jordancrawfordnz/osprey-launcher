@@ -30,6 +30,22 @@ namespace OspreyLauncher
             Taskbar.Hide();
         }
 
+        public static void HideProcess(Process toHide)
+        {
+            if (toHide.MainWindowHandle != IntPtr.Zero)
+            {
+                ShowWindow(toHide.MainWindowHandle, 0);
+            }
+        }
+
+        public static void ShowProcess(Process toShow)
+        {
+            if (toShow.MainWindowHandle != IntPtr.Zero)
+            {
+                ShowWindow(toShow.MainWindowHandle, 1);
+            }
+        }
+
         private static void SwitchProcess(Process toSwitchTo)
         {
             if (currentProcess == toSwitchTo)
@@ -39,23 +55,7 @@ namespace OspreyLauncher
                 Interaction.AppActivate(toSwitchTo.Id);
             }
             finally{}
-            currentProcess = toSwitchTo;           
-        }
-
-        private static void HideMainWindow(Process toHide)
-        {
-            if (toHide.MainWindowHandle != IntPtr.Zero)
-            {
-                ShowWindow(toHide.MainWindowHandle, 0);
-            }
-        }
-
-        private static void ShowMainWindow(Process toShow)
-        {
-            if (toShow.MainWindowHandle != IntPtr.Zero)
-            {
-                ShowWindow(toShow.MainWindowHandle, 1);
-            }
+            currentProcess = toSwitchTo;
         }
     }
 }

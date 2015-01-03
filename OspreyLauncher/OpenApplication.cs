@@ -39,7 +39,7 @@ namespace OspreyLauncher
 
         void onHide()
         {
-            application.changeInstance(new HiddenApplication(application, process));
+            application.changeInstance(new BackgroundApplication(application, process));
         }
 
         public override void Close()
@@ -72,6 +72,17 @@ namespace OspreyLauncher
         public void notifyProcessClosure(LaunchableApplication instanceClosed)
         {
             onClose();
+        }
+
+
+        public override void Show()
+        {
+            WindowManagement.ShowProcess(process);
+        }
+
+        public override void Hide()
+        {
+            WindowManagement.HideProcess(process);
         }
     }
 }

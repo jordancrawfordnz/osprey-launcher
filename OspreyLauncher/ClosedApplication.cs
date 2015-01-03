@@ -26,5 +26,14 @@ namespace OspreyLauncher
         public override void ForceClose()
         {
         }
+
+
+        public override void Show()
+        {
+        }
+
+        public override void Hide()
+        {
+        }
     }
 }

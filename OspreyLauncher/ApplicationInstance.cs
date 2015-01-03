@@ -11,6 +11,8 @@ namespace OspreyLauncher
         public abstract void Launch();
         public abstract void Close();
         public abstract void ForceClose();
+        public abstract void Show();
+        public abstract void Hide();
 
         protected LaunchableApplication application;
 

@@ -83,5 +83,15 @@ namespace OspreyLauncher
         {
             restricted.Add(toAdd);
         }
+
+        public void Show()
+        {
+            instance.Show();
+        }
+
+        public void Hide()
+        {
+            instance.Hide();
+        }
     }
 }

@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace OspreyLauncher
 {
-    public class HiddenApplication : ApplicationInstance
+    public class BackgroundApplication : ApplicationInstance
     {
-        public HiddenApplication(LaunchableApplication application, Process process)
+        public BackgroundApplication(LaunchableApplication application, Process process)
             : base(application)
         {
             this.process = process;
@@ -30,6 +30,17 @@ namespace OspreyLauncher
         {
             process.Kill();
             process.Close();
+        }
+
+
+        public override void Show()
+        {
+            WindowManagement.ShowProcess(process);
+        }
+
+        public override void Hide()
+        {
+            WindowManagement.HideProcess(process);
         }
     }
 }

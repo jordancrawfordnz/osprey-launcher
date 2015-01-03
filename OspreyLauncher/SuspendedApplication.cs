@@ -34,5 +34,19 @@ namespace OspreyLauncher
             Thread.Sleep(2000);
             application.changeInstance(new ClosedApplication(application));
         }
+
+        public override void Show()
+        {
+            ToolLauncher.DoResume(process);
+            WindowManagement.ShowProcess(process);
+            ToolLauncher.DoSuspend(process);
+        }
+
+        public override void Hide()
+        {
+            ToolLauncher.DoResume(process);
+            WindowManagement.HideProcess(process);
+            ToolLauncher.DoSuspend(process);
+        }
     }
 }

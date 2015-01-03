@@ -87,7 +87,7 @@
     <Compile Include="ApplicationInstance.cs" />
     <Compile Include="ClosedApplication.cs" />
     <Compile Include="FrontendBridge.cs" />
-    <Compile Include="HiddenApplication.cs" />
+    <Compile Include="BackgroundApplication.cs" />
     <Compile Include="DesktopLaunchable.cs" />
     <Compile Include="ExitSelectable.cs" />
     <Compile Include="globalKeyboardHook.cs" />
