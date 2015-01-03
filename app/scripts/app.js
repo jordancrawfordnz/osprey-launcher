@@ -7,30 +7,6 @@
  *
  * Main module of the application.
  */
-
-var frontend;
-var mockBackend = {};
-mockBackend.addApplication = function(name,path,suspendable,keepopen)
-{
-  return;
-};
-
-mockBackend.addDesktopLaunchable = function(name)
-{
-  return;
-};
-
-mockBackend.addExitLaunchable = function(name)
-{
-  return;
-};
-
-mockBackend.addRestriction = function(first,second)
-{
-  return;
-};
-
-
 angular
   .module('ospreyLauncherApp', [
     'ngAnimate',
@@ -60,7 +36,7 @@ angular
   .run(function($rootScope,$location) {
     frontend = $rootScope;
 
-    var useMockBackend = false;
+    var useMockBackend = true;
 
     if(useMockBackend)
     {
