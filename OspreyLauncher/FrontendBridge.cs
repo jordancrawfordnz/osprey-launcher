@@ -63,6 +63,7 @@ namespace OspreyLauncher
         public void Reset()
         {
             LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.reset()");
+            Thread.Sleep(100); // minor delay to allow the frontend to reset.
         }
 
         public void MoveLeft()
