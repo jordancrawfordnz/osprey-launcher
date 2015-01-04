@@ -155,11 +155,6 @@ namespace OspreyLauncher
             this.Hide();
         }
 
-        public void prepareToBeShown()
-        {
-            FrontendBridge.GetInstance().Reset();
-        }
-
         // == Currently Unused Fade Methods ===
         public void fadeOut()
         {
