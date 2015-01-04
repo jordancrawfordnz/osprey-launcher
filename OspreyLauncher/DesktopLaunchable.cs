@@ -26,12 +26,12 @@ namespace OspreyLauncher
         {
             if (isHidden)
             {
+                LauncherWindow.GetInstance().showWindow();
+                Taskbar.Hide();
                 foreach (Launchable currentLaunchable in LauncherController.GetInstance().GetLaunchables())
                 {
                     if (currentLaunchable != this) currentLaunchable.Show();
                 }
-                LauncherWindow.GetInstance().showWindow();
-                Taskbar.Hide();
                 isHidden = false;
             }
         }
