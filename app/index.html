@@ -24,18 +24,16 @@
     <![endif]-->
 
   <div class="container">
-      <div class="header">
-          <div class="header-column-left">
-              left
-          </div>
+      <div class="header" ng-controller="HeaderCtrl">
+          <div class="header-column-left" current-time></div>
           <div class="header-column-center">
             <img src="images/logo.png" alt="Osprey">
           </div>
-          <div class="header-column-right">Column right</div>
+          <div class="header-column-right" disk-space></div>
       </div>
       <div ng-view=""></div>
 
-    <!-- build:js(.) scripts/oldieshim.js -->
+    <!-- build:js(.) scripts/oldieshim.js
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
@@ -58,6 +56,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/mockTesting.js"></script>
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/loading.js"></script>
         <script src="scripts/controllers/info.js"></script>
