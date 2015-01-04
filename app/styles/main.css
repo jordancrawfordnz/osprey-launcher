@@ -20,7 +20,6 @@ body {
 .header {
   margin-top: 0;
   margin-bottom: 0;
-  line-height: 200px;
   display: flex;
   flex-direction: row;
   height: 200px;
@@ -41,7 +40,6 @@ body {
   }
 
   .header {
-    line-height: 150px;
     height: 150px;
   }
 }
@@ -102,9 +100,23 @@ body {
 }
 
 
-.header-column-left{ width: 40%; text-align: right;}
-.header-column-right{  width: 40%; text-align: left;}
-.header-column-center{ width: 20%; text-align: center; }
+.header-column-left
+{
+  width: 40%;
+  text-align: right;
+  margin-top: 60px;
+}
+.header-column-right
+{
+  width: 40%;
+  text-align: left;
+  margin-top: 50px;
+}
+.header-column-center
+{
+  width: 20%;
+  text-align: center;
+}
 
 @media (max-width: 1280px) {
   .header-column-center img

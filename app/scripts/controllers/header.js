@@ -10,13 +10,12 @@ angular.module('ospreyLauncherApp')
 .directive('currentTime', ['$interval', 'dateFilter',
   function($interval, dateFilter)
   {
-    
     // return the directive link function.
-    return function(scope, element, attrs) {
-      
+    return function(scope, element, attrs)
+    {  
       // used to update the UI
       function updateTime() {
-        element.text(dateFilter(new Date(), "h:m a on EEEE, d MMMM yyyy"));
+        element.text(dateFilter(new Date(), "h:mm a on EEEE, d MMMM yyyy"));
       }
 
       // watch the expression, and update the UI on change. $watch simply registers a callback.
@@ -38,8 +37,8 @@ angular.module('ospreyLauncherApp')
   function($interval)
   {
     // return the directive link function.
-    return function(scope, element, attrs) {
-      
+    return function(scope, element, attrs)
+    {  
       // used to update the UI
       function updateRecordings() {
         $.getJSON( "http://192.168.1.140:4322/MPExtended/TVAccessService/json/GetScheduledRecordingsForToday", function( data ) {
@@ -55,6 +54,10 @@ angular.module('ospreyLauncherApp')
               {
                 element.text(data.length + " recordings scheduled today.");
               }
+            }
+            else
+            {
+              element.text("No recordings today.");
             }
           }
         });
@@ -72,17 +75,15 @@ angular.module('ospreyLauncherApp')
       element.on('$destroy', function() {
         $interval.cancel(automaticallyUpdateRecordings);
       });
-   
     }
-  
   }
 ])
 .directive('diskSpace', ['$interval',
   function($interval)
   {
     // return the directive link function.
-    return function(scope, element, attrs) {
-      
+    return function(scope, element, attrs)
+    {  
       // used to update the UI
       function updateDiskSpace() {
         $.getJSON( "http://192.168.1.140:80/DiskSpace", function( data ) {
