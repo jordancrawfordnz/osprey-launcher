@@ -41,8 +41,9 @@ angular.module('ospreyLauncherApp')
       {
         case 'launchable':
         {
-          $scope.$apply(function() { $location.path('/loading'); }); // display loading screen
           $rootScope.backend.selectItem($rootScope.currentSelectable.name);
+          setTimeout(function(){ $scope.$apply(function() { $location.path('/loading'); }); }, 100);
+          // display loading screen, use a slight delay in-case it loads quickly.
           break;
         }
         case 'selectable':
