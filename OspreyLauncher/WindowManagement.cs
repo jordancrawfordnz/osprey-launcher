@@ -30,6 +30,7 @@ namespace OspreyLauncher
 
         public static void SwitchToLauncher()
         {
+            FrontendBridge.GetInstance().Reset();
             SwitchProcess(Process.GetCurrentProcess());
             Taskbar.Hide();
         }

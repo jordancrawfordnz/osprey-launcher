@@ -103,8 +103,10 @@ namespace OspreyLauncher
 
         public void HandleLaunch() // when a launch listener fires
         {
-            FrontendBridge.GetInstance().Reset();
-            Close(currentLaunchable);
+            if(currentLaunchable == null)
+                FrontendBridge.GetInstance().Reset(); // if still in launcher and want to go back
+            else
+                Close(currentLaunchable);
         }
 
         public void CloseLauncher()
