@@ -34,8 +34,10 @@ namespace OspreyLauncher
                 Taskbar.Hide();
             }
             InitializeComponent();
-
+            
             browser = new ChromiumWebBrowser("http://192.168.1.106:9000/");
+            browser.BrowserSettings = new BrowserSettings();
+            browser.BrowserSettings.WebSecurityDisabled = true; // This is a security flaw! Can be turned off if the: "Access-Control-Allow-Origin: *" header is present.
             browser.Dock = DockStyle.Fill;
            
             browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
