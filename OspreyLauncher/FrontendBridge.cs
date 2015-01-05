@@ -90,5 +90,10 @@ namespace OspreyLauncher
         {
             LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.selectKey()");
         }
+
+        public bool Isx86()
+        {
+            return false;
+        }
     }
 }
