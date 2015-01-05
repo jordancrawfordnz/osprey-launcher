@@ -22,6 +22,11 @@ mockBackend.addRestriction = function(first,second)
   return;
 };
 
+mockBackend.isx86 = function()
+{
+  return false;
+}
+
 document.onkeydown = checkKey;
 
 function checkKey(e) {

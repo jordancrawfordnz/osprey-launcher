@@ -79,8 +79,6 @@ angular
 
     // == Setup data ==
 
-    var x86system = false;
-
     // define applications
     var plex = {'title': 'Movies',
                 'name' : 'Plex',
@@ -113,7 +111,7 @@ angular
                 'name' : 'exit',
                 'type' : 'selectable'};
 
-    if(x86system)
+    if($rootScope.backend.isx86())
     {
       plex.path = 'C:\\Program Files\\Plex Home Theater\\Plex Home Theater.exe';
       mediaportal.path = 'C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
