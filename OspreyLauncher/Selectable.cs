@@ -8,6 +8,5 @@ namespace OspreyLauncher
     public interface Selectable
     {
         void Select();
-        // TODO: add getName, getIcon
     }
 }

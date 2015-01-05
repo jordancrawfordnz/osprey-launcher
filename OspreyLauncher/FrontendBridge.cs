@@ -93,7 +93,7 @@ namespace OspreyLauncher
 
         public bool Isx86()
         {
-            return false;
+            return UserSettings.GetInstance().getBooleanSetting("x86system");
         }
     }
 }
