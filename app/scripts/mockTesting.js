@@ -27,6 +27,9 @@ mockBackend.isx86 = function()
   return false;
 }
 
+mockBackend.setupApplicationAutomaticClosing = function(timeDelay)
+{ }
+
 document.onkeydown = checkKey;
 
 function checkKey(e) {
