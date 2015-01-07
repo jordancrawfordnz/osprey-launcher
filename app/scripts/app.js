@@ -83,7 +83,7 @@ angular
     $rootScope.launchableSelect = function()
     {
       $rootScope.backend.selectItem($rootScope.currentSelectable.name);
-      setTimeout(function(){ $scope.$apply(function() { $location.path('/loading'); }); }, 100);
+      setTimeout(function(){ $rootScope.$apply(function() { $location.path('/loading'); }); }, 100);
       // display loading screen, use a slight delay in-case it loads quickly.
     }
 
