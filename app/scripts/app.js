@@ -79,37 +79,55 @@ angular
 
     // == Setup data ==
 
+
+    $rootScope.launchableSelect = function()
+    {
+      $rootScope.backend.selectItem($rootScope.currentSelectable.name);
+      setTimeout(function(){ $scope.$apply(function() { $location.path('/loading'); }); }, 100);
+      // display loading screen, use a slight delay in-case it loads quickly.
+    }
+
+    $rootScope.selectableSelect = function()
+    {
+      $rootScope.backend.selectItem($rootScope.currentSelectable.name);
+    }
+
+    $rootScope.linkSelect = function()
+    {
+      $rootScope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
+    }
+
     // define applications
     var plex = {'title': 'Movies',
                 'name' : 'Plex',
                 'img' : 'images/plex.png',
                 'suspendable' : true,
                 'keepOpen' : false,
-                'type' : 'launchable',
+                'onSelect' : $rootScope.launchableSelect,
                 'restriction' : 'Kodi'};
     var mediaportal = {'title':'TV',
                        'name' : 'MediaPortal',
                        'img' : 'images/mediaportal.png',
                        'suspendable' : true,
                        'keepOpen' : false,
-                       'type' : 'launchable'};
+                       'onSelect' : $rootScope.launchableSelect};
     var kodi = {'title': 'Stream',
                 'name' : 'Kodi',
                 'img' : 'images/kodi.png',
                 'suspendable' : true,
                 'keepOpen' : false,
                 'restriction' : 'Plex',
-                'type' : 'launchable'};
+                'onSelect' : $rootScope.launchableSelect};
     var desktop = {'title': 'Desktop',
                    'name' : 'Desktop',
-                   'type' : 'selectable'};
+                   'onSelect' : $rootScope.selectableSelect};
     var info = {'title': 'Information',
                 'name' : 'Info',
                 'url'  : 'info',
-                'type' : 'link'};
+                'onSelect' : $rootScope.linkSelect};
     var exit = {'title': 'Exit',
                 'name' : 'exit',
-                'type' : 'selectable'};
+                'onSelect' : $rootScope.selectableSelect};
 
     if($rootScope.backend.isx86())
     {

@@ -37,26 +37,7 @@ angular.module('ospreyLauncherApp')
 
   	$rootScope.selectKey = function()
   	{
-      switch($rootScope.currentSelectable.type)
-      {
-        case 'launchable':
-        {
-          $rootScope.backend.selectItem($rootScope.currentSelectable.name);
-          setTimeout(function(){ $scope.$apply(function() { $location.path('/loading'); }); }, 100);
-          // display loading screen, use a slight delay in-case it loads quickly.
-          break;
-        }
-        case 'selectable':
-        {
-          $rootScope.backend.selectItem($rootScope.currentSelectable.name);
-          break;
-        }
-        case 'link':
-        {
-          $scope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
-          break;
-        }
-      }
+      $rootScope.currentSelectable.onSelect();
   	};
 
     // == Allow grabbing data ==
