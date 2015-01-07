@@ -136,6 +136,8 @@ angular
     $rootScope.addRestriction(plex,kodi);
     $rootScope.addRestriction(kodi,plex);
 
+    $rootScope.backend.setupApplicationAutomaticClosing(120);
+
     // define relative applications
     plex.left = desktop;
     plex.right = mediaportal;
