@@ -86,6 +86,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationAutomaticCloser.cs" />
     <Compile Include="ApplicationInstance.cs" />
     <Compile Include="ClosedApplication.cs" />
     <Compile Include="FrontendBridge.cs" />

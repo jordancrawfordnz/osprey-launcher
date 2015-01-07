@@ -22,12 +22,7 @@ namespace OspreyLauncher
             return instance;
         }
 
-        public void SelectItem(string toSelect)
-        {
-            Selectable selectable = LauncherController.GetInstance().GetSelectable(toSelect);
-            if (selectable != null)
-                new Thread(new ThreadStart(selectable.Select)).Start(); // select the item in a new thread so the view is not frozen.
-        }
+        // For the frontend to talk to us
 
         public void AddApplication(string name, string path, bool suspendable = true, bool keepOpen = false)
         {
@@ -60,6 +55,41 @@ namespace OspreyLauncher
             LauncherController.GetInstance().AddSelectable(name, ExitSelectable.GetInstance());
         }
 
+        public bool Isx86()
+        {
+            return UserSettings.GetInstance().getBooleanSetting("x86system");
+        }
+
+        bool enableAutomaticClosing = false;
+        int automaticCloseDelay = 0;
+        public void SetupApplicationAutomaticClosing(int minutesToWait)
+        {
+            automaticCloseDelay = minutesToWait;
+            enableAutomaticClosing = true;
+        }
+
+        // To get data stored in this class
+
+        public int GetAutomaticClosingDelay()
+        {
+            return automaticCloseDelay;
+        }
+
+        public bool AutomaticClosingEnabled()
+        {
+            return enableAutomaticClosing;
+        }
+
+
+        // To talk to the frontend
+
+        public void SelectItem(string toSelect)
+        {
+            Selectable selectable = LauncherController.GetInstance().GetSelectable(toSelect);
+            if (selectable != null)
+                new Thread(new ThreadStart(selectable.Select)).Start(); // select the item in a new thread so the view is not frozen.
+        }
+
         public void Reset()
         {
             LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.reset()");
@@ -89,11 +119,6 @@ namespace OspreyLauncher
         public void SelectKey()
         {
             LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.selectKey()");
-        }
-
-        public bool Isx86()
-        {
-            return UserSettings.GetInstance().getBooleanSetting("x86system");
         }
     }
 }

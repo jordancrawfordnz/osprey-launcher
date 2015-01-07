@@ -11,6 +11,7 @@ namespace OspreyLauncher
     {
         Process process;
         ProcessCloseWatcher watcher;
+        ApplicationAutomaticCloser automaticClose;
 
         public OpenApplication(LaunchableApplication application, Process process) : base(application)
         {
@@ -21,6 +22,10 @@ namespace OspreyLauncher
             
             Thread watcherThread = new Thread(new ThreadStart(watcher.waitForExit));
             watcherThread.Start(); // Start the thread
+
+            automaticClose = new ApplicationAutomaticCloser(application, FrontendBridge.GetInstance().GetAutomaticClosingDelay());
+            if (FrontendBridge.GetInstance().AutomaticClosingEnabled())
+                automaticClose.Begin();
         }
 
         public override void Launch()
@@ -44,6 +49,7 @@ namespace OspreyLauncher
 
         public override void Close()
         {
+            automaticClose.Cancel();
             if (application.shouldKeepOpen())
             {
                 WindowManagement.SwitchToLauncher();
