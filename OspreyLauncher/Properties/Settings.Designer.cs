@@ -22,17 +22,5 @@ namespace OspreyLauncher.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool x86System {
-            get {
-                return ((bool)(this["x86System"]));
-            }
-            set {
-                this["x86System"] = value;
-            }
-        }
     }
 }
