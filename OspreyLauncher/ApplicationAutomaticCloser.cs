@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Diagnostics;
 
 namespace OspreyLauncher
 {
     public class ApplicationAutomaticCloser
     {
         Thread waiterThread;
+        Thread inputIdleThread;
         LaunchableApplication toClose;
         int minutesToWait;
         bool timeUp = false;
 
-        public ApplicationAutomaticCloser(LaunchableApplication toClose,int minutesToWait)
+        public ApplicationAutomaticCloser(LaunchableApplication toClose,int minutesToWait,Process toWaitForInputIdle)
         {
             this.minutesToWait = minutesToWait;
             this.toClose = toClose;
             this.waiterThread = null;
+            this.inputIdleThread = null;
         }
 
         public void Begin()
@@ -25,12 +28,19 @@ namespace OspreyLauncher
             waiterThread = new Thread(new ThreadStart(WaitUntilTime));
             timeUp = false;
             waiterThread.Start(); // Start the thread
+
+            // start waiting for idle
+
+            // on idle, reset timer by killing waiting thread and starting another one.
+            // how to know when un-idle?
         }
 
         public void Cancel()
         {
             if(waiterThread != null && !timeUp) // if timer has started and time isn't up.
                 waiterThread.Abort();
+
+            // ensure idle waiting thread killed
         }
 
         private void WaitUntilTime()
