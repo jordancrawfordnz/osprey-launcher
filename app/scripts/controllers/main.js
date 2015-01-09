@@ -35,10 +35,10 @@ angular.module('ospreyLauncherApp')
       $scope.$apply();
   	};
 
-  	// $rootScope.selectKey = function()
-  	// {
-   //    $rootScope.currentSelectable.onSelect();
-  	// };
+  	$rootScope.selectKey = function()
+  	{
+      $rootScope.currentSelectable.onSelect();
+  	};
 
     // == Allow grabbing data ==
 
