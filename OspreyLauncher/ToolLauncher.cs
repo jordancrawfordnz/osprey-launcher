@@ -38,5 +38,13 @@ namespace OspreyLauncher
             processInfo.Arguments = "-r " + toResume.Id.ToString();
             Process.Start(processInfo);
         }
+
+        public static void SwitchToProcess(Process toSwitchTo)
+        {
+            ProcessStartInfo processInfo = getStartInfo();
+            processInfo.FileName = "SwitchToWindow.exe";
+            processInfo.Arguments = toSwitchTo.Id.ToString();
+            Process.Start(processInfo);
+        }
     }
 }

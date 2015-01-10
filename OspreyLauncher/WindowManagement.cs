@@ -50,16 +50,9 @@ namespace OspreyLauncher
                 ShowWindow(toShow.MainWindowHandle, 1);
             }
         }
-
         private static void SwitchProcess(Process toSwitchTo)
         {
-            if (currentProcess == toSwitchTo)
-                return;
-
-            if (toSwitchTo.MainWindowHandle != IntPtr.Zero)
-            {
-                SwitchToThisWindow(toSwitchTo.MainWindowHandle,true);
-            }
+            ToolLauncher.SwitchToProcess(toSwitchTo);
             currentProcess = toSwitchTo;
         }
     }
