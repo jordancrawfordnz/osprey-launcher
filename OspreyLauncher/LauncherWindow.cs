@@ -42,15 +42,7 @@ namespace OspreyLauncher
            
             browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
             browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
-            browser.GotFocus += new EventHandler(browser_GotFocus);
             this.Controls.Add(browser);
-        }
-
-        // stop the browser from getting focus
-        void browser_GotFocus(object sender, EventArgs e)
-        {
-            this.Focus();
-            // I don't think this is actually doing the trick!
         }
 
         public ChromiumWebBrowser getBrowser()
