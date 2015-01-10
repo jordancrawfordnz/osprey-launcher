@@ -48,14 +48,20 @@ namespace OspreyLauncher
 
         public static void Show()
         {
-            ShowWindow(Handle, SW_SHOW);
-            ShowWindow(HandleOfStartButton, SW_SHOW);
+            if (!Program.DebugMode)
+            {
+                ShowWindow(Handle, SW_SHOW);
+                ShowWindow(HandleOfStartButton, SW_SHOW);
+            }
         }
 
         public static void Hide()
         {
-            ShowWindow(Handle, SW_HIDE);
-            ShowWindow(HandleOfStartButton, SW_HIDE);
+            if (!Program.DebugMode)
+            {
+                ShowWindow(Handle, SW_HIDE);
+                ShowWindow(HandleOfStartButton, SW_HIDE);
+            }
         }
     }
 }
