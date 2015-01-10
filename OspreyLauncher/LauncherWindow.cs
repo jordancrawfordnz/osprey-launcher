@@ -31,6 +31,7 @@ namespace OspreyLauncher
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
                 Taskbar.Hide();
+                Cursor.Hide();
             }
             InitializeComponent();
             
@@ -40,7 +41,6 @@ namespace OspreyLauncher
             browser.Dock = DockStyle.Fill;
            
             browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
-            Cursor.Hide();
             browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
             browser.GotFocus += new EventHandler(browser_GotFocus);
             this.Controls.Add(browser);
