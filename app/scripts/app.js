@@ -133,7 +133,7 @@ angular
     {
       plex.path = 'C:\\Program Files\\Plex Home Theater\\Plex Home Theater.exe';
       mediaportal.path = 'C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
-      kodi.path = 'C:\\Program Files\\XBMC\\XBMC.exe';
+      kodi.path = 'C:\\Program Files\\Kodi\\Kodi.exe';
     }
     else
     {
@@ -154,7 +154,7 @@ angular
     $rootScope.addRestriction(plex,kodi);
     $rootScope.addRestriction(kodi,plex);
 
-    $rootScope.backend.setupApplicationAutomaticClosing(120);
+    $rootScope.backend.setupApplicationAutomaticClosing(4*60);
 
     // define relative applications
     plex.left = desktop;
