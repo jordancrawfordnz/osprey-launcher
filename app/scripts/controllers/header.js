@@ -15,11 +15,11 @@ angular.module('ospreyLauncherApp')
     {  
       // used to update the UI
       function updateTime() {
-        element.text(dateFilter(new Date(), "h:mm a on EEEE, d MMMM yyyy"));
+        element.text(dateFilter(new Date(), 'h:mm a on EEEE, d MMMM yyyy'));
       }
 
       // watch the expression, and update the UI on change. $watch simply registers a callback.
-      scope.$watch(attrs.currentTime, function(value) {
+      scope.$watch(attrs.currentTime, function() {
         updateTime();
       });
 
@@ -30,7 +30,7 @@ angular.module('ospreyLauncherApp')
       element.on('$destroy', function() {
         $interval.cancel(stopTime);
       });
-    }
+    };
   }
 ])
 .directive('todaysRecordings', ['$interval',
@@ -41,30 +41,30 @@ angular.module('ospreyLauncherApp')
     {  
       // used to update the UI
       function updateRecordings() {
-        $.getJSON( "http://192.168.1.140:4322/MPExtended/TVAccessService/json/GetScheduledRecordingsForToday", function( data ) {
+        $.getJSON( 'http://192.168.1.140:4322/MPExtended/TVAccessService/json/GetScheduledRecordingsForToday', function( data ) {
           if(Array.isArray(data))
           {
             if(data.length > 0)
             {
-              if(data.length == 1)
+              if(data.length === 1)
               {
-                element.text(data.length + " recording scheduled today.");
+                element.text(data.length + ' recording scheduled today.');
               }
               else
               {
-                element.text(data.length + " recordings scheduled today.");
+                element.text(data.length + ' recordings scheduled today.');
               }
             }
             else
             {
-              element.text("No recordings today.");
+              element.text('No recordings today.');
             }
           }
         });
-      };
+      }
 
       // watch the expression, and update the UI on change. $watch simply registers a callback.
-      scope.$watch(attrs.todaysRecordings, function(value) {
+      scope.$watch(attrs.todaysRecordings, function() {
         updateRecordings();
       });
 
@@ -75,7 +75,7 @@ angular.module('ospreyLauncherApp')
       element.on('$destroy', function() {
         $interval.cancel(automaticallyUpdateRecordings);
       });
-    }
+    };
   }
 ])
 .directive('diskSpace', ['$interval',
@@ -86,14 +86,14 @@ angular.module('ospreyLauncherApp')
     {  
       // used to update the UI
       function updateDiskSpace() {
-        $.getJSON( "http://192.168.1.140:80/DiskSpace", function( data ) {
+        $.getJSON( 'http://192.168.1.140:80/DiskSpace', function( data ) {
           
-          element.text((100-data.percentageUsed)+ "% of disk free.");
+          element.text((100-data.percentageUsed)+ '% of disk free.');
         });
-      };
+      }
 
       // watch the expression, and update the UI on change. $watch simply registers a callback.
-      scope.$watch(attrs.diskSpace, function(value) {
+      scope.$watch(attrs.diskSpace, function() {
         updateDiskSpace();
       });
 
@@ -105,6 +105,6 @@ angular.module('ospreyLauncherApp')
         $interval.cancel(automaticallyUpdateDiskSpace);
       });
    
-    }
+    };
   }
 ]);

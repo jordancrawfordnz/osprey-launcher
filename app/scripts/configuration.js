@@ -2,7 +2,7 @@
 var coreConfigData = function($rootScope)
 {
 	$rootScope.useMockBackend = false;
-}
+};
 
 var setupConfigData = function($rootScope)
 {
@@ -89,4 +89,4 @@ var setupConfigData = function($rootScope)
     $rootScope.extras = [desktop,info];
     
     $rootScope.makeCurrent(plex);
-}
+};

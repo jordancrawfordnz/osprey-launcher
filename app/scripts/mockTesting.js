@@ -25,12 +25,10 @@ mockBackend.addRestriction = function(first,second)
 mockBackend.isx86 = function()
 {
   return false;
-}
+};
 
 mockBackend.setupApplicationAutomaticClosing = function(timeDelay)
-{ }
-
-document.onkeydown = checkKey;
+{ };
 
 function checkKey(e) {
 
@@ -57,3 +55,6 @@ function checkKey(e) {
       // enter key
     }
 }
+
+document.onkeydown = checkKey;
+

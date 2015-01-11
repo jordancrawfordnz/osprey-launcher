@@ -15,7 +15,7 @@ angular
     'ngRoute',
     'ngSanitize'
   ])
-  .config(function ($routeProvider,$httpProvider) {
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -41,17 +41,17 @@ angular
       $rootScope.backend.selectItem($rootScope.currentSelectable.name);
       setTimeout(function(){ $rootScope.$apply(function() { $location.path('/loading'); }); }, 100);
       // display loading screen, use a slight delay in-case it loads quickly.
-    }
+    };
 
     $rootScope.selectableSelect = function()
     {
       $rootScope.backend.selectItem($rootScope.currentSelectable.name);
-    }
+    };
 
     $rootScope.linkSelect = function()
     {
       $rootScope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
-    }
+    };
 
     $rootScope.setupInBackend = function(toSetup)
     {
