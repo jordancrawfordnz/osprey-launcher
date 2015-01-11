@@ -6,7 +6,7 @@
 				</div>
 		</div>
 		<div class="col-md-3">
-				<div ng-repeat="extra in getExtras()" class="application extra" ng-class="{selected: extra.selected}">
+				<div ng-repeat="extra in getExtras()" class="application extra" ng-class="{selected: extra.selected, top: $first, bottom: $last}">
 					{{extra.title}}
 				</div>
 		</div>
