@@ -57,7 +57,7 @@ namespace OspreyLauncher
 
         public bool Isx86()
         {
-            return UserSettings.GetInstance().getBooleanSetting("x86system");
+            return UserSettings.GetInstance().isx86System();
         }
 
         bool enableAutomaticClosing = false;

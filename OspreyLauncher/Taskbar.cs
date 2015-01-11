@@ -41,14 +41,9 @@ namespace OspreyLauncher
             }
         }
 
-        private Taskbar()
-        {
-            // hide ctor
-        }
-
         public static void Show()
         {
-            if (!Program.DebugMode)
+            if (!UserSettings.GetInstance().isInDebugMode())
             {
                 ShowWindow(Handle, SW_SHOW);
                 ShowWindow(HandleOfStartButton, SW_SHOW);
@@ -57,7 +52,7 @@ namespace OspreyLauncher
 
         public static void Hide()
         {
-            if (!Program.DebugMode)
+            if (!UserSettings.GetInstance().isInDebugMode())
             {
                 ShowWindow(Handle, SW_HIDE);
                 ShowWindow(HandleOfStartButton, SW_HIDE);

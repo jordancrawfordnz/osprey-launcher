@@ -26,7 +26,7 @@ namespace OspreyLauncher
 
         private LauncherWindow()
         {
-            if (!Program.DebugMode)
+            if (!UserSettings.GetInstance().isInDebugMode())
             {
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
@@ -35,7 +35,7 @@ namespace OspreyLauncher
             }
             InitializeComponent();
             
-            browser = new ChromiumWebBrowser("http://192.168.1.106:9000/");
+            browser = new ChromiumWebBrowser(UserSettings.GetInstance().getFrontendUrl());
             browser.BrowserSettings = new BrowserSettings();
             browser.BrowserSettings.WebSecurityDisabled = true; // This is a security flaw! Can be turned off if the: "Access-Control-Allow-Origin: *" header is present.
             browser.Dock = DockStyle.Fill;
@@ -57,7 +57,7 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate
                 {
                     loadingLabel.Hide();
-                    this.Focus(); 
+                    this.Focus();
                     
                 }); // invokes this method in the UI thread
                 return;
