@@ -14,8 +14,6 @@ namespace OspreyLauncher
         static UserSettings instance = null;
         Hashtable settings = new Hashtable();
 
-        bool hasBeenPrepared = false;
-
         private UserSettings()
         {
             bool haveHadChance = false;

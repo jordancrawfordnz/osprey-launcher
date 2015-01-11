@@ -15,7 +15,7 @@ namespace OspreyLauncher
         int minutesToWait;
         bool timeUp = false;
 
-        public ApplicationAutomaticCloser(LaunchableApplication toClose,int minutesToWait,Process toWaitForInputIdle)
+        public ApplicationAutomaticCloser(LaunchableApplication toClose,int minutesToWait)
         {
             this.minutesToWait = minutesToWait;
             this.toClose = toClose;
@@ -28,19 +28,12 @@ namespace OspreyLauncher
             waiterThread = new Thread(new ThreadStart(WaitUntilTime));
             timeUp = false;
             waiterThread.Start(); // Start the thread
-
-            // start waiting for idle
-
-            // on idle, reset timer by killing waiting thread and starting another one.
-            // how to know when un-idle?
         }
 
         public void Cancel()
         {
             if(waiterThread != null && !timeUp) // if timer has started and time isn't up.
                 waiterThread.Abort();
-
-            // ensure idle waiting thread killed
         }
 
         private void WaitUntilTime()

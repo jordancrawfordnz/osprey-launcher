@@ -23,7 +23,7 @@ namespace OspreyLauncher
             Thread watcherThread = new Thread(new ThreadStart(watcher.waitForExit));
             watcherThread.Start(); // Start the thread
 
-            automaticClose = new ApplicationAutomaticCloser(application, FrontendBridge.GetInstance().GetAutomaticClosingDelay(),process);
+            automaticClose = new ApplicationAutomaticCloser(application, FrontendBridge.GetInstance().GetAutomaticClosingDelay());
             if (FrontendBridge.GetInstance().AutomaticClosingEnabled())
                 automaticClose.Begin();
         }
