@@ -57,6 +57,7 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate
                 {
                     loadingLabel.Hide();
+                    WindowManagement.SwitchToLauncher();
                     this.Focus();
                     
                 }); // invokes this method in the UI thread
