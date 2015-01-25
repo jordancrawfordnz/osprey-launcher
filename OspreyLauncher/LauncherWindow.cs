@@ -17,6 +17,7 @@ namespace OspreyLauncher
         private readonly ChromiumWebBrowser browser;
 
         static LauncherWindow instance = null;
+
         public static LauncherWindow GetInstance()
         {
             if (instance == null)
@@ -105,6 +106,10 @@ namespace OspreyLauncher
             {
                 FrontendBridge.GetInstance().SelectKey();
                 return true;
+            }
+            else if (keyData == Keys.Back || keyData == Keys.Escape)
+            {
+                FrontendBridge.GetInstance().Reset();
             }
             // Call the base class
             return base.ProcessCmdKey(ref msg, keyData);
