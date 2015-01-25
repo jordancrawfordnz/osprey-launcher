@@ -29,6 +29,10 @@ angular
         templateUrl: 'views/loading.html',
         controller: 'LoadingCtrl'
       })
+      .when('/options', {
+        templateUrl: 'views/options.html',
+        controller: 'OptionsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -52,6 +56,12 @@ angular
     {
       $rootScope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
     };
+
+    $rootScope.optionsSelect = function()
+    {
+      $rootScope.$apply(function() { $location.path('/options'); });
+    };
+
 
     $rootScope.setupInBackend = function(toSetup)
     {
@@ -93,5 +103,12 @@ angular
       $rootScope.backend = backend;
     }
 
+    $rootScope.exit = function()
+    {
+        $rootScope.backend.selectItem("exit");
+    };
+    $rootScope.backend.addExitLaunchable("exit");
+
     setupConfigData($rootScope);
+
   });

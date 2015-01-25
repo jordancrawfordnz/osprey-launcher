@@ -63,7 +63,7 @@ var setupConfigData = function($rootScope)
     $rootScope.addRestriction(kodi,plex);
 
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
-
+    
     // define relative applications
     plex.left = desktop;
     plex.right = mediaportal;
@@ -87,6 +87,6 @@ var setupConfigData = function($rootScope)
     // define display order
     $rootScope.applications = [plex,mediaportal,kodi];
     $rootScope.extras = [desktop,info];
-    
+
     $rootScope.makeCurrent(plex);
 };

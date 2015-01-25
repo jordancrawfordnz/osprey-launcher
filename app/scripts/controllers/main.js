@@ -25,8 +25,16 @@ angular.module('ospreyLauncherApp')
   	
     $rootScope.moveUp = function()
   	{
-  		$rootScope.makeCurrent($rootScope.currentSelectable.up);
-      $scope.$apply();
+      if(jQuery.inArray($rootScope.currentSelectable,$rootScope.applications) !== -1)
+      {
+        console.log('select');
+        $rootScope.optionsSelect();
+      }
+      else
+      {
+  		  $rootScope.makeCurrent($rootScope.currentSelectable.up);
+        $scope.$apply();
+      }
   	};
   	
     $rootScope.moveDown = function()

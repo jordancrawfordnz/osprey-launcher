@@ -1,0 +1,15 @@
+.optionsBox
+{
+  margin-top: 70px;
+  font-size: 30px;
+  text-align: center;
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:         0px 0px 100px 0px #0086D9;
+}
+
+.nav-pills > li > a
+{
+  border-radius: 0px;
+}
