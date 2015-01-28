@@ -26,7 +26,6 @@ namespace OspreyLauncher
             }
             catch (SettingsNotFoundException ex)
             {
-//                LauncherWindow.GetInstance().displayMessage("No configuration file was found.\nPlease run the configuration maker before using OspreyLauncher.");
                 MessageBox.Show("No configuration file was found.\nPlease run the configuration maker before using OspreyLauncher.");
                 return; // If the settings cannot be found, close the application.
             }
