@@ -32,6 +32,7 @@ namespace OspreyLauncher
         {
             FrontendBridge.GetInstance().Reset();
             SwitchProcess(Process.GetCurrentProcess());
+            LauncherWindow.GetInstance().focusBrowser(LauncherWindow.GetInstance().getFrontendBrowser());
             Taskbar.Hide();
         }
 

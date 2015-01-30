@@ -35,57 +35,66 @@ namespace OspreyLauncher
                 Cursor.Hide();
             }
             InitializeComponent();
-            frontendBrowser = makeBrowser(UserSettings.GetInstance().getFrontendUrl());
-            frontendBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
+            frontendBrowser = addNewBrowser(UserSettings.GetInstance().getFrontendUrl());
             frontendBrowser.RegisterJsObject("backend", FrontendBridge.GetInstance());
 
-
-            new Form1().Show();
             // the label seems to stretch, so must be hidden before anything can be seen.
 
             // running hide seems to stop something loading properly. Will have to see how this actually works.
             // maybe make a switch method to switch between two browser instances
 
         }
+
+        Stack<ChromiumWebBrowser> browserStack = new Stack<ChromiumWebBrowser>();
         
-        ChromiumWebBrowser secondaryBrowser = null;
-
-        public void showBrowserInstance(string url)
-        {
-            if (secondaryBrowser != null)
-            {
-                switchToMainBrowser();
-            }
-            frontendBrowser.Hide();
-            loadingLabel.Show();  
-            ChromiumWebBrowser browser = makeBrowser(url);
-            secondaryBrowser = browser;
-            browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
-        }
-
-        public void switchToMainBrowser()
-        {
-            if (secondaryBrowser != null)
-            {
-                frontendBrowser.Show();
-                this.Controls.Remove(secondaryBrowser);
-                secondaryBrowser.Dispose();
-                secondaryBrowser = null;
-            }
-        }
-
-        private ChromiumWebBrowser makeBrowser(string url)
+        public ChromiumWebBrowser addNewBrowser(string url)
         {
             ChromiumWebBrowser browser = new ChromiumWebBrowser(url);
-
             browser.BrowserSettings = new BrowserSettings();
             browser.BrowserSettings.WebSecurityDisabled = true; // This is a security flaw! Can be turned off if the: "Access-Control-Allow-Origin: *" header is present.
             browser.Dock = DockStyle.Fill;
+            loadingLabel.Show();
             this.Controls.Add(browser);
+            browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
+            browser.SetFocus(true);
+            browserStack.Push(browser);
             return browser;
         }
 
-        public ChromiumWebBrowser getBrowser()
+        public void focusBrowser(ChromiumWebBrowser toSwitchTo)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    focusBrowser(toSwitchTo);
+                });
+                return;
+            }
+            toSwitchTo.SetFocus(true);
+        }
+        
+        public void killBrowser(ChromiumWebBrowser toKill)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    killBrowser(toKill);
+                });
+                return;
+            }
+            this.Controls.Remove(toKill);
+            toKill.Dispose();
+            browserStack.Pop();
+            
+            if(browserStack.Count > 0)
+            {
+                focusBrowser(browserStack.Peek());
+            }
+        }
+
+        public ChromiumWebBrowser getFrontendBrowser()
         {
             return frontendBrowser;
         }
@@ -112,12 +121,13 @@ namespace OspreyLauncher
                 Invoke((MethodInvoker)delegate { PrepareForClose(); }); // invokes this method in the UI thread
                 return;
             }
-            fadeOut();
             this.Close();
         }
 
+        /*
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            /*
             // Send keys through to JS
             if (keyData == Keys.Left)
             {
@@ -148,10 +158,12 @@ namespace OspreyLauncher
             {
                 FrontendBridge.GetInstance().Reset();
             }
+             */
             // Call the base class
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+   //         return base.ProcessCmdKey(ref msg, keyData);
+    //    }
 
+   
         public void displayMessage(string message)
         {
             // this could be run from another thread!
@@ -190,55 +202,5 @@ namespace OspreyLauncher
             // if in the main (UI) thread
             this.Hide();
         }
-
-        // == Currently Unused Fade Methods ===
-        public void fadeOut()
-        {
-            if (InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate { fadeOut(); }); // invokes this method in the UI thread
-                return;
-            }
-            while (this.Opacity > 0)
-            {
-                this.Opacity -= 0.1;
-                Thread.Sleep(10);
-            }
-        }
-
-        public void fadeIn()
-        {
-            if (InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate { fadeIn(); }); // invokes this method in the UI thread
-                return;
-            }
-            while (this.Opacity < 1)
-            {
-                this.Opacity += 0.1;
-                Thread.Sleep(10);
-            }
-        }
-
-        public void prepareFadeIn()
-        {
-            if (InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate { prepareFadeIn(); }); // invokes this method in the UI thread
-                return;
-            }
-            this.Opacity = 0;
-        }
-
-        public void prepareFadeOut()
-        {
-            if (InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate { prepareFadeOut(); }); // invokes this method in the UI thread
-                return;
-            }
-            this.Opacity = 1;
-        }
-
     }
 }

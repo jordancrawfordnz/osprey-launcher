@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using CefSharp.WinForms;
+using CefSharp;
 
 namespace OspreyLauncher
 {
@@ -92,33 +94,34 @@ namespace OspreyLauncher
 
         public void Reset()
         {
-            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.reset()");
+            ChromiumWebBrowser frontend = LauncherWindow.GetInstance().getFrontendBrowser();
+            frontend.ExecuteScriptAsync("frontend.reset()");
             Thread.Sleep(100); // minor delay to allow the frontend to reset.
         }
 
         public void MoveLeft()
         {
-            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveLeft()");
+            LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.moveLeft()");
         }
 
         public void MoveRight()
         {
-            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveRight()");
+            LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.moveRight()");
         }
 
         public void MoveUp()
         {
-            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveUp()");
+            LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.moveUp()");
         }
 
         public void MoveDown()
         {
-            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.moveDown()");
+            LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.moveDown()");
         }
 
         public void SelectKey()
         {
-            LauncherWindow.GetInstance().getBrowser().ExecuteScriptAsync("frontend.selectKey()");
+            LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.selectKey()");
         }
     }
 }
