@@ -30,7 +30,12 @@ namespace OspreyLauncher
 
         public override void ForceClose()
         {
-            process.Kill();
+            try
+            {
+                process.Kill();
+            }
+            catch(Exception ex)
+            { }
             Thread.Sleep(2000);
             application.changeInstance(new ClosedApplication(application));
         }
