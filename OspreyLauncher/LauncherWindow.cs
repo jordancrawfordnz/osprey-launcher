@@ -14,7 +14,7 @@ namespace OspreyLauncher
 {
     public partial class LauncherWindow : Form
     {
-        private readonly ChromiumWebBrowser browser;
+        private readonly ChromiumWebBrowser frontendBrowser;
 
         static LauncherWindow instance = null;
 
@@ -35,20 +35,59 @@ namespace OspreyLauncher
                 Cursor.Hide();
             }
             InitializeComponent();
-            
-            browser = new ChromiumWebBrowser(UserSettings.GetInstance().getFrontendUrl());
+            frontendBrowser = makeBrowser(UserSettings.GetInstance().getFrontendUrl());
+            frontendBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
+            frontendBrowser.RegisterJsObject("backend", FrontendBridge.GetInstance());
+
+
+            new Form1().Show();
+            // the label seems to stretch, so must be hidden before anything can be seen.
+
+            // running hide seems to stop something loading properly. Will have to see how this actually works.
+            // maybe make a switch method to switch between two browser instances
+
+        }
+        
+        ChromiumWebBrowser secondaryBrowser = null;
+
+        public void showBrowserInstance(string url)
+        {
+            if (secondaryBrowser != null)
+            {
+                switchToMainBrowser();
+            }
+            frontendBrowser.Hide();
+            loadingLabel.Show();  
+            ChromiumWebBrowser browser = makeBrowser(url);
+            secondaryBrowser = browser;
+            browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
+        }
+
+        public void switchToMainBrowser()
+        {
+            if (secondaryBrowser != null)
+            {
+                frontendBrowser.Show();
+                this.Controls.Remove(secondaryBrowser);
+                secondaryBrowser.Dispose();
+                secondaryBrowser = null;
+            }
+        }
+
+        private ChromiumWebBrowser makeBrowser(string url)
+        {
+            ChromiumWebBrowser browser = new ChromiumWebBrowser(url);
+
             browser.BrowserSettings = new BrowserSettings();
             browser.BrowserSettings.WebSecurityDisabled = true; // This is a security flaw! Can be turned off if the: "Access-Control-Allow-Origin: *" header is present.
             browser.Dock = DockStyle.Fill;
-           
-            browser.RegisterJsObject("backend", FrontendBridge.GetInstance());
-            browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
             this.Controls.Add(browser);
+            return browser;
         }
 
         public ChromiumWebBrowser getBrowser()
         {
-            return browser;
+            return frontendBrowser;
         }
 
         void browser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
@@ -59,8 +98,6 @@ namespace OspreyLauncher
                 {
                     loadingLabel.Hide();
                     WindowManagement.SwitchToLauncher();
-                    this.Focus();
-                    
                 }); // invokes this method in the UI thread
                 return;
             } 
