@@ -52,14 +52,14 @@ namespace OspreyLauncher
             automaticClose.Cancel();
             if (application.shouldKeepOpen())
             {
-                WindowManagement.SwitchToLauncher();
+                LauncherController.GetInstance().ResetLauncher();
                 onHide();
             }
             else
             {
                 if (application.isSuspendable())
                 {
-                    WindowManagement.SwitchToLauncher();
+                    LauncherController.GetInstance().ResetLauncher();
                     ToolLauncher.DoSuspend(process); // suspend process
                     onSuspend();
                 }

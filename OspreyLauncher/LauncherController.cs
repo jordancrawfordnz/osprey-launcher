@@ -86,6 +86,7 @@ namespace OspreyLauncher
         {
             if (application == null) return;
             application.Close();
+            ResetLauncher();
             HandleClose(application);
         }
 
@@ -94,9 +95,17 @@ namespace OspreyLauncher
             if (application == null) return;
             if (currentLaunchable == application)
             {
+                ResetLauncher();
                 currentLaunchable = null;
-                WindowManagement.SwitchToLauncher();
             }
+        }
+
+        public void ResetLauncher()
+        {
+            LauncherWindow.GetInstance().showBrowser(LauncherWindow.GetInstance().getFrontendBrowser());
+            Taskbar.Hide();
+            FrontendBridge.GetInstance().Reset();
+            WindowManagement.SwitchToLauncher();
         }
 
         // === General lifecycle things ===

@@ -126,6 +126,7 @@
     <Compile Include="Taskbar.cs" />
     <Compile Include="UDPTrigger.cs" />
     <Compile Include="UserSettings.cs" />
+    <Compile Include="Webpage.cs" />
     <Compile Include="WindowManagement.cs" />
     <EmbeddedResource Include="LauncherWindow.resx">
       <DependentUpon>LauncherWindow.cs</DependentUpon>

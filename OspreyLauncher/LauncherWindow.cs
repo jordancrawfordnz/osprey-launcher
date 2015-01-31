@@ -35,7 +35,7 @@ namespace OspreyLauncher
                 Cursor.Hide();
             }
             InitializeComponent();
-            frontendBrowser = addNewBrowser(UserSettings.GetInstance().getFrontendUrl());
+            frontendBrowser = showBrowser(UserSettings.GetInstance().getFrontendUrl());
             frontendBrowser.RegisterJsObject("backend", FrontendBridge.GetInstance());
 
             // the label seems to stretch, so must be hidden before anything can be seen.
@@ -45,52 +45,80 @@ namespace OspreyLauncher
 
         }
 
-        Stack<ChromiumWebBrowser> browserStack = new Stack<ChromiumWebBrowser>();
-        
-        public ChromiumWebBrowser addNewBrowser(string url)
+        List<ChromiumWebBrowser> browsers = new List<ChromiumWebBrowser>();
+        ChromiumWebBrowser currentlyShownBrowser = null;
+
+        public ChromiumWebBrowser showBrowser(string url, ChromiumWebBrowser pendingInit = null)
         {
-            ChromiumWebBrowser browser = new ChromiumWebBrowser(url);
+            ChromiumWebBrowser browser;
+            if (pendingInit == null)
+                browser = new ChromiumWebBrowser(url);
+            else
+                browser = pendingInit;
+
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    showBrowser(url,browser);
+                });
+                return browser;
+            }
             browser.BrowserSettings = new BrowserSettings();
             browser.BrowserSettings.WebSecurityDisabled = true; // This is a security flaw! Can be turned off if the: "Access-Control-Allow-Origin: *" header is present.
             browser.Dock = DockStyle.Fill;
             loadingLabel.Show();
             this.Controls.Add(browser);
             browser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(browser_FrameLoadEnd);
-            browser.SetFocus(true);
-            browserStack.Push(browser);
+            if (currentlyShownBrowser != null)
+            {
+                currentlyShownBrowser.Hide();
+                currentlyShownBrowser.SetFocus(false);
+            }
+            currentlyShownBrowser = browser;
+            browsers.Add(browser);
             return browser;
         }
 
-        public void focusBrowser(ChromiumWebBrowser toSwitchTo)
+        public void showBrowser(ChromiumWebBrowser browser)
         {
             if (InvokeRequired)
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    focusBrowser(toSwitchTo);
+                    showBrowser(browser);
                 });
                 return;
             }
-            toSwitchTo.SetFocus(true);
+            if (!browsers.Contains(browser)) return; // browser must be setup properly.
+            if (currentlyShownBrowser == browser) return;
+            if (currentlyShownBrowser != null)
+            {
+                currentlyShownBrowser.Hide();
+            }
+            browser.Show();
+            browser.SetFocus(true);
+            currentlyShownBrowser = browser;
         }
-        
-        public void killBrowser(ChromiumWebBrowser toKill)
+                
+        public void killBrowser(ChromiumWebBrowser browser)
         {
             if (InvokeRequired)
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    killBrowser(toKill);
+                    killBrowser(browser);
                 });
                 return;
             }
-            this.Controls.Remove(toKill);
-            toKill.Dispose();
-            browserStack.Pop();
-            
-            if(browserStack.Count > 0)
+            if (!browsers.Contains(browser)) return; // browser must be setup properly.
+            this.Controls.Remove(browser);
+            browser.SetFocus(false);
+            browser.Dispose();
+            browsers.Remove(browser);
+            if (browser == currentlyShownBrowser)
             {
-                focusBrowser(browserStack.Peek());
+                currentlyShownBrowser = null;
             }
         }
 

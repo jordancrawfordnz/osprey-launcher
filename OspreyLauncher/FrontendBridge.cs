@@ -57,6 +57,11 @@ namespace OspreyLauncher
             LauncherController.GetInstance().AddSelectable(name, ExitSelectable.GetInstance());
         }
 
+        public void AddWebpageLaunchable(string name, string url)
+        {
+            LauncherController.GetInstance().AddSelectable(name, new Webpage(url));
+        }
+
         public bool Isx86()
         {
             return UserSettings.GetInstance().isx86System();
