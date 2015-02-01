@@ -38,6 +38,11 @@ var setupConfigData = function($rootScope)
                 'url'  : 'info',
                 'onSelect' : $rootScope.linkSelect};
 
+    var tvnzOndemand = {'title': 'TVNZ OnDemand',
+                        'name' : 'tvnzondemand',
+                        'url'  : 'http://www.tv3.co.nz/OnDemand.aspx',
+                        'onSelect' : $rootScope.launchableSelect};
+
     if($rootScope.backend.isx86())
     {
       plex.path = 'C:\\Program Files\\Plex Home Theater\\Plex Home Theater.exe';
@@ -57,6 +62,8 @@ var setupConfigData = function($rootScope)
     $rootScope.setupInBackend(kodi);
 
     $rootScope.backend.addDesktopLaunchable(desktop.name);
+
+    $rootScope.backend.addWebpageLaunchable(tvnzOndemand.name,tvnzOndemand.url, true);
 
     // setup restrictions
     $rootScope.addRestriction(plex,kodi);
@@ -82,11 +89,13 @@ var setupConfigData = function($rootScope)
     info.left = kodi;
     info.right = plex;
     info.up = desktop;
-    info.down = desktop;
+    info.down = tvnzOndemand;
+
+    tvnzOndemand.up = info;
 
     // define display order
     $rootScope.applications = [plex,mediaportal,kodi];
-    $rootScope.extras = [desktop,info];
+    $rootScope.extras = [desktop,info, tvnzOndemand];
 
     $rootScope.makeCurrent(plex);
 };
