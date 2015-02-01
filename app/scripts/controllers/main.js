@@ -14,13 +14,17 @@ angular.module('ospreyLauncherApp')
     $rootScope.moveLeft = function()
   	{
       if(!$scope.options)
+      {
         changePosition(currentRow, currentCol - 1);
+      }
   	};
   	
     $rootScope.moveRight = function()
   	{
       if(!$scope.options)
-        changePosition(currentRow, currentCol + 1);
+      {
+       changePosition(currentRow, currentCol + 1);
+      }
   	};
   	
     $rootScope.moveUp = function()
@@ -77,11 +81,11 @@ angular.module('ospreyLauncherApp')
     {
       for(var rowKey = 0; rowKey < grid.length; rowKey++)
       {
-        var currentRow = grid[rowKey];
-        for(var colKey = 0; colKey < currentRow.length; colKey++)
+        var row = grid[rowKey];
+        for(var colKey = 0; colKey < row.length; colKey++)
         {
-          var currentCol = currentRow[colKey];
-          if(currentCol == $rootScope.currentSelectable)
+          var col = row[colKey];
+          if(col == $rootScope.currentSelectable)
           {
             return {'row' : rowKey, 'col' : colKey}; 
           }
@@ -134,23 +138,47 @@ angular.module('ospreyLauncherApp')
 
 
     $scope.selectables = $rootScope.applications;
+    var grid;
+    var currentRow;
+    var currentCol;
+    var perRow;
 
-    var perRow = 4;
-    var grid = [];
-    var currentRow = [];
-    angular.forEach($scope.selectables, function(value, key)
+    $scope.resetGrid = function()
     {
-      if((key % perRow) == 0 && key != 0)
-      {
-        grid.push(currentRow);
-        currentRow = [];
-      }
-      currentRow.push(value);
-    });
-    grid.push(currentRow);
+      var perRowOld = perRow;
+      var winWidth =  $(window).width();
+       if(winWidth < 768 ){
+          perRow = 1;
+       }else if( winWidth >= 768 && winWidth <= 991){
+          perRow = 2;
+       }else if( winWidth >= 992 && winWidth <= 1199){
+          perRow = 3;
+       }else if( winWidth >= 1200 ){
+          perRow = 4;
+       }
 
-    var currentPosition = $scope.findSelectablePosition($rootScope.currentSelectable);
-    var currentRow = currentPosition.row;
-    var currentCol = currentPosition.col;
+      if(perRow != perRowOld)
+      {
+        grid = [];
+        var row = [];
+        angular.forEach($scope.selectables, function(value, key)
+        {
+          if((key % perRow) == 0 && key != 0)
+          {
+            grid.push(row);
+            row = [];
+          }
+          row.push(value);
+        });
+        grid.push(row);
+
+        var currentPosition = $scope.findSelectablePosition($rootScope.currentSelectable);
+        currentRow = currentPosition.row;
+        currentCol = currentPosition.col;
+      }
+    };
+
+    $scope.resetGrid();
+    $(window).resize($scope.resetGrid); // re-caluate the grid when the browser re-sizes
 
   }]);
