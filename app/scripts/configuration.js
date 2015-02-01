@@ -94,8 +94,7 @@ var setupConfigData = function($rootScope)
     tvnzOndemand.up = info;
 
     // define display order
-    $rootScope.applications = [plex,mediaportal,kodi];
-    $rootScope.extras = [desktop,info, tvnzOndemand];
+    $rootScope.applications = [plex,mediaportal,kodi, desktop, info, tvnzOndemand];
 
     $rootScope.makeCurrent(plex);
 };

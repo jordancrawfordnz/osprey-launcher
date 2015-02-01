@@ -112,3 +112,35 @@ angular
     setupConfigData($rootScope);
 
   });
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode === 38) {
+      frontend.moveUp();
+      // up arrow
+    }
+    else if (e.keyCode === 40) {
+      frontend.moveDown();
+      // down arrow
+    }
+    else if (e.keyCode === 37) {
+      frontend.moveLeft();
+      // left arrow
+    }
+    else if (e.keyCode === 39) {
+      frontend.moveRight();
+      // right arrow
+    }
+    else if (e.keyCode === 13) {
+      frontend.selectKey();
+      // enter key
+    }
+    else if(e.keyCode === 73) {
+      frontend.context();
+      // context menu
+    }
+}
+
+document.onkeydown = checkKey;

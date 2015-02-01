@@ -34,32 +34,3 @@ mockBackend.isx86 = function()
 
 mockBackend.setupApplicationAutomaticClosing = function(timeDelay)
 { };
-
-function checkKey(e) {
-
-    e = e || window.event;
-
-    if (e.keyCode === 38) {
-      frontend.moveUp();
-      // up arrow
-    }
-    else if (e.keyCode === 40) {
-      frontend.moveDown();
-      // down arrow
-    }
-    else if (e.keyCode === 37) {
-      frontend.moveLeft();
-      // left arrow
-    }
-    else if (e.keyCode === 39) {
-      frontend.moveRight();
-      // right arrow
-    }
-    else if (e.keyCode === 13) {
-      frontend.selectKey();
-      // enter key
-    }
-}
-
-document.onkeydown = checkKey;
-
