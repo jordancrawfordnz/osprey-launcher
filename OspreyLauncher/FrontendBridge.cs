@@ -97,6 +97,13 @@ namespace OspreyLauncher
                 new Thread(new ThreadStart(selectable.Select)).Start(); // select the item in a new thread so the view is not frozen.
         }
 
+        public void ForceClose(string toForceClose)
+        {
+            Launchable launchable = LauncherController.GetInstance().GetLaunchable(toForceClose);
+            if (launchable != null)
+                new Thread(new ThreadStart(launchable.ForceClose)).Start(); // select the item in a new thread so the view is not frozen.
+        }
+
         public void Reset()
         {
             ChromiumWebBrowser frontend = LauncherWindow.GetInstance().getFrontendBrowser();
@@ -127,6 +134,11 @@ namespace OspreyLauncher
         public void SelectKey()
         {
             LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.selectKey()");
+        }
+
+        public void Context()
+        {
+            LauncherWindow.GetInstance().getFrontendBrowser().ExecuteScriptAsync("frontend.context()");
         }
     }
 }

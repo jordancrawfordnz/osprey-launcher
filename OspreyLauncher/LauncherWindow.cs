@@ -202,6 +202,10 @@ namespace OspreyLauncher
             {
                 FrontendBridge.GetInstance().Reset();
             }
+            else if (keyData == Keys.I)
+            {
+                FrontendBridge.GetInstance().Context();
+            }
              
             // Call the base class
             return base.ProcessCmdKey(ref msg, keyData);
