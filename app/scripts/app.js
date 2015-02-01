@@ -134,7 +134,7 @@ function checkKey(e) {
       frontend.selectKey();
       // enter key
     }
-    else if(e.keyCode === 73) {
+    else if(e.keyCode === 67) {
       frontend.context();
       // context menu
     }
