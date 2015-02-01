@@ -3,9 +3,11 @@ body {
   padding-bottom: 20px;
   color: white;
   overflow: hidden;
-  background-size: 100%;
   background-color: black;
   background-image: url('../images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 
@@ -110,6 +112,7 @@ body {
   background-repeat: no-repeat;
 
 }
+
 
 .navbar-inverse
 {
