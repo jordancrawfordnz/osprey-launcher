@@ -1,7 +1,7 @@
 'use strict';
 var coreConfigData = function($rootScope)
 {
-	$rootScope.useMockBackend = false;
+	$rootScope.useMockBackend = true;
 };
 
 var setupConfigData = function($rootScope)
@@ -10,38 +10,45 @@ var setupConfigData = function($rootScope)
 	// == Setup data ==
 
     // define applications
-    var plex = {'title': 'Movies',
-                'name' : 'Plex',
+    var plex = {'name' : 'Plex',
                 'img' : 'images/plex.png',
                 'suspendable' : true,
                 'keepOpen' : false,
                 'onSelect' : $rootScope.launchableSelect,
                 'restriction' : 'Kodi'};
-    var mediaportal = {'title':'TV',
-                       'name' : 'MediaPortal',
+    var mediaportal = {'name' : 'MediaPortal',
                        'img' : 'images/mediaportal.png',
                        'suspendable' : true,
                        'keepOpen' : false,
                        'onSelect' : $rootScope.launchableSelect};
-    var kodi = {'title': 'Stream',
-                'name' : 'Kodi',
+    var kodi = {'name' : 'Kodi',
                 'img' : 'images/kodi.png',
                 'suspendable' : true,
                 'keepOpen' : false,
                 'restriction' : 'Plex',
                 'onSelect' : $rootScope.launchableSelect};
-    var desktop = {'title': 'Desktop',
-                   'name' : 'Desktop',
+    var desktop = {'name' : 'Desktop',
+                   'img' : 'images/windowsdesktop.png',
                    'onSelect' : $rootScope.selectableSelect};
-    var info = {'title': 'Information',
-                'name' : 'Info',
+    var info = {'name' : 'Information',
+                'img' : 'images/info.png',
                 'url'  : 'http://192.168.1.140',
                 'onSelect' : $rootScope.launchableSelect};
 
-    var tvnzOndemand = {'title': 'TVNZ OnDemand',
-                        'name' : 'tvnzondemand',
-                        'url'  : 'http://www.tv3.co.nz/OnDemand.aspx',
+    var tvnzOndemand = {'name' : 'TVNZ',
+                        'url'  : 'http://tvnz.co.nz/video',
+                        'img'  : 'images/tvnzod.png',
                         'onSelect' : $rootScope.launchableSelect};
+
+    var threeNow = { 'name' : '3NOW',
+                 'url'  : 'http://www.tv3.co.nz/OnDemand.aspx',
+                 'img'  : 'images/3now.png',
+                 'onSelect' : $rootScope.launchableSelect};
+
+    var fourOnDemand = { 'name' : 'FOUR',
+                 'url'  : 'http://www.four.co.nz/TV/OnDemand.aspx',
+                 'img'  : 'images/fourondemand.png',
+                 'onSelect' : $rootScope.launchableSelect};
 
     if($rootScope.backend.isx86())
     {
@@ -64,6 +71,8 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.addDesktopLaunchable(desktop.name);
 
     $rootScope.backend.addWebpageLaunchable(tvnzOndemand.name,tvnzOndemand.url, true);
+    $rootScope.backend.addWebpageLaunchable(threeNow.name,threeNow.url, true);
+    $rootScope.backend.addWebpageLaunchable(fourOnDemand.name,fourOnDemand.url, true);
     $rootScope.backend.addWebpageLaunchable(info.name,info.url, false);
 
     // setup restrictions
@@ -72,30 +81,8 @@ var setupConfigData = function($rootScope)
 
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
     
-    // define relative applications
-    plex.left = desktop;
-    plex.right = mediaportal;
-
-    mediaportal.left = plex;
-    mediaportal.right = kodi;
-
-    kodi.left = mediaportal;
-    kodi.right = desktop;
-
-    desktop.left = kodi;
-    desktop.right = plex;
-    desktop.up = info;
-    desktop.down = info;
-
-    info.left = kodi;
-    info.right = plex;
-    info.up = desktop;
-    info.down = tvnzOndemand;
-
-    tvnzOndemand.up = info;
-
     // define display order
-    $rootScope.applications = [plex,mediaportal,kodi, desktop, info, tvnzOndemand];
+    $rootScope.applications = [plex,mediaportal,kodi, desktop, info, tvnzOndemand, threeNow, fourOnDemand];
 
     $rootScope.makeCurrent(plex);
 };

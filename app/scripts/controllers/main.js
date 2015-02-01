@@ -135,7 +135,7 @@ angular.module('ospreyLauncherApp')
 
     $scope.selectables = $rootScope.applications;
 
-    var perRow = 3;
+    var perRow = 4;
     var grid = [];
     var currentRow = [];
     angular.forEach($scope.selectables, function(value, key)

@@ -1,12 +1,10 @@
-<div class="container-fluid" ng-class="{context: options !== null}">
+<div class="container-fluid launchableContainer" ng-class="{context: options !== null}">
 	<div class="row">
 		<div ng-repeat="selectable in selectables">
-			<div class="col-sm-6 col-md-4">
-				<div class="row">
-					<div class="application main" ng-class="{selected: selectable.selected}">
-						<img ng-src="{{selectable.img}}"/><br>
-						{{selectable.name}}
-					</div>
+			<div class="col-md-3">
+				<div class="application main" ng-class="{selected: selectable.selected}">
+					<img ng-src="{{selectable.img}}"/><br>
+					{{selectable.name}}
 				</div>
 			</div>
 		</div>
@@ -17,14 +15,4 @@
 	<ul class="nav nav-pills nav-stacked"  ng-repeat="option in options" >
 		<li role="presentation" ng-class="{active: option.selected}"><a>{{option.text}}</a></li>
 	</ul>
-</div>
-
-
-<div class="row options-row" ng-hide="options === null">
-	<div class="col-md-4"></div>
-  	<div class="col-md-4">
-  		
-
-	</div>
-	<div class="col-md-4"></div>
 </div>
