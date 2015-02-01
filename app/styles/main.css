@@ -1,6 +1,5 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
   color: white;
   overflow: hidden;
@@ -178,4 +177,21 @@ body {
 {
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
+}
+
+.navbar-inverse
+{
+  opacity: 0.8;
+  border: none;
+}
+
+.navbar
+{
+  border-radius: 0px;
+}
+
+.navbar-inverse .navbar-nav > li > a
+{
+  color: white;
+  font-size: 18px;
 }
