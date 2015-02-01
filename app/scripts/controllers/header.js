@@ -48,16 +48,16 @@ angular.module('ospreyLauncherApp')
             {
               if(data.length === 1)
               {
-                element.text(data.length + ' recording scheduled today.');
+                element.text(data.length + ' recording scheduled today');
               }
               else
               {
-                element.text(data.length + ' recordings scheduled today.');
+                element.text(data.length + ' recordings scheduled today');
               }
             }
             else
             {
-              element.text('No recordings today.');
+              element.text('No recordings today');
             }
           }
         });
@@ -88,7 +88,7 @@ angular.module('ospreyLauncherApp')
       function updateDiskSpace() {
         $.getJSON( 'http://192.168.1.140:80/DiskSpace', function( data ) {
           
-          element.text((100-data.percentageUsed)+ '% of disk free.');
+          element.text((100-data.percentageUsed)+ '% of disk free');
         });
       }
 

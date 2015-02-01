@@ -4,6 +4,9 @@ body {
   padding-bottom: 20px;
   color: white;
   overflow: hidden;
+  background-size: 100%;
+  background-color: black;
+  background-image: url('../images/background.jpg');
 }
 
 
@@ -139,17 +142,6 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  background-size: 100% 100%;
-  background-color: black;
-  background-image: url('../images/background.jpg');
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 
 .container-narrow > hr {
   margin: 30px 0;
@@ -172,4 +164,13 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+/* Osprey Navbar */
+
+
+.launcher-navigation-container
+{
+  background-image: url('../images/logo.png');
+  background-repeat: no-repeat;
 }

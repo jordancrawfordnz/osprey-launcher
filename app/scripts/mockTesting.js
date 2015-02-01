@@ -22,6 +22,11 @@ mockBackend.addRestriction = function(first,second)
   return;
 };
 
+mockBackend.addWebpageLaunchable = function()
+{
+  return;
+}
+
 mockBackend.isx86 = function()
 {
   return false;

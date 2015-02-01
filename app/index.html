@@ -24,18 +24,24 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <div class="container">
-      <div class="header" ng-controller="HeaderCtrl">
-          <div class="header-column-left" current-time></div>
-          <div class="header-column-center">
-            <img src="images/logo.png" alt="Osprey">
-          </div>
-          <div class="header-column-right">
-            <div disk-space></div>
-            <div todays-recordings></div>
-          </div>
-      </div>
-      <div ng-view=""></div>
+
+
+    <div class="container">
+      <nav class="navbar navbar-inverse">
+      <div class="container-fluid launcher-navigation-container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a disk-space></a></li>
+          <li><a todays-recordings></a></li>
+          <li><a current-time></a></li>
+        </ul>
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div ng-view=""></div>
+  </div>
 
     <!-- build:js(.) scripts/oldieshim.js
     <!--[if lt IE 9]>

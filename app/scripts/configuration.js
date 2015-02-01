@@ -1,7 +1,7 @@
 'use strict';
 var coreConfigData = function($rootScope)
 {
-	$rootScope.useMockBackend = false;
+	$rootScope.useMockBackend = true;
 };
 
 var setupConfigData = function($rootScope)
