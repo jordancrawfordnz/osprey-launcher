@@ -168,6 +168,11 @@ body {
 
 /* Osprey Navbar */
 
+.container-fluid.context
+{
+  opacity: 0.5;
+  filter: blur(5px);
+}
 
 .launcher-navigation-container
 {

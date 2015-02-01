@@ -1,52 +1,30 @@
-<!-- <div class="row application-selector-table">
-		<div ng-repeat="application in getApplications()" class="col-md-3">
-				<div class="application main" ng-class="{selected: application.selected}">
-					<img ng-src="{{application.img}}"/><br>
-					{{application.title}}
-				</div>
-		</div>
-		<div class="col-md-3">
-				<div ng-repeat="extra in getExtras()" class="application extra" ng-class="{selected: extra.selected, top: $first, bottom: $last}">
-					{{extra.title}}
-				</div>
-		</div>
-</div> -->
-
-
-
-<div class="container-fluid">
+<div class="container-fluid" ng-class="{context: options !== null}">
 	<div class="row">
 		<div ng-repeat="selectable in selectables">
 			<div class="col-sm-6 col-md-4">
-				<!-- <div class="thumbnail"> -->
-					<div class="row">
-
-						<div class="application main" ng-class="{selected: selectable.selected}">
-							<img ng-src="{{selectable.img}}"/><br>
-							{{selectable.name}}
-						</div>
-
-
-						<!-- 
-						<div class="col-md-4">
-							<img class="pull-left" ng-src="{{item.img}}"/>
-						</div>
-						<div class="col-md-8 selectable-title">
-							{{item.name}}
-						</div> -->
+				<div class="row">
+					<div class="application main" ng-class="{selected: selectable.selected}">
+						<img ng-src="{{selectable.img}}"/><br>
+						{{selectable.name}}
 					</div>
-				<!-- </div> -->
-<!-- 				<div class="thumbnail thumbnailContainer">
-					<div class="overlay background">
-					    <div class="caption">
-					        <img class="pull-left" ng-src="{{item.img}}"/>
-					        <h3 class="pull-left">{{item.name}}</h3>
-					    </div>
-					</div>
-			    </div>
- -->
-
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="optionsBox">
+	<ul class="nav nav-pills nav-stacked"  ng-repeat="option in options" >
+		<li role="presentation" ng-class="{active: option.selected}"><a>{{option.text}}</a></li>
+	</ul>
+</div>
+
+
+<div class="row options-row" ng-hide="options === null">
+	<div class="col-md-4"></div>
+  	<div class="col-md-4">
+  		
+
+	</div>
+	<div class="col-md-4"></div>
 </div>

@@ -29,10 +29,6 @@ angular
         templateUrl: 'views/loading.html',
         controller: 'LoadingCtrl'
       })
-      .when('/options', {
-        templateUrl: 'views/options.html',
-        controller: 'OptionsCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });

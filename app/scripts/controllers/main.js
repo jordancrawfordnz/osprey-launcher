@@ -23,27 +23,37 @@ angular.module('ospreyLauncherApp')
   	
     $rootScope.moveUp = function()
   	{
-      changePosition(currentRow - 1, currentCol);
+      if($scope.options)
+        changeCurrentOption(-1);
+      else
+        changePosition(currentRow - 1, currentCol);
   	};
   	
     $rootScope.moveDown = function()
   	{
-  		changePosition(currentRow + 1, currentCol);
+  		if($scope.options)
+        changeCurrentOption(1);
+      else
+        changePosition(currentRow + 1, currentCol);
   	};
 
   	$rootScope.selectKey = function()
   	{
-      $rootScope.currentSelectable.onSelect();
+      if($scope.options)
+        $scope.options[currentSelectedOption].action();
+      else
+        $rootScope.currentSelectable.onSelect();
   	};
 
     $rootScope.context = function()
     {
-      console.log('context menu');
+      showContextMenu();
     }
 
     // setup grid
 
     $scope.contextMenu = false;
+    $scope.options = null;
 
     function changePosition(row, col)
     {
@@ -75,6 +85,51 @@ angular.module('ospreyLauncherApp')
         }
       }
     };
+
+    function changeCurrentOption(changeBy)
+    {
+      var newIndex = currentSelectedOption + changeBy;
+      if(newIndex < 0)
+      {
+        newIndex = ($scope.options.length - 1);
+      }
+      if(newIndex >= $scope.options.length)
+      {
+        newIndex = 0;
+      }
+      setCurrentOption(newIndex);
+    }
+
+    var currentSelectedOption = null;
+    function setCurrentOption(index)
+    {
+      if(currentSelectedOption !== null)
+      {
+        $scope.options[currentSelectedOption].selected = false;
+      }
+      currentSelectedOption = index;
+      $scope.options[currentSelectedOption].selected = true;
+      $scope.$apply();
+    }
+
+    function showContextMenu()
+    {
+      $scope.options = [];
+
+      $scope.options.push({text : "Exit Launcher", action : $rootScope.exit});
+      $scope.options.push({text : "Force Close [App] (Placeholder)", action : $rootScope.reset});
+      $scope.options.push({text : "Keep [App] Open (Placeholder)", action : $rootScope.reset});
+      $scope.options.push({text : "Cancel", action : hideContextMenu});
+
+      setCurrentOption(0);
+    }
+
+    function hideContextMenu()
+    {
+      $scope.options = null;
+      $scope.$apply();
+    }
+
 
     $scope.selectables = $rootScope.applications;
 
