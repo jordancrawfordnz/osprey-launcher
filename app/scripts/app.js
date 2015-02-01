@@ -21,10 +21,6 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/info', {
-        templateUrl: 'views/info.html',
-        controller: 'InfoCtrl'
-      })
       .when('/loading', {
         templateUrl: 'views/loading.html',
         controller: 'LoadingCtrl'

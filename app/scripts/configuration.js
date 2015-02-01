@@ -1,7 +1,7 @@
 'use strict';
 var coreConfigData = function($rootScope)
 {
-	$rootScope.useMockBackend = true;
+	$rootScope.useMockBackend = false;
 };
 
 var setupConfigData = function($rootScope)
@@ -35,8 +35,8 @@ var setupConfigData = function($rootScope)
                    'onSelect' : $rootScope.selectableSelect};
     var info = {'title': 'Information',
                 'name' : 'Info',
-                'url'  : 'info',
-                'onSelect' : $rootScope.linkSelect};
+                'url'  : 'http://192.168.1.140',
+                'onSelect' : $rootScope.launchableSelect};
 
     var tvnzOndemand = {'title': 'TVNZ OnDemand',
                         'name' : 'tvnzondemand',
@@ -64,6 +64,7 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.addDesktopLaunchable(desktop.name);
 
     $rootScope.backend.addWebpageLaunchable(tvnzOndemand.name,tvnzOndemand.url, true);
+    $rootScope.backend.addWebpageLaunchable(info.name,info.url, false);
 
     // setup restrictions
     $rootScope.addRestriction(plex,kodi);
