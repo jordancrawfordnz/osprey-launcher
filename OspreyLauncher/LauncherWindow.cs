@@ -31,8 +31,8 @@ namespace OspreyLauncher
             {
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
+                changeCursor(false);
                 Taskbar.Hide();
-                Cursor.Hide();
             }
             InitializeComponent();
             frontendBrowser = showBrowser(UserSettings.GetInstance().getFrontendUrl());
@@ -47,6 +47,22 @@ namespace OspreyLauncher
 
         List<ChromiumWebBrowser> browsers = new List<ChromiumWebBrowser>();
         ChromiumWebBrowser currentlyShownBrowser = null;
+
+        public void changeCursor(bool enabled)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    changeCursor(enabled);
+                });
+                return;
+            }
+            if (enabled)
+                Cursor.Show();
+            else
+                Cursor.Hide();
+        }
 
         public ChromiumWebBrowser showBrowser(string url, ChromiumWebBrowser pendingInit = null)
         {
@@ -152,10 +168,10 @@ namespace OspreyLauncher
             this.Close();
         }
 
-        /*
+        
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            /*
+            
             // Send keys through to JS
             if (keyData == Keys.Left)
             {
@@ -186,10 +202,10 @@ namespace OspreyLauncher
             {
                 FrontendBridge.GetInstance().Reset();
             }
-             */
+             
             // Call the base class
-   //         return base.ProcessCmdKey(ref msg, keyData);
-    //    }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
    
         public void displayMessage(string message)

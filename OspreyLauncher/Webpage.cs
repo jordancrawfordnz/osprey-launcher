@@ -11,10 +11,12 @@ namespace OspreyLauncher
     {
         string url;
         ChromiumWebBrowser browser;
+        bool showCursor;
 
-        public Webpage(string url)
+        public Webpage(string url, bool showCursor = false)
         {
             this.url = url;
+            this.showCursor = showCursor;
         }
 
         public void Close()
@@ -25,6 +27,7 @@ namespace OspreyLauncher
         public void ForceClose()
         {
             LauncherWindow.GetInstance().killBrowser(browser);
+            if (showCursor) LauncherWindow.GetInstance().changeCursor(false);
         }
 
         public void Select()
@@ -35,6 +38,7 @@ namespace OspreyLauncher
         public void Launch()
         {
             browser = LauncherWindow.GetInstance().showBrowser(url);
+            if (showCursor) LauncherWindow.GetInstance().changeCursor(true);
         }
 
         public void Show()
