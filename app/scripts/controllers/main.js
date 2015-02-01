@@ -13,12 +13,14 @@ angular.module('ospreyLauncherApp')
     
     $rootScope.moveLeft = function()
   	{
-      changePosition(currentRow, currentCol - 1);
+      if(!$scope.options)
+        changePosition(currentRow, currentCol - 1);
   	};
   	
     $rootScope.moveRight = function()
   	{
-      changePosition(currentRow, currentCol + 1);
+      if(!$scope.options)
+        changePosition(currentRow, currentCol + 1);
   	};
   	
     $rootScope.moveUp = function()
@@ -47,7 +49,8 @@ angular.module('ospreyLauncherApp')
 
     $rootScope.context = function()
     {
-      showContextMenu();
+      if(!$scope.options)
+        showContextMenu($scope.currentSelectable);
     }
 
     // setup grid
@@ -112,13 +115,12 @@ angular.module('ospreyLauncherApp')
       $scope.$apply();
     }
 
-    function showContextMenu()
+    function showContextMenu(selectable)
     {
       $scope.options = [];
 
       $scope.options.push({text : "Exit Launcher", action : $rootScope.exit});
-      $scope.options.push({text : "Force Close [App] (Placeholder)", action : $rootScope.reset});
-      $scope.options.push({text : "Keep [App] Open (Placeholder)", action : $rootScope.reset});
+      $scope.options.push({text : "Force Close " + selectable.name, action : $rootScope.forceCloseCurrent});
       $scope.options.push({text : "Cancel", action : hideContextMenu});
 
       setCurrentOption(0);

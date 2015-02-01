@@ -48,6 +48,11 @@ angular
       $rootScope.backend.selectItem($rootScope.currentSelectable.name);
     };
 
+    $rootScope.forceCloseCurrent = function()
+    {
+      $rootScope.backend.forceClose($rootScope.currentSelectable.name);
+    }
+
     $rootScope.linkSelect = function()
     {
       $rootScope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
