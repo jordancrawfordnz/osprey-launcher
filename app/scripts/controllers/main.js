@@ -154,7 +154,7 @@ angular.module('ospreyLauncherApp')
        }else if( winWidth >= 992 && winWidth <= 1199){
           perRow = 3;
        }else if( winWidth >= 1200 ){
-          perRow = 4;
+          perRow = 3;
        }
 
       if(perRow != perRowOld)
