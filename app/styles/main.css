@@ -94,7 +94,6 @@ body {
 .container-fluid.context
 {
   opacity: 0.5;
-  filter: blur(5px);
 }
 
 .osprey-brand
