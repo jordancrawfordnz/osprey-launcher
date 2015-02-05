@@ -48,7 +48,7 @@ angular.module('ospreyLauncherApp')
       if($scope.options)
         $scope.options[currentSelectedOption].action();
       else
-        $rootScope.currentSelectable.onSelect();
+        $rootScope.launchableSelect();
   	};
 
     $rootScope.context = function()

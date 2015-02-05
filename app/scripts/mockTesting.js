@@ -7,6 +7,9 @@ mockBackend.addApplication = function(name,path,suspendable,keepopen)
   return;
 };
 
+mockBackend.selectItem = function()
+{ };
+
 mockBackend.addDesktopLaunchable = function(name)
 {
   return;

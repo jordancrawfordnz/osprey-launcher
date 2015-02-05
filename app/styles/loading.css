@@ -4,7 +4,9 @@
 }
 
 .launchableImg
-{ }
+{
+  width: 200px;
+}
 
 .loadingApplication
 {
