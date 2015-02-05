@@ -147,7 +147,7 @@ angular.module('ospreyLauncherApp')
     }
 
 
-    $scope.selectables = $rootScope.applications;
+    $scope.selectables = $rootScope.launchables;
     var grid;
     var currentRow;
     var currentCol;

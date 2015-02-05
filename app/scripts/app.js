@@ -49,17 +49,6 @@ angular
       $rootScope.backend.forceClose($rootScope.currentSelectable.name);
     }
 
-    $rootScope.linkSelect = function()
-    {
-      $rootScope.$apply(function() { $location.path('/' + $rootScope.currentSelectable.url); });
-    };
-
-    $rootScope.optionsSelect = function()
-    {
-      $rootScope.$apply(function() { $location.path('/options'); });
-    };
-
-
     $rootScope.setupInBackend = function(toSetup)
     {
       $rootScope.backend.addApplication(toSetup.name, toSetup.path, toSetup.suspendable, toSetup.keepOpen);

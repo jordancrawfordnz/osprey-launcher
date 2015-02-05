@@ -32,14 +32,14 @@ body {
   font-size: 20px;
 }
 
-.application-selector-table
+.launchable-selector-table
 {
   margin-top: 100px;
 }
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:100);
 
-.application
+.launchable
 {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
@@ -58,17 +58,17 @@ body {
 
 }
 
-.application img
+.launchable img
 {
   width: 200px;
 }
-.application.main
+.launchable.main
 {
   font-size: 55px;
   padding-bottom: 20px;
 }
 
-.application.extra
+.launchable.extra
 {
   margin-bottom: 40px;
   font-size: 50px;
@@ -77,12 +77,12 @@ body {
   padding-bottom: 20px;
 }
 
-.application.extra.top
+.launchable.extra.top
 {
   margin-top: 45px;
 }
 
-.application.selected
+.launchable.selected
 {
   background-color: #FFFFFF;
   box-shadow:        0px 0px 50px 0px #0086D9;
@@ -121,7 +121,7 @@ body {
   font-size: 18px;
 }
 
-.application-container
+.launchable-container
 {
   padding-left: 30px;
   padding-right: 30px;

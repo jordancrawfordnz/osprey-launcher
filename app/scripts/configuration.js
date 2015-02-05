@@ -9,46 +9,38 @@ var setupConfigData = function($rootScope)
 	
 	// == Setup data ==
 
-    // define applications
+    // define launchables
     var plex = {'name' : 'Plex',
                 'img' : 'images/plex.png',
                 'suspendable' : true,
                 'keepOpen' : false,
-                'onSelect' : $rootScope.launchableSelect,
                 'restriction' : 'Kodi'};
     var mediaportal = {'name' : 'MediaPortal',
                        'img' : 'images/mediaportal.png',
                        'suspendable' : true,
-                       'keepOpen' : false,
-                       'onSelect' : $rootScope.launchableSelect};
+                       'keepOpen' : false};
     var kodi = {'name' : 'Kodi',
                 'img' : 'images/kodi.png',
                 'suspendable' : true,
                 'keepOpen' : false,
-                'restriction' : 'Plex',
-                'onSelect' : $rootScope.launchableSelect};
+                'restriction' : 'Plex'};
     var desktop = {'name' : 'Desktop',
-                   'img' : 'images/windowsdesktop.png',
-                   'onSelect' : $rootScope.selectableSelect};
+                   'img' : 'images/windowsdesktop.png'};
     var info = {'name' : 'Information',
                 'img' : 'images/info.png',
-                'url'  : 'http://192.168.1.140',
-                'onSelect' : $rootScope.launchableSelect};
+                'url'  : 'http://192.168.1.140'};
 
     var tvnzOndemand = {'name' : 'TVNZ',
                         'url'  : 'http://tvnz.co.nz/video',
-                        'img'  : 'images/tvnzod.png',
-                        'onSelect' : $rootScope.launchableSelect};
+                        'img'  : 'images/tvnzod.png'};
 
     var threeNow = { 'name' : '3NOW',
                  'url'  : 'http://www.tv3.co.nz/OnDemand.aspx',
-                 'img'  : 'images/3now.png',
-                 'onSelect' : $rootScope.launchableSelect};
+                 'img'  : 'images/3now.png'};
 
     var fourOnDemand = { 'name' : 'FOUR',
                  'url'  : 'http://www.four.co.nz/TV/OnDemand.aspx',
-                 'img'  : 'images/fourondemand.png',
-                 'onSelect' : $rootScope.launchableSelect};
+                 'img'  : 'images/fourondemand.png'};
 
     if($rootScope.backend.isx86())
     {
@@ -82,7 +74,7 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
     
     // define display order
-    $rootScope.applications = [plex, mediaportal, kodi, tvnzOndemand, threeNow, fourOnDemand, desktop, info];
+    $rootScope.launchables = [plex, mediaportal, kodi, tvnzOndemand, threeNow, fourOnDemand, desktop, info];
 
     $rootScope.makeCurrent(plex);
 };
