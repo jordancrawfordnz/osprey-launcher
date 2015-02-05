@@ -202,7 +202,7 @@ namespace OspreyLauncher
             {
                 FrontendBridge.GetInstance().Reset();
             }
-            else if (keyData == Keys.I)
+            else if (keyData == Keys.C)
             {
                 FrontendBridge.GetInstance().Context();
             }
