@@ -1,8 +1,8 @@
-<div class="container-fluid launchableContainer" ng-class="{context: options !== null}">
+<div class="container-fluid" id="launchableContainer" ng-class="{context: options !== null}">
 	<div class="row">
 		<div ng-repeat="selectable in selectables">
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<div class="application main" ng-class="{selected: selectable.selected}">
+			<div class="col-lg-4 col-md-6 col-sm-6 application-container">
+				<div class="application main" id="{{selectable.name}}" ng-class="{selected: selectable.selected}">
 					<img ng-src="{{selectable.img}}"/><br>
 					{{selectable.name}}
 				</div>

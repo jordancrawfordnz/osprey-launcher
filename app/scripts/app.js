@@ -116,26 +116,32 @@ function checkKey(e) {
 
     if (e.keyCode === 38) {
       frontend.moveUp();
+      e.preventDefault();
       // up arrow
     }
     else if (e.keyCode === 40) {
       frontend.moveDown();
+      e.preventDefault();
       // down arrow
     }
     else if (e.keyCode === 37) {
       frontend.moveLeft();
+      e.preventDefault();
       // left arrow
     }
     else if (e.keyCode === 39) {
       frontend.moveRight();
+      e.preventDefault();
       // right arrow
     }
     else if (e.keyCode === 13) {
       frontend.selectKey();
+      e.preventDefault();
       // enter key
     }
     else if(e.keyCode === 67) {
       frontend.context();
+      e.preventDefault();
       // context menu
     }
 }

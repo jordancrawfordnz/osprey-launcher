@@ -71,6 +71,16 @@ angular.module('ospreyLauncherApp')
         {
           currentRow = row;
           currentCol = col;
+
+          var item = $("#" + newPosition.name);
+          var topBarPush = parseInt($('#launchableContainer').css('margin-top'), 10);
+          if(!item.visible())
+          {
+            $('html, body').stop().animate({
+              scrollTop: item.offset().top - topBarPush
+            }, 300);
+          }
+
           $rootScope.makeCurrent(newPosition);
           $scope.$apply(); 
         }
@@ -145,6 +155,7 @@ angular.module('ospreyLauncherApp')
 
     $scope.resetGrid = function()
     {
+      $('#launchableContainer').css('margin-top', ($('#launcher-headerbar').height() + 30));
       var perRowOld = perRow;
       var winWidth =  $(window).width();
        if(winWidth < 768 ){
@@ -152,7 +163,7 @@ angular.module('ospreyLauncherApp')
        }else if( winWidth >= 768 && winWidth <= 991){
           perRow = 2;
        }else if( winWidth >= 992 && winWidth <= 1199){
-          perRow = 3;
+          perRow = 2;
        }else if( winWidth >= 1200 ){
           perRow = 3;
        }

@@ -82,7 +82,7 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
     
     // define display order
-    $rootScope.applications = [plex,mediaportal,kodi, desktop, info, tvnzOndemand, threeNow, fourOnDemand];
+    $rootScope.applications = [plex, mediaportal, kodi, tvnzOndemand, threeNow, fourOnDemand, desktop, info];
 
     $rootScope.makeCurrent(plex);
 };
