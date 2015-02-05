@@ -11,26 +11,11 @@
   margin-right: auto;
   margin-left: auto;
   text-align: center;
-  width: 600px;
   padding: 20px;
   color: black;
+  opacity: 0.8;
   background-color: #eee;
   box-shadow: 0px 0px 50px 0px rgba(50, 50, 50, 1); 
   border-radius: 20px;
-  margin-top: 150px;
-}
-
-@media (max-width: 1280px) {
-  .applicationTitle
-  {
-    font-size: 60px;
-  }
-  .applicationImg
-  {
-    width: 250px;
-  }
-  .loadingApplication
-  {
-    margin-top: 70px;
-  }
+  margin-top: 200px;
 }
