@@ -130,8 +130,8 @@ angular.module('ospreyLauncherApp')
     {
       $scope.options = [];
 
-      $scope.options.push({text : "Exit Launcher", action : $rootScope.exit});
       $scope.options.push({text : "Force Close " + selectable.name, action : $rootScope.forceCloseCurrent});
+      $scope.options.push({text : "Exit Launcher", action : $rootScope.exit});
       $scope.options.push({text : "Cancel", action : hideContextMenu});
 
       setCurrentOption(0);
