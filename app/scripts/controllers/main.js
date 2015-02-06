@@ -55,7 +55,12 @@ angular.module('ospreyLauncherApp')
     {
       if(!$scope.options)
         showContextMenu($scope.currentSelectable);
-    }
+    };
+
+    $rootScope.onReset = function()
+    {
+      scrollToPosition();
+    };
 
     // setup grid
 
@@ -72,16 +77,8 @@ angular.module('ospreyLauncherApp')
           currentRow = row;
           currentCol = col;
 
-          var item = $("#" + newPosition.name);
-          var topBarPush = parseInt($('#launchableContainer').css('margin-top'), 10);
-          if(!item.visible())
-          {
-            $('html, body').stop().animate({
-              scrollTop: item.offset().top - topBarPush
-            }, 300);
-          }
-
           $rootScope.makeCurrent(newPosition);
+          scrollToPosition();
           $scope.$apply(); 
         }
       }
@@ -145,6 +142,19 @@ angular.module('ospreyLauncherApp')
       $scope.options = null;
       $scope.$apply();
     }
+
+    function scrollToPosition()
+    {
+      var newPosition = $rootScope.currentSelectable;
+      var item = $("#" + newPosition.name);
+      var topBarPush = parseInt($('#launchableContainer').css('margin-top'), 10);
+      if(!item.visible())
+      {
+        $('html, body').stop().animate({
+          scrollTop: item.offset().top - topBarPush
+        }, 300);
+      }
+    };
 
 
     $scope.selectables = $rootScope.launchables;

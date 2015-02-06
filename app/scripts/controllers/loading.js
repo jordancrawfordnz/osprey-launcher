@@ -16,6 +16,9 @@ angular.module('ospreyLauncherApp')
 
 	$rootScope.selectKey = function()
 	{};
+	
+	$rootScope.onReset = function()
+    {};
 
 	$scope.getLaunchable = function()
 	{

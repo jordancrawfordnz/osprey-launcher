@@ -76,6 +76,7 @@ angular
     $rootScope.reset = function()
     {
       $rootScope.$apply(function() { $location.path('/'); });
+      $rootScope.onReset();
     };
 
     coreConfigData($rootScope);
