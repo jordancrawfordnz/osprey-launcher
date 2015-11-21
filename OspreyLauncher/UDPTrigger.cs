@@ -22,7 +22,7 @@ namespace OspreyLauncher
         private void listenUDP()
         {
             //Creates a UdpClient for reading incoming data.
-            UdpClient receivingUdpClient = new UdpClient(4141);
+            UdpClient receivingUdpClient = new UdpClient(UserSettings.GetInstance().getControlPort());
             while (true)
             {
                 //Creates an IPEndPoint to record the IP Address and port number of the sender.  

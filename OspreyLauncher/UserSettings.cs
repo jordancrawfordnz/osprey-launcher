@@ -68,6 +68,11 @@ namespace OspreyLauncher
             return getBooleanSetting("debugMode");
         }
 
+        public int getControlPort()
+        {
+            return getIntegerSetting("controlPort");
+        }
+
         public string getFrontendUrl()
         {
             return getStringSetting("frontendURL");
@@ -81,6 +86,11 @@ namespace OspreyLauncher
         private bool getBooleanSetting(string key)
         {
             return (bool)settings[key];
+        }
+
+        private int getIntegerSetting(string key)
+        {
+            return (int)settings[key];
         }
     }
 }
