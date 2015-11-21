@@ -81,7 +81,8 @@ namespace OspreyLauncher
                 return browser;
             }
             browser.BrowserSettings = new BrowserSettings();
-            browser.BrowserSettings.WebSecurityDisabled = true; // This is a security flaw! Can be turned off if the: "Access-Control-Allow-Origin: *" header is present.
+            browser.LifeSpanHandler = new CEFLifespanHandler();
+
             browser.Dock = DockStyle.Fill;
             loadingLabel.Show();
             this.Controls.Add(browser);
