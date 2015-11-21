@@ -131,7 +131,6 @@ namespace OspreyLauncher
             if (!browsers.Contains(browser)) return; // browser must be setup properly.
             this.Controls.Remove(browser);
             browser.SetFocus(false);
-            browser.Dispose();
             browsers.Remove(browser);
             if (browser == currentlyShownBrowser)
             {
