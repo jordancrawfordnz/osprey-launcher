@@ -41,19 +41,16 @@ var setupConfigData = function($rootScope)
     if($rootScope.backend.isx86())
     {
       plex.path = 'C:\\Program Files\\Plex Home Theater\\Plex Home Theater.exe';
-      mediaportal.path = 'C:\\Program Files\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
       kodi.path = 'C:\\Program Files\\Kodi\\Kodi.exe';
     }
     else
     {
       plex.path = 'C:\\Program Files (x86)\\Plex Home Theater\\Plex Home Theater.exe';
-      mediaportal.path = 'C:\\Program Files (x86)\\Team MediaPortal\\MediaPortal\\MediaPortal.exe';
       kodi.path = 'C:\\Program Files (x86)\\Kodi\\Kodi.exe';
     }
 
     // setup the selectables with the backend
     $rootScope.setupInBackend(plex);
-    $rootScope.setupInBackend(mediaportal);
     $rootScope.setupInBackend(kodi);
 
     $rootScope.backend.addDesktopLaunchable(desktop.name);
@@ -70,7 +67,7 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
     
     // define display order
-    $rootScope.launchables = [plex, mediaportal, kodi, tvnzOndemand, threeNow, fourOnDemand, desktop, info];
+    $rootScope.launchables = [plex, kodi, tvnzOndemand, threeNow, fourOnDemand, desktop, info];
 
     $rootScope.makeCurrent(plex);
 };
