@@ -15,14 +15,10 @@ var setupConfigData = function($rootScope)
                 'suspendable' : true,
                 'keepOpen' : false,
                 'restriction' : 'Kodi'};
-    var mediaportal = {'name' : 'MediaPortal',
-                       'img' : 'images/mediaportal.png',
-                       'suspendable' : true,
-                       'keepOpen' : false};
     var kodi = {'name' : 'Kodi',
                 'img' : 'images/kodi.png',
                 'suspendable' : true,
-                'keepOpen' : false,
+                'keepOpen' : true,
                 'restriction' : 'Plex'};
     var desktop = {'name' : 'Desktop',
                    'img' : 'images/windowsdesktop.png'};
