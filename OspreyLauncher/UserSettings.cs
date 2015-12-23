@@ -49,6 +49,11 @@ namespace OspreyLauncher
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OspreyLauncher.conf");
         }
 
+        public string GetCEFSettingsPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OspreyLauncherCEFCache");
+        }
+
         public static UserSettings GetInstance()
         {
             if (instance == null)

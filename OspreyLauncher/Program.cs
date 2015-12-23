@@ -17,11 +17,14 @@ namespace OspreyLauncher
         {
            try
             {
-                Cef.Initialize(new CefSettings());
+                UserSettings settings = UserSettings.GetInstance();
+                CefSettings cefSettings = new CefSettings();
+                cefSettings.CachePath = settings.GetCEFSettingsPath();
+                cefSettings.PersistSessionCookies = true;
+                Cef.Initialize(cefSettings);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 LauncherController controller = LauncherController.GetInstance();
-                UserSettings settings = UserSettings.GetInstance();
                 Application.Run(LauncherWindow.GetInstance());
             }
             catch (SettingsNotFoundException ex)
