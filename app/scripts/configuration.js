@@ -26,6 +26,14 @@ var setupConfigData = function($rootScope)
                 'img' : 'images/info.png',
                 'url'  : 'http://192.168.1.140'};
 
+    var youTube = {'name' : 'YouTube',
+                   'url'  : 'https://youtube.com',
+                   'img'  : 'images/youtube.png'};
+
+    var spotify = {'name' : 'Spotify',
+                   'url'  : 'https://play.spotify.com/',
+                   'img'  : 'images/spotify.png'};
+
     var tvnzOndemand = {'name' : 'TVNZ',
                         'url'  : 'http://tvnz.co.nz/video',
                         'img'  : 'images/tvnzod.png'};
@@ -55,6 +63,8 @@ var setupConfigData = function($rootScope)
 
     $rootScope.backend.addDesktopLaunchable(desktop.name);
 
+    $rootScope.backend.addWebpageLaunchable(youTube.name,youTube.url, true);
+    $rootScope.backend.addWebpageLaunchable(spotify.name,spotify.url, true);
     $rootScope.backend.addWebpageLaunchable(tvnzOndemand.name,tvnzOndemand.url, true);
     $rootScope.backend.addWebpageLaunchable(threeNow.name,threeNow.url, true);
     $rootScope.backend.addWebpageLaunchable(fourOnDemand.name,fourOnDemand.url, true);
@@ -67,7 +77,7 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
     
     // define display order
-    $rootScope.launchables = [plex, kodi, tvnzOndemand, threeNow, fourOnDemand, desktop, info];
+    $rootScope.launchables = [plex, kodi, desktop, youTube, spotify, tvnzOndemand, threeNow, fourOnDemand, info];
 
-    $rootScope.makeCurrent(plex);
+    $rootScope.makeCurrent($rootScope.launchables[0]);
 };

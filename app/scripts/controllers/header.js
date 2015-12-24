@@ -86,7 +86,7 @@ angular.module('ospreyLauncherApp')
     {  
       // used to update the UI
       function updateDiskSpace() {
-        $.getJSON( 'http://192.168.1.140:80/DiskSpace', function( data ) {
+        $.getJSON( 'http://192.168.1.140:80/DiskSpace/', function( data ) {
           
           element.text((100-data.percentageUsed)+ '% of disk free');
         });
