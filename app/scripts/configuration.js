@@ -76,6 +76,7 @@ var setupConfigData = function($rootScope)
 
     $rootScope.backend.addDesktopLaunchable(desktop.name);
 
+    setupWebpageLaunchable($rootScope, youTube);
     setupWebpageLaunchable($rootScope, spotify);
     setupWebpageLaunchable($rootScope, tvnzOndemand);
     setupWebpageLaunchable($rootScope, threeNow);
