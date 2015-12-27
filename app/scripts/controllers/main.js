@@ -46,7 +46,12 @@ angular.module('ospreyLauncherApp')
   	$rootScope.selectKey = function()
   	{
       if($scope.options)
-        $scope.options[currentSelectedOption].action();
+      {
+        var selectedOption = $scope.options[currentSelectedOption];
+        if(selectedOption.action)
+          selectedOption.action();
+        hideContextMenu();
+      }
       else
         $rootScope.launchableSelect();
   	};
@@ -132,7 +137,7 @@ angular.module('ospreyLauncherApp')
 
       $scope.options.push({text : "Force Close " + selectable.name, action : $rootScope.forceCloseCurrent});
       $scope.options.push({text : "Exit Launcher", action : $rootScope.exit});
-      $scope.options.push({text : "Cancel", action : hideContextMenu});
+      $scope.options.push({text : "Cancel"});
 
       setCurrentOption(0);
     }
