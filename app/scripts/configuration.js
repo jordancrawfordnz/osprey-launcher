@@ -4,6 +4,10 @@ var coreConfigData = function($rootScope)
 	$rootScope.useMockBackend = false;
 };
 
+function setupWebpageLaunchable($rootScope, launchable) {
+  $rootScope.backend.addWebpageLaunchable(launchable.name, launchable.url, launchable.showCursor, launchable.blockPopups);
+}
+
 var setupConfigData = function($rootScope)
 {
 	
@@ -28,23 +32,32 @@ var setupConfigData = function($rootScope)
 
     var youTube = {'name' : 'YouTube',
                    'url'  : 'https://youtube.com',
-                   'img'  : 'images/youtube.png'};
+                   'img'  : 'images/youtube.png',
+                   'showCursor' : true,
+                   'blockPopups' : true};
 
     var spotify = {'name' : 'Spotify',
                    'url'  : 'https://play.spotify.com/',
-                   'img'  : 'images/spotify.png'};
+                   'img'  : 'images/spotify.png',
+                   'showCursor' : true,};
 
     var tvnzOndemand = {'name' : 'TVNZ',
                         'url'  : 'http://tvnz.co.nz/video',
-                        'img'  : 'images/tvnzod.png'};
+                        'img'  : 'images/tvnzod.png',
+                        'showCursor' : true,
+                        'blockPopups' : true};
 
     var threeNow = { 'name' : '3NOW',
                  'url'  : 'http://www.tv3.co.nz/OnDemand.aspx',
-                 'img'  : 'images/3now.png'};
+                 'img'  : 'images/3now.png',
+                 'showCursor' : true,
+                 'blockPopups' : true};
 
     var fourOnDemand = { 'name' : 'FOUR',
                  'url'  : 'http://www.four.co.nz/TV/OnDemand.aspx',
-                 'img'  : 'images/fourondemand.png'};
+                 'img'  : 'images/fourondemand.png',
+                 'showCursor' : true,
+                 'blockPopups' : true};
 
     if($rootScope.backend.isx86())
     {
@@ -63,12 +76,11 @@ var setupConfigData = function($rootScope)
 
     $rootScope.backend.addDesktopLaunchable(desktop.name);
 
-    $rootScope.backend.addWebpageLaunchable(youTube.name,youTube.url, true);
-    $rootScope.backend.addWebpageLaunchable(spotify.name,spotify.url, true);
-    $rootScope.backend.addWebpageLaunchable(tvnzOndemand.name,tvnzOndemand.url, true);
-    $rootScope.backend.addWebpageLaunchable(threeNow.name,threeNow.url, true);
-    $rootScope.backend.addWebpageLaunchable(fourOnDemand.name,fourOnDemand.url, true);
-    $rootScope.backend.addWebpageLaunchable(info.name,info.url, false);
+    setupWebpageLaunchable($rootScope, spotify);
+    setupWebpageLaunchable($rootScope, tvnzOndemand);
+    setupWebpageLaunchable($rootScope, threeNow);
+    setupWebpageLaunchable($rootScope, fourOnDemand);
+    setupWebpageLaunchable($rootScope, info);
 
     // setup restrictions
     $rootScope.addRestriction(plex,kodi);
