@@ -11,12 +11,13 @@ namespace OspreyLauncher
     {
         string url;
         ChromiumWebBrowser browser;
-        bool showCursor;
+        bool showCursor, blockPopups;
 
-        public Webpage(string url, bool showCursor = false)
+        public Webpage(string url, bool showCursor = false, bool blockPopups = false)
         {
             this.url = url;
             this.showCursor = showCursor;
+            this.blockPopups = blockPopups;
         }
 
         public void Close()
@@ -39,6 +40,7 @@ namespace OspreyLauncher
         {
             browser = LauncherWindow.GetInstance().showBrowser(url);
             if (showCursor) LauncherWindow.GetInstance().changeCursor(true);
+            if (blockPopups) browser.LifeSpanHandler = new CEFLifespanHandler();
         }
 
         public void Show()

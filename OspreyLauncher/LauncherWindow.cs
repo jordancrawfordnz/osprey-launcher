@@ -81,7 +81,6 @@ namespace OspreyLauncher
                 return browser;
             }
             browser.BrowserSettings = new BrowserSettings();
-            browser.LifeSpanHandler = new CEFLifespanHandler();
 
             browser.Dock = DockStyle.Fill;
             loadingLabel.Show();
