@@ -131,6 +131,8 @@ namespace OspreyLauncher
             this.Controls.Remove(browser);
             browser.SetFocus(false);
             browsers.Remove(browser);
+            browser.Stop();
+            browser.Load("about:blank");
             if (browser == currentlyShownBrowser)
             {
                 currentlyShownBrowser = null;
