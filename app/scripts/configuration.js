@@ -30,6 +30,11 @@ var setupConfigData = function($rootScope)
                 'img' : 'images/info.png',
                 'url'  : 'http://192.168.1.140'};
 
+    var couchFlickr = { 'name' : 'couchFlickr',
+                        'img' : 'images/flickr.png',
+                        'url' : 'http://192.168.1.140/couchflickr'
+    }
+
     var youTube = {'name' : 'YouTube',
                    'url'  : 'https://youtube.com',
                    'img'  : 'images/youtube.png',
@@ -82,6 +87,7 @@ var setupConfigData = function($rootScope)
     setupWebpageLaunchable($rootScope, threeNow);
     setupWebpageLaunchable($rootScope, fourOnDemand);
     setupWebpageLaunchable($rootScope, info);
+    setupWebpageLaunchable($rootScope, couchFlickr);
 
     // setup restrictions
     $rootScope.addRestriction(plex,kodi);
@@ -90,7 +96,7 @@ var setupConfigData = function($rootScope)
     $rootScope.backend.setupApplicationAutomaticClosing(4*60);
     
     // define display order
-    $rootScope.launchables = [plex, kodi, desktop, youTube, spotify, tvnzOndemand, threeNow, fourOnDemand, info];
+    $rootScope.launchables = [plex, kodi, desktop, couchFlickr, youTube, spotify, tvnzOndemand, threeNow, fourOnDemand, info];
 
     $rootScope.makeCurrent($rootScope.launchables[0]);
 };
