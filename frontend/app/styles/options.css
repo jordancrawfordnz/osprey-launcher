@@ -1,0 +1,31 @@
+.optionsBox
+{
+  position: fixed;
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 200px;
+
+  width: 600px;
+
+  font-size: 30px;
+  text-align: center;
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:         0px 0px 100px 0px #0086D9;
+}
+
+.nav-pills > li > a
+{
+  border-radius: 0px;
+}
+
+.options-row
+{
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
