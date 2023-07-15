@@ -1,14 +1,12 @@
+# Osprey Launcher
+
 ---
 
 **Please note:** This project is not actively maintained, it may no longer work and may depend on out of date dependencies.
 
 ---
 
-# Osprey Launcher
-
 An application launcher for home theater PCs built with C# and Angular.js.
-
----
 
 Build with Visual Studio 2015. I have tested this fine on Windows 7, Windows 8.1 and Windows 10.
 SwitchToThisWindow causes unknown publisher dialogs.
